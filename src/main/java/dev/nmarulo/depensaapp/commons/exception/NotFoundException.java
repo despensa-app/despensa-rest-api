@@ -4,12 +4,12 @@ import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends DefaultHttpException {
     
-    public NotFoundException(String message) {
-        super(HttpStatus.NOT_FOUND, message);
+    public NotFoundException(String reason) {
+        super(HttpStatus.NOT_FOUND, reason);
     }
     
-    public NotFoundException(String message, Throwable cause) {
-        super(HttpStatus.NOT_FOUND, message, cause);
+    public NotFoundException(String reason, Throwable cause) {
+        super(HttpStatus.NOT_FOUND, reason, cause);
     }
     
 }

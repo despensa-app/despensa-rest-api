@@ -4,12 +4,12 @@ import org.springframework.http.HttpStatus;
 
 public class InternalServerErrorException extends DefaultHttpException {
     
-    public InternalServerErrorException(String message) {
-        super(HttpStatus.INTERNAL_SERVER_ERROR, message);
+    public InternalServerErrorException(String reason) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR, reason);
     }
     
-    public InternalServerErrorException(String message, Throwable cause) {
-        super(HttpStatus.INTERNAL_SERVER_ERROR, message, cause);
+    public InternalServerErrorException(String reason, Throwable cause) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR, reason, cause);
     }
     
 }
