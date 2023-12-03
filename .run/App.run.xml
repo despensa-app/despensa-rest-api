@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" activateToolWindowBeforeRun="false">
-    <module name="depensa-app" />
+    <module name="despensa-rest-api" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="dev.nmarulo.depensaapp.DespensaRestApiApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
