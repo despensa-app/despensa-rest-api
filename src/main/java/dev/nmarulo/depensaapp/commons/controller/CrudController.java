@@ -75,14 +75,14 @@ public abstract class CrudController<I, O, ID> {
         Object fieldId;
         
         if (field == null) {
-            throw new InternalServerErrorException(this.localMessage.getMessage("error.class-does-not-have-x-property", "ID"));
+            throw new InternalServerErrorException(this.localMessage.getMessage("error.class-does-not-have-property", "ID"));
         }
         
         try {
             ReflectionUtils.makeAccessible(field);
             fieldId = ReflectionUtils.getField(field, response);
         } catch (Exception ex) {
-            throw new InternalServerErrorException(this.localMessage.getMessage("error.obtaining-value_x-property", "ID"));
+            throw new InternalServerErrorException(this.localMessage.getMessage("error.obtaining-value-property", "ID"));
         }
         
         return fieldId;

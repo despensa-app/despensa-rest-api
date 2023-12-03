@@ -32,4 +32,10 @@ public class AppProperties {
     @Value("${app.pageable.size:10}")
     private int pageableSize;
     
+    @Value("${app.locale.default:}")
+    private Locale defaultLocale;
+    
+    @Value("${app.locale.supported:}")
+    private List<Locale> supportedLocales;
+    
 }
