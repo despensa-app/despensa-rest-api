@@ -4,6 +4,7 @@ import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "shopping_list")
+@ToString
 public class ShoppingList {
     
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,13 +51,12 @@ public class ShoppingList {
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopping_list_id")
+    @ToString.Exclude
     private Set<ProductHasShoppingList> productHasShoppingList;
     
     public ShoppingList() {
         this.productHasShoppingList = new HashSet<>();
     }
-    
-    public String toString() {return "ShoppingList(id=" + this.getId() + ", name=" + this.getName() + ", totalProducts=" + this.getTotalProducts() + ", totalCalories=" + this.getTotalCalories() + ", totalPrice=" + this.getTotalPrice() + ", createdAt=" + this.getCreatedAt() + ", updatedAt=" + this.getUpdatedAt() + ", productHasShoppingList=" + this.getProductHasShoppingList() + ")";}
     
     public boolean equals(final Object o) {
         if (o == this) {
@@ -99,12 +100,7 @@ public class ShoppingList {
         }
         final Object this$updatedAt = this.getUpdatedAt();
         final Object other$updatedAt = other.getUpdatedAt();
-        if (!Objects.equals(this$updatedAt, other$updatedAt)) {
-            return false;
-        }
-        final Object this$productHasShoppingList = this.getProductHasShoppingList();
-        final Object other$productHasShoppingList = other.getProductHasShoppingList();
-        return Objects.equals(this$productHasShoppingList, other$productHasShoppingList);
+        return Objects.equals(this$updatedAt, other$updatedAt);
     }
     
     protected boolean canEqual(final Object other) {return other instanceof ShoppingList;}
@@ -126,8 +122,6 @@ public class ShoppingList {
         result = result * PRIME + ($createdAt == null ? 43 : $createdAt.hashCode());
         final Object $updatedAt = this.getUpdatedAt();
         result = result * PRIME + ($updatedAt == null ? 43 : $updatedAt.hashCode());
-        final Object $productHasShoppingList = this.getProductHasShoppingList();
-        result = result * PRIME + ($productHasShoppingList == null ? 43 : $productHasShoppingList.hashCode());
         return result;
     }
     
