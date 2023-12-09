@@ -65,11 +65,13 @@ public class ShoppingListService extends CrudServiceImp<ShoppingListReq, Shoppin
         
         productRes.setId(product.getId());
         productRes.setName(product.getName());
+        productRes.setPrice(product.getPrice());
         unitTypeRes.setId(unitType.getId());
         unitTypeRes.setName(unitType.getName());
         
         response.setProduct(productRes);
         response.setUnitType(unitTypeRes);
+        response.setTotalPrice(productHasShoppingList.getTotalPrice());
         response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
         response.setSelected(productHasShoppingList.getSelected());
         

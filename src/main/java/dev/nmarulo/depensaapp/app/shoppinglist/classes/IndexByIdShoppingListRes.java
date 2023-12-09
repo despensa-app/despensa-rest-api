@@ -2,6 +2,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist.classes;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -24,12 +25,16 @@ public class IndexByIdShoppingListRes {
         
         private UnitType unitType;
         
+        private BigDecimal totalPrice;
+        
         @Data
         public static class Product {
             
             private Integer id;
             
             private String name;
+            
+            private BigDecimal price;
             
         }
         
