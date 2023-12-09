@@ -1,16 +1,12 @@
 package dev.nmarulo.depensaapp.app.productshoppinglist;
 
-import dev.nmarulo.depensaapp.app.products.Product;
-import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
-import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -21,16 +17,16 @@ import java.util.Objects;
 @Embeddable
 public class ProductHasShoppingListPK implements Serializable {
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Product product;
+    @Column(name = "product_id", nullable = false)
+    private Integer productId;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ShoppingList shoppingList;
+    @Column(name = "shopping_list_id", nullable = false)
+    private Integer shoppingListId;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UnitType unitType;
+    @Column(name = "unit_type_id", nullable = false)
+    private Integer unitTypeId;
     
-    public String toString() {return "ProductHasShoppingListPK(product=" + this.getProduct() + ", shoppingList=" + this.getShoppingList() + ", unitType=" + this.getUnitType() + ")";}
+    public String toString() {return "ProductHasShoppingListPK(productId=" + this.getProductId() + ", shoppingListId=" + this.getShoppingListId() + ", unitTypeId=" + this.getUnitTypeId() + ")";}
     
     public boolean equals(final Object o) {
         if (o == this) {
@@ -42,18 +38,18 @@ public class ProductHasShoppingListPK implements Serializable {
         if (!other.canEqual(this)) {
             return false;
         }
-        final Object this$product = this.getProduct();
-        final Object other$product = other.getProduct();
+        final Object this$product = this.getProductId();
+        final Object other$product = other.getProductId();
         if (!Objects.equals(this$product, other$product)) {
             return false;
         }
-        final Object this$shoppingList = this.getShoppingList();
-        final Object other$shoppingList = other.getShoppingList();
+        final Object this$shoppingList = this.getShoppingListId();
+        final Object other$shoppingList = other.getShoppingListId();
         if (!Objects.equals(this$shoppingList, other$shoppingList)) {
             return false;
         }
-        final Object this$unitType = this.getUnitType();
-        final Object other$unitType = other.getUnitType();
+        final Object this$unitType = this.getUnitTypeId();
+        final Object other$unitType = other.getUnitTypeId();
         return Objects.equals(this$unitType, other$unitType);
     }
     
@@ -62,11 +58,11 @@ public class ProductHasShoppingListPK implements Serializable {
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;
-        final Object $product = this.getProduct();
+        final Object $product = this.getProductId();
         result = result * PRIME + ($product == null ? 43 : $product.hashCode());
-        final Object $shoppingList = this.getShoppingList();
+        final Object $shoppingList = this.getShoppingListId();
         result = result * PRIME + ($shoppingList == null ? 43 : $shoppingList.hashCode());
-        final Object $unitType = this.getUnitType();
+        final Object $unitType = this.getUnitTypeId();
         result = result * PRIME + ($unitType == null ? 43 : $unitType.hashCode());
         return result;
     }
