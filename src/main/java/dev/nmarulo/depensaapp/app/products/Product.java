@@ -33,7 +33,7 @@ public class Product {
     private BigDecimal price;
     
     @Basic
-    @Column(name = "img_url", nullable = false, length = 250)
+    @Column(name = "img_url", nullable = false)
     private String imgUrl;
     
     @Basic
