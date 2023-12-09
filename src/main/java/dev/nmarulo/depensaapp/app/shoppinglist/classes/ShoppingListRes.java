@@ -3,7 +3,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist.classes;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 public class ShoppingListRes {
@@ -18,8 +18,8 @@ public class ShoppingListRes {
     
     private BigDecimal totalPrice;
     
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
     
 }

@@ -2,7 +2,7 @@ package dev.nmarulo.depensaapp.app.unitytypes.classes;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 public class UnitTypeRes {
@@ -11,8 +11,8 @@ public class UnitTypeRes {
     
     private String name;
     
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
     
 }

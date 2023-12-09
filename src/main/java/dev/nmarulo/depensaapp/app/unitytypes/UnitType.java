@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -29,11 +29,11 @@ public class UnitType {
     
     @Basic
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     
     @Basic
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_type_id")
