@@ -1,8 +1,11 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
+import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexByIdShoppingListRes;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexShoppingListRes;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.ShoppingListReq;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.ShoppingListRes;
+import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.CrudServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,47 @@ public class ShoppingListService extends CrudServiceImp<ShoppingListReq, Shoppin
         response.setPageSize(pageFindAll.getNumberOfElements());
         response.setTotalPages(pageFindAll.getTotalPages());
         response.setTotal(pageFindAll.getTotalElements());
+        
+        return response;
+    }
+    
+    public IndexByIdShoppingListRes indexById(Integer id) {
+        var findById = this.repository.findById(id);
+        
+        if (findById.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        var response = new IndexByIdShoppingListRes();
+        var shoppingList = findById.get();
+        var productsRes = shoppingList.getProductHasShoppingList()
+                                      .stream()
+                                      .map(this::mapperTo)
+                                      .toList();
+        
+        response.setId(shoppingList.getId());
+        response.setName(shoppingList.getName());
+        response.setItems(productsRes);
+        
+        return response;
+    }
+    
+    private IndexByIdShoppingListRes.Item mapperTo(ProductHasShoppingList productHasShoppingList) {
+        var response = new IndexByIdShoppingListRes.Item();
+        var productRes = new IndexByIdShoppingListRes.Item.Product();
+        var unitTypeRes = new IndexByIdShoppingListRes.Item.UnitType();
+        var product = productHasShoppingList.getProduct();
+        var unitType = productHasShoppingList.getUnitType();
+        
+        productRes.setId(product.getId());
+        productRes.setName(product.getName());
+        unitTypeRes.setId(unitType.getId());
+        unitTypeRes.setName(unitType.getName());
+        
+        response.setProduct(productRes);
+        response.setUnitType(unitTypeRes);
+        response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
+        response.setSelected(productHasShoppingList.getSelected());
         
         return response;
     }
