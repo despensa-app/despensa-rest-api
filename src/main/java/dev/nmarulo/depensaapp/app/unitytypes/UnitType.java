@@ -1,6 +1,7 @@
 package dev.nmarulo.depensaapp.app.unitytypes;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.depensaapp.commons.gson.GsonExclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,7 @@ public class UnitType {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_type_id")
     @ToString.Exclude
+    @GsonExclude
     private Set<ProductHasShoppingList> productHasShoppingList;
     
     public UnitType() {

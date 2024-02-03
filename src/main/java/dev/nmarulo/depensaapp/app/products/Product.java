@@ -1,6 +1,7 @@
 package dev.nmarulo.depensaapp.app.products;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.depensaapp.commons.gson.GsonExclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,6 +58,7 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     @ToString.Exclude
+    @GsonExclude
     private Set<ProductHasShoppingList> productHasShoppingList;
     
     public Product() {
