@@ -33,8 +33,8 @@ public class ProductHasShoppingList {
     @Column(name = "total_price", nullable = false, precision = 2)
     private BigDecimal totalPrice;
     
-    @Column(name = "selected")
-    private Boolean selected;
+    @Column(name = "selected", nullable = false)
+    private boolean selected;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
@@ -81,9 +81,7 @@ public class ProductHasShoppingList {
         if (!Objects.equals(this$totalPrice, other$totalPrice)) {
             return false;
         }
-        final Object this$selected = this.getSelected();
-        final Object other$selected = other.getSelected();
-        return Objects.equals(this$selected, other$selected);
+        return this.isSelected() == other.isSelected();
     }
     
     protected boolean canEqual(final Object other) {return other instanceof ProductHasShoppingList;}
@@ -99,8 +97,7 @@ public class ProductHasShoppingList {
         result = result * PRIME + ($totalCalories == null ? 43 : $totalCalories.hashCode());
         final Object $totalPrice = this.getTotalPrice();
         result = result * PRIME + ($totalPrice == null ? 43 : $totalPrice.hashCode());
-        final Object $selected = this.getSelected();
-        result = result * PRIME + ($selected == null ? 43 : $selected.hashCode());
+        result = result * PRIME + (this.isSelected() ? 79 : 97);
         return result;
     }
     

@@ -19,7 +19,7 @@ public class IndexByIdShoppingListRes {
         
         private Integer unitsPerProduct;
         
-        private Boolean selected;
+        private boolean selected;
         
         private Product product;
         
