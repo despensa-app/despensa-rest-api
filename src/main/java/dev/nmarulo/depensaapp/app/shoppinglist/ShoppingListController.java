@@ -26,7 +26,7 @@ public class ShoppingListController extends CrudController<ShoppingListReq, Shop
         return ResponseEntity.ok(this.service.index());
     }
     
-    @GetMapping("/{id}/index")
+    @GetMapping("/index/{id}")
     public ResponseEntity<IndexByIdShoppingListRes> indexById(@PathVariable Integer id) {
         return ResponseEntity.ok(this.service.indexById(id));
     }
