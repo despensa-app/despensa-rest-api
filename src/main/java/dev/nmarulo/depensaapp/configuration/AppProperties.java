@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+import java.util.Locale;
+
 @Configuration
 @Getter
 public class AppProperties {
