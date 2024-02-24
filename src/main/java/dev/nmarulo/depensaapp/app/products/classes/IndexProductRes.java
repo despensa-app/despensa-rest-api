@@ -2,9 +2,11 @@ package dev.nmarulo.depensaapp.app.products.classes;
 
 import dev.nmarulo.depensaapp.commons.classes.PagingAndSortingRes;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
+@EqualsAndHashCode(callSuper = true)
 public class IndexProductRes extends PagingAndSortingRes<IndexProductRes.Product> {
     
     @Data
