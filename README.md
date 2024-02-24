@@ -18,6 +18,7 @@ No disponible, por el momento.
 - [Requisitos](#requisitos)
 - [Empezar a trabajar](#empezar-a-trabajar)
     - [Crear base de datos](#create-database)
+    - [Usando postman](#using-postman)
     - [Trabajando en IntelliJ IDEA](#working-ingellij)
 
 ### Requisitos
@@ -34,6 +35,13 @@ No disponible, por el momento.
 
 - Creamos el esquema `despensa_app`.
 - Ejecutamos el script [database.sql](database.sql)
+
+<a name="using-postman"></a>
+**Usando postman**
+
+- Puedes hacer un fork a las API en el siguiente enlace:
+
+  [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/3462094-24c69e86-2ae0-42da-a1f0-55d411d60ad6?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D3462094-24c69e86-2ae0-42da-a1f0-55d411d60ad6%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bdespensa-app%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaSIsInNlc3Npb25JbmRleCI6MH1d)
 
 <a name="working-ingellij"></a>
 **Trabajando en IntelliJ IDEA**
@@ -52,7 +60,7 @@ Clonar proyecto:
 > File > New > Project from Version Control
 
 <a name="maven-home-path"></a>
-Establecer la ruta local de maven: 
+Establecer la ruta local de maven:
 
 (No es necesario si se pretende usar `mvnw`)
 
@@ -114,8 +122,8 @@ Cualquier contribución que hagas será muy apreciada.
 Gracias a [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) por proporcionar una licencia para IntelliJ para
 desarrollar este proyecto.
 
-| JetBrains                                                                                    | IntelliJ                                                                                  |
-|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| JetBrains                                                                                                 | IntelliJ                                                                                               |
+|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | ![jetbrains](https://github.com/despensa-app/despensa-rest-api/blob/master/img/jetbrains.svg "jetbrains") | ![intellij](https://github.com/despensa-app/despensa-rest-api/blob/master/img/intellij.svg "intellij") |
 
 ## Licencia
