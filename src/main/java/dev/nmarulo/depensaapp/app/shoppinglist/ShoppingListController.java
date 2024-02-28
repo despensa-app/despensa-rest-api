@@ -23,7 +23,7 @@ public class ShoppingListController {
         return ResponseEntity.ok(this.service.findAll());
     }
     
-    @GetMapping("/index/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(this.service.findById(id));
     }
