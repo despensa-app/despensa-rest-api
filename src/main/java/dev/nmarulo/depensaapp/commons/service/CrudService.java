@@ -2,7 +2,7 @@ package dev.nmarulo.depensaapp.commons.service;
 
 import dev.nmarulo.depensaapp.commons.classes.PagingAndSortingRes;
 
-public interface CrudService<I, O, ID> {
+public interface CrudService<I, O, ID> extends BasicService {
     
     PagingAndSortingRes<O> findAll();
     
