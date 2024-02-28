@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
-public class IndexShoppingListProductRes {
+public class SaveShoppingListProductRes {
     
     private ShoppingList shoppingList;
     

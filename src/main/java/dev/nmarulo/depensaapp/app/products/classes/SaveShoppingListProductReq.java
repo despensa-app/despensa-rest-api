@@ -3,7 +3,7 @@ package dev.nmarulo.depensaapp.app.products.classes;
 import lombok.Data;
 
 @Data
-public class IndexShoppingListProductReq {
+public class SaveShoppingListProductReq {
     
     private Integer productId;
     

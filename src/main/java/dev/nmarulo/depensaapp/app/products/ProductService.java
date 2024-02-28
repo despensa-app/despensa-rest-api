@@ -1,8 +1,8 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.IndexProductRes;
-import dev.nmarulo.depensaapp.app.products.classes.IndexShoppingListProductReq;
-import dev.nmarulo.depensaapp.app.products.classes.IndexShoppingListProductRes;
+import dev.nmarulo.depensaapp.app.products.classes.FindAllProductRes;
+import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductReq;
+import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListPK;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
@@ -32,8 +32,8 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public IndexProductRes index(Integer excludeShoppingListId) {
-        var response = new IndexProductRes();
+    public FindAllProductRes findAll(Integer excludeShoppingListId) {
+        var response = new FindAllProductRes();
         //Obtener todos los productos que no estén en la lista de compra actual.
         var pageFindAll = this.repository.findAllByIdNotInShoppingList(excludeShoppingListId, getDataRequestScope().getPageable());
         
@@ -50,8 +50,8 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    private IndexProductRes.Product mapperTo(Product product) {
-        var response = new IndexProductRes.Product();
+    private FindAllProductRes.Product mapperTo(Product product) {
+        var response = new FindAllProductRes.Product();
         
         response.setId(product.getId());
         response.setName(product.getName());
@@ -60,7 +60,7 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    public IndexShoppingListProductRes indexShoppingList(IndexShoppingListProductReq request) {
+    public SaveShoppingListProductRes saveShoppingList(SaveShoppingListProductReq request) {
         var productOptional = this.repository.findById(request.getProductId());
         var shoppingListOptional = this.shoppingListRepository.findById(request.getShoppingListId());
         var unityTipeOptional = this.unitTypeRepository.findById(request.getUnitTypeId());
@@ -80,12 +80,12 @@ public class ProductService extends BasicServiceImp {
         return mapperTo(productOptional.get(), shoppingListOptional.get(), unityTipeOptional.get(), productHasShoppingListSave);
     }
     
-    private IndexShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {
-        var response = new IndexShoppingListProductRes();
+    private SaveShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {
+        var response = new SaveShoppingListProductRes();
         
-        var shoppingListRes = new IndexShoppingListProductRes.ShoppingList(shoppingList.getId(), shoppingList.getName());
-        var unitTypeRes = new IndexShoppingListProductRes.UnitType(unitType.getId(), unitType.getName());
-        var productRes = new IndexShoppingListProductRes.Product(product.getId(), product.getName(), product.getPrice());
+        var shoppingListRes = new SaveShoppingListProductRes.ShoppingList(shoppingList.getId(), shoppingList.getName());
+        var unitTypeRes = new SaveShoppingListProductRes.UnitType(unitType.getId(), unitType.getName());
+        var productRes = new SaveShoppingListProductRes.Product(product.getId(), product.getName(), product.getPrice());
         
         response.setShoppingList(shoppingListRes);
         response.setProduct(productRes);
@@ -96,7 +96,7 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    private ProductHasShoppingList getEntity(IndexShoppingListProductReq request, Product product) {
+    private ProductHasShoppingList getEntity(SaveShoppingListProductReq request, Product product) {
         var productHasShoppingListPK = new ProductHasShoppingListPK();
         var productHasShoppingList = new ProductHasShoppingList();
         
