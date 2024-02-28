@@ -3,12 +3,9 @@ package dev.nmarulo.depensaapp.app.shoppinglist.classes;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
-public class ShoppingListRes {
-    
-    private Integer id;
+public class ShoppingListAdminReq {
     
     private String name;
     
@@ -17,9 +14,5 @@ public class ShoppingListRes {
     private BigDecimal totalCalories;
     
     private BigDecimal totalPrice;
-    
-    private LocalDateTime createdAt;
-    
-    private LocalDateTime updatedAt;
     
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class UnitTypeRes {
+public class UnitTypeAdminRes {
     
     private Integer id;
     

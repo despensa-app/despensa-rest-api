@@ -1,7 +1,8 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.*;
-import dev.nmarulo.depensaapp.commons.controller.CrudController;
+import dev.nmarulo.depensaapp.app.products.classes.IndexProductRes;
+import dev.nmarulo.depensaapp.app.products.classes.IndexShoppingListProductReq;
+import dev.nmarulo.depensaapp.app.products.classes.IndexShoppingListProductRes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 @Getter
-public class ProductController extends CrudController<ProductReq, ProductRes, Integer> {
+public class ProductController {
     
     private final ProductService service;
     

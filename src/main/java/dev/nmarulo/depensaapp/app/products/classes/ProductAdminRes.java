@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class ProductRes {
+public class ProductAdminRes {
     
     private Integer id;
     
