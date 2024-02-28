@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
-public class IndexShoppingListRes extends PagingAndSortingRes<IndexShoppingListRes.ShoppingList> {
+public class FindAllShoppingListRes extends PagingAndSortingRes<FindAllShoppingListRes.ShoppingList> {
     
     @Data
     public static class ShoppingList {

@@ -1,7 +1,7 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexByIdShoppingListRes;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexShoppingListRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdShoppingListRes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ public class ShoppingListController {
     
     private final ShoppingListService service;
     
-    @GetMapping("/index")
-    public ResponseEntity<IndexShoppingListRes> index() {
-        return ResponseEntity.ok(this.service.index());
+    @GetMapping
+    public ResponseEntity<FindAllShoppingListRes> findAll() {
+        return ResponseEntity.ok(this.service.findAll());
     }
     
     @GetMapping("/index/{id}")
-    public ResponseEntity<IndexByIdShoppingListRes> indexById(@PathVariable Integer id) {
-        return ResponseEntity.ok(this.service.indexById(id));
+    public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok(this.service.findById(id));
     }
     
 }

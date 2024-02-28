@@ -1,8 +1,8 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexByIdShoppingListRes;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexShoppingListRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdShoppingListRes;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
@@ -16,8 +16,8 @@ public class ShoppingListService extends BasicServiceImp {
     
     private final ShoppingListRepository repository;
     
-    public IndexShoppingListRes index() {
-        var response = new IndexShoppingListRes();
+    public FindAllShoppingListRes findAll() {
+        var response = new FindAllShoppingListRes();
         var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
         
         var shoppingList = pageFindAll.stream()
@@ -33,14 +33,14 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
-    public IndexByIdShoppingListRes indexById(Integer id) {
+    public FindByIdShoppingListRes findById(Integer id) {
         var findById = this.repository.findById(id);
         
         if (findById.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
-        var response = new IndexByIdShoppingListRes();
+        var response = new FindByIdShoppingListRes();
         var shoppingList = findById.get();
         var productsRes = shoppingList.getProductHasShoppingList()
                                       .stream()
@@ -54,10 +54,10 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
-    private IndexByIdShoppingListRes.Item mapperTo(ProductHasShoppingList productHasShoppingList) {
-        var response = new IndexByIdShoppingListRes.Item();
-        var productRes = new IndexByIdShoppingListRes.Item.Product();
-        var unitTypeRes = new IndexByIdShoppingListRes.Item.UnitType();
+    private FindByIdShoppingListRes.Item mapperTo(ProductHasShoppingList productHasShoppingList) {
+        var response = new FindByIdShoppingListRes.Item();
+        var productRes = new FindByIdShoppingListRes.Item.Product();
+        var unitTypeRes = new FindByIdShoppingListRes.Item.UnitType();
         var product = productHasShoppingList.getProduct();
         var unitType = productHasShoppingList.getUnitType();
         
@@ -76,8 +76,8 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
-    private IndexShoppingListRes.ShoppingList mapperTo(ShoppingList entity) {
-        var response = new IndexShoppingListRes.ShoppingList();
+    private FindAllShoppingListRes.ShoppingList mapperTo(ShoppingList entity) {
+        var response = new FindAllShoppingListRes.ShoppingList();
         
         response.setId(entity.getId());
         response.setName(entity.getName());

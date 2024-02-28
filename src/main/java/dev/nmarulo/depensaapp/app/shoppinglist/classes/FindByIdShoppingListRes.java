@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class IndexByIdShoppingListRes {
+public class FindByIdShoppingListRes {
     
     private Integer id;
     
