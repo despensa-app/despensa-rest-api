@@ -1,6 +1,8 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.*;
+import dev.nmarulo.depensaapp.app.products.classes.IndexProductRes;
+import dev.nmarulo.depensaapp.app.products.classes.IndexShoppingListProductReq;
+import dev.nmarulo.depensaapp.app.products.classes.IndexShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListPK;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
@@ -10,7 +12,7 @@ import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitTypeRepository;
 import dev.nmarulo.depensaapp.commons.exception.BadRequestException;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
-import dev.nmarulo.depensaapp.commons.service.CrudServiceImp;
+import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ import java.math.BigDecimal;
 @Service
 @RequiredArgsConstructor
 @Getter
-public class ProductService extends CrudServiceImp<ProductReq, ProductRes, Product, Integer> {
+public class ProductService extends BasicServiceImp {
     
     private final ProductRepository repository;
     

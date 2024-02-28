@@ -3,10 +3,8 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexByIdShoppingListRes;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.IndexShoppingListRes;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.ShoppingListReq;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.ShoppingListRes;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
-import dev.nmarulo.depensaapp.commons.service.CrudServiceImp;
+import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Getter
-public class ShoppingListService extends CrudServiceImp<ShoppingListReq, ShoppingListRes, ShoppingList, Integer> {
+public class ShoppingListService extends BasicServiceImp {
     
     private final ShoppingListRepository repository;
     
