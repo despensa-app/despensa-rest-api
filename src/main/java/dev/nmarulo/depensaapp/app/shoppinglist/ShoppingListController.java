@@ -1,6 +1,7 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdShoppingListRes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,11 @@ public class ShoppingListController {
     @GetMapping("/{id}")
     public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(this.service.findById(id));
+    }
+    
+    @GetMapping("/{id}/products/{productId}")
+    public ResponseEntity<FindByIdProductShoppingListRest> findByIdProduct(@PathVariable Integer id, @PathVariable Integer productId) {
+        return ResponseEntity.ok(this.service.findByIdProduct(id, productId));
     }
     
 }
