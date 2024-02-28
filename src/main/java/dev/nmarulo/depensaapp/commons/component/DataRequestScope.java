@@ -1,6 +1,5 @@
 package dev.nmarulo.depensaapp.commons.component;
 
-import dev.nmarulo.depensaapp.commons.classes.PagingAndSortingReq;
 import dev.nmarulo.depensaapp.configuration.AppProperties;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +16,6 @@ import org.springframework.web.servlet.LocaleResolver;
 public class DataRequestScope {
     
     private Pageable pageable;
-    
-    private PagingAndSortingReq pagingAndSortingReq;
     
     private final AppProperties appProperties;
     
