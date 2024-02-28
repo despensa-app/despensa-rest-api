@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Getter
 public class ProductAdminController extends CrudController<ProductAdminReq, ProductAdminRes, Integer> {
     
-    private final ProductService service;
+    private final ProductAdminService service;
     
 }
