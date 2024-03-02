@@ -1,15 +1,13 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.DeleteProductsShoppingListReq;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdShoppingListRes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shopping-lists")
@@ -32,6 +30,14 @@ public class ShoppingListController {
     @GetMapping("/{id}/products/{productId}")
     public ResponseEntity<FindByIdProductShoppingListRest> findByIdProduct(@PathVariable Integer id, @PathVariable Integer productId) {
         return ResponseEntity.ok(this.service.findByIdProduct(id, productId));
+    }
+    
+    @DeleteMapping("/{id}/products")
+    public ResponseEntity<?> deleteProducts(@PathVariable Integer id, @RequestBody DeleteProductsShoppingListReq request) {
+        this.service.deleteProducts(id, request);
+        
+        return ResponseEntity.noContent()
+                             .build();
     }
     
 }

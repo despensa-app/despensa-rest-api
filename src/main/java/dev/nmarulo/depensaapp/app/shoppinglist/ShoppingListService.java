@@ -2,6 +2,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.DeleteProductsShoppingListReq;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest.UnitTypeRes;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -69,6 +71,30 @@ public class ShoppingListService extends BasicServiceImp {
         }
         
         return findByIdProductMapperTo(productShoppingListOptional.get());
+    }
+    
+    public void deleteProducts(Integer id, DeleteProductsShoppingListReq request) {
+        var shoppingListOptional = this.repository.findById(id);
+        
+        if (shoppingListOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        var shoppingList = shoppingListOptional.get();
+        
+        var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdIn(id, request.getProductsId());
+        
+        var totalProducts = shoppingList.getTotalProducts() - productsShoppingList.size();
+        var reduce = productsShoppingList.stream()
+                                         .map(ProductHasShoppingList::getTotalPrice)
+                                         .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var totalPrice = shoppingList.getTotalPrice()
+                                     .subtract(reduce);
+        
+        shoppingList.setTotalProducts(totalProducts);
+        shoppingList.setTotalPrice(totalPrice);
+        
+        this.productHasShoppingListRepository.deleteAll(productsShoppingList);
     }
     
     private FindByIdProductShoppingListRest findByIdProductMapperTo(ProductHasShoppingList productHasShoppingList) {
