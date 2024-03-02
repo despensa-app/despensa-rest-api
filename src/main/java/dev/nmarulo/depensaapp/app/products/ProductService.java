@@ -73,11 +73,19 @@ public class ProductService extends BasicServiceImp {
         }
         
         var productHasShoppingList = getEntity(request, productOptional.get());
+        var shoppingList = shoppingListOptional.get();
+        
+        var totalProducts = shoppingList.getTotalProducts() + 1;
+        var totalPrice = shoppingList.getTotalPrice()
+                                     .add(productHasShoppingList.getTotalPrice());
+        
+        shoppingList.setTotalProducts(totalProducts);
+        shoppingList.setTotalPrice(totalPrice);
         
         //TODO: Como el "save" no me retorna las FK estoy consultando previamente cada uno de los campos.
         var productHasShoppingListSave = this.productHasShoppingListRepository.save(productHasShoppingList);
         
-        return mapperTo(productOptional.get(), shoppingListOptional.get(), unityTipeOptional.get(), productHasShoppingListSave);
+        return mapperTo(productOptional.get(), shoppingList, unityTipeOptional.get(), productHasShoppingListSave);
     }
     
     private SaveShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {
