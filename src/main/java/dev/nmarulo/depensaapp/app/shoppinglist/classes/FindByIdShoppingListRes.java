@@ -12,6 +12,10 @@ public class FindByIdShoppingListRes {
     
     private String name;
     
+    private Integer totalProducts;
+    
+    private BigDecimal totalPrice;
+    
     private List<Item> items;
     
     @Data

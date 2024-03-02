@@ -59,6 +59,8 @@ public class ShoppingListService extends BasicServiceImp {
         response.setId(shoppingList.getId());
         response.setName(shoppingList.getName());
         response.setItems(productsRes);
+        response.setTotalProducts(shoppingList.getTotalProducts());
+        response.setTotalPrice(shoppingList.getTotalPrice());
         
         return response;
     }
