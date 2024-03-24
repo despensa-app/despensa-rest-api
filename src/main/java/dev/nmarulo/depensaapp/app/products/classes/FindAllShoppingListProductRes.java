@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
-public class FindAllProductRes extends PagingAndSortingRes<FindAllProductRes.Product> {
+public class FindAllShoppingListProductRes extends PagingAndSortingRes<FindAllShoppingListProductRes.Product> {
     
     @Data
     public static class Product {
@@ -17,12 +17,6 @@ public class FindAllProductRes extends PagingAndSortingRes<FindAllProductRes.Pro
         private String name;
         
         private BigDecimal price;
-        
-        private String imgUrl;
-        
-        private BigDecimal calories;
-        
-        private String description;
         
     }
     

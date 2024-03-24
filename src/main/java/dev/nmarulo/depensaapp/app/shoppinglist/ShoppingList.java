@@ -28,7 +28,7 @@ public class ShoppingList {
     private Integer id;
     
     @Basic
-    @Column(name = "name", nullable = false, length = 250)
+    @Column(name = "name", length = 250)
     private String name;
     
     @Column(name = "total_products", nullable = false)
