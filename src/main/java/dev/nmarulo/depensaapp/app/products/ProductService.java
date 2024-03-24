@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.FindAllProductRes;
+import dev.nmarulo.depensaapp.app.products.classes.FindAllShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductReq;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
@@ -32,8 +32,8 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public FindAllProductRes findAll(Integer excludeShoppingListId) {
-        var response = new FindAllProductRes();
+    public FindAllShoppingListProductRes findAllShoppingList(Integer excludeShoppingListId) {
+        var response = new FindAllShoppingListProductRes();
         //Obtener todos los productos que no estén en la lista de compra actual.
         var pageFindAll = this.repository.findAllByIdNotInShoppingList(excludeShoppingListId, getDataRequestScope().getPageable());
         
@@ -50,8 +50,8 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    private FindAllProductRes.Product mapperTo(Product product) {
-        var response = new FindAllProductRes.Product();
+    private FindAllShoppingListProductRes.Product mapperTo(Product product) {
+        var response = new FindAllShoppingListProductRes.Product();
         
         response.setId(product.getId());
         response.setName(product.getName());

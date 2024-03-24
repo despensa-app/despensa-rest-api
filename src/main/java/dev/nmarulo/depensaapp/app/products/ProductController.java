@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.FindAllProductRes;
+import dev.nmarulo.depensaapp.app.products.classes.FindAllShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductReq;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductRes;
 import lombok.Getter;
@@ -16,10 +16,10 @@ public class ProductController {
     
     private final ProductService service;
     
-    @GetMapping
-    public ResponseEntity<FindAllProductRes> findAll(@RequestParam(value = "exclude_shopping_list_id",
-                                                                   required = false) Integer excludeShoppingListId) {
-        return ResponseEntity.ok(this.service.findAll(excludeShoppingListId));
+    @GetMapping("/shopping-list")
+    public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@RequestParam(value = "exclude_shopping_list_id",
+                                                                                           required = false) Integer excludeShoppingListId) {
+        return ResponseEntity.ok(this.service.findAllShoppingList(excludeShoppingListId));
     }
     
     @PostMapping("/shopping-list")
