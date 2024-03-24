@@ -21,6 +21,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <org.modelmapper.version>3.0.0</org.modelmapper.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -80,8 +82,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${org.modelmapper.version}</version>
         </dependency>
     </dependencies>
 

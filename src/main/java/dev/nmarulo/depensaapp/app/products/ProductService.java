@@ -38,25 +38,17 @@ public class ProductService extends BasicServiceImp {
         //Obtener todos los productos que no estén en la lista de compra actual.
         var pageFindAll = this.repository.findAllByIdNotInShoppingList(excludeShoppingListId, getDataRequestScope().getPageable());
         
-        var products = pageFindAll.stream()
-                                  .map(this::mapperTo)
-                                  .toList();
-        
-        response.setContent(products);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
+        getModelMapper().map(pageFindAll, response);
         
         return response;
     }
     
-    private FindAllShoppingListProductRes.Product mapperTo(Product product) {
-        var response = new FindAllShoppingListProductRes.Product();
+    public FindAllProductRes findAll() {
+        var response = new FindAllProductRes();
+        //Obtener todos los productos que no estén en la lista de compra actual.
+        var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
         
-        response.setId(product.getId());
-        response.setName(product.getName());
-        response.setPrice(product.getPrice());
+        getModelMapper().map(pageFindAll, response);
         
         return response;
     }
@@ -89,48 +81,17 @@ public class ProductService extends BasicServiceImp {
         return mapperTo(productOptional.get(), shoppingList, unityTipeOptional.get(), productHasShoppingListSave);
     }
     
-    public FindAllProductRes findAll() {
-        var response = new FindAllProductRes();
-        var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
-        
-        var products = pageFindAll.stream()
-                                  .map(this::findAllMapperTo)
-                                  .toList();
-        
-        response.setContent(products);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
-        
-        return response;
-    }
-    
-    private FindAllProductRes.Product findAllMapperTo(Product product) {
-        var response = new FindAllProductRes.Product();
-        
-        response.setId(product.getId());
-        response.setName(product.getName());
-        response.setPrice(product.getPrice());
-        response.setImgUrl(product.getImgUrl());
-        response.setCalories(product.getCalories());
-        response.setDescription(product.getDescription());
-        
-        return response;
-    }
-    
     private SaveShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {
         var response = new SaveShoppingListProductRes();
         
-        var shoppingListRes = new SaveShoppingListProductRes.ShoppingList(shoppingList.getId(), shoppingList.getName());
-        var unitTypeRes = new SaveShoppingListProductRes.UnitType(unitType.getId(), unitType.getName());
-        var productRes = new SaveShoppingListProductRes.Product(product.getId(), product.getName(), product.getPrice());
+        var shoppingListRes = getModelMapper().map(shoppingList, SaveShoppingListProductRes.ShoppingList.class);
+        var unitTypeRes = getModelMapper().map(unitType, SaveShoppingListProductRes.UnitType.class);
+        var productRes = getModelMapper().map(product, SaveShoppingListProductRes.Product.class);
         
-        response.setShoppingList(shoppingListRes);
-        response.setProduct(productRes);
-        response.setUnitType(unitTypeRes);
-        response.setTotalPrice(productHasShoppingListSave.getTotalPrice());
-        response.setUnitsPerProduct(productHasShoppingListSave.getUnitsPerProduct());
+        getModelMapper().map(shoppingList, response);
+        getModelMapper().map(unitType, response);
+        getModelMapper().map(product, response);
+        getModelMapper().map(productHasShoppingListSave, response);
         
         return response;
     }

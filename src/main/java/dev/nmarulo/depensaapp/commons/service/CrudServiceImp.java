@@ -10,6 +10,9 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import java.lang.reflect.Type;
 
 @Getter
 public abstract class CrudServiceImp<I, O, E, ID> extends BasicServiceImp implements CrudService<I, O, ID> {
@@ -18,9 +21,10 @@ public abstract class CrudServiceImp<I, O, E, ID> extends BasicServiceImp implem
     
     @Override
     public PagingAndSortingRes<O> findAll() {
+        Type responseType = new TypeToken<PagingAndSortingRes<O>>() {}.getType();
         Page<E> page = getRepository().findAll(getDataRequestScope().getPageable());
         
-        return pageToResponse(page, getResponseClass());
+        return getModelMapper().map(page, responseType);
     }
     
     @Override
@@ -28,30 +32,18 @@ public abstract class CrudServiceImp<I, O, E, ID> extends BasicServiceImp implem
         E entity = getRepository().findById(id)
                                   .orElse(null);
         
-        return getGsonUtil().convertTo(entity, getResponseClass());
+        return getModelMapper().map(entity, getResponseClass());
     }
     
     @Override
     public O save(I request) {
-        E entity = getGsonUtil().convertTo(request, getEntityClass());
-        
-        setFieldId(null, entity);
-        
-        E save = getRepository().save(entity);
-        
-        return getGsonUtil().convertTo(save, getResponseClass());
+        return saveOrUpdate(null, request);
     }
     
     @Override
     public O update(ID id, I request) {
         checkIsExistById(id);
-        E entity = getGsonUtil().convertTo(request, getEntityClass());
-        
-        setFieldId(id, entity);
-        
-        E save = getRepository().save(entity);
-        
-        return getGsonUtil().convertTo(save, getResponseClass());
+        return saveOrUpdate(id, request);
     }
     
     @Override
@@ -60,17 +52,11 @@ public abstract class CrudServiceImp<I, O, E, ID> extends BasicServiceImp implem
         getRepository().deleteById(id);
     }
     
-    protected <RE, EN> PagingAndSortingRes<RE> pageToResponse(Page<EN> page, Class<RE> classRE) {
-        PagingAndSortingRes<RE> response = new PagingAndSortingRes<>();
-        List<RE> content = getGsonUtil().convertTo(page.getContent(), classRE);
-        
-        response.setContent(content);
-        response.setCurrentPage(page.getNumber());
-        response.setPageSize(page.getNumberOfElements());
-        response.setTotalPages(page.getTotalPages());
-        response.setTotal(page.getTotalElements());
-        
-        return response;
+    private O saveOrUpdate(ID id, I request) {
+        E entity = getModelMapper().map(request, getEntityClass());
+        setFieldId(id, entity);
+        E save = getRepository().save(entity);
+        return getModelMapper().map(save, getResponseClass());
     }
     
     private void checkIsExistById(ID id) {

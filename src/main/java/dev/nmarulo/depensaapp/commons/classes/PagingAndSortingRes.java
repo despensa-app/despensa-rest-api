@@ -1,5 +1,6 @@
 package dev.nmarulo.depensaapp.commons.classes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -9,12 +10,16 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class PagingAndSortingRes<R> extends ContentRes<R> {
     
-    private int currentPage;
+    @JsonProperty("currentPage")
+    private int number;
     
-    private int pageSize;
+    @JsonProperty("pageSize")
+    private int numberOfElements;
     
+    @JsonProperty("totalPages")
     private int totalPages;
     
-    private long total;
+    @JsonProperty("total")
+    private long totalElements;
     
 }
