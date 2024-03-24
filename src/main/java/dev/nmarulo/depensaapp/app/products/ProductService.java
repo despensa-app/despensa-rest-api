@@ -33,10 +33,20 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public FindAllProductRes findAll(Integer excludeShoppingListId) {
-        var response = new FindAllProductRes();
+    public FindAllShoppingListProductRes findAllShoppingList(Integer excludeShoppingListId) {
+        var response = new FindAllShoppingListProductRes();
         //Obtener todos los productos que no estén en la lista de compra actual.
         var pageFindAll = this.repository.findAllByIdNotInShoppingList(excludeShoppingListId, getDataRequestScope().getPageable());
+        
+        getModelMapper().map(pageFindAll, response);
+        
+        return response;
+    }
+    
+    public FindAllProductRes findAll() {
+        var response = new FindAllProductRes();
+        //Obtener todos los productos que no estén en la lista de compra actual.
+        var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
         
         getModelMapper().map(pageFindAll, response);
         
