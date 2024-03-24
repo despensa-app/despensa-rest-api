@@ -2,11 +2,8 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.DeleteProductsShoppingListReq;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.*;
 import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest.UnitTypeRes;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdShoppingListRes;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
@@ -14,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -97,6 +95,21 @@ public class ShoppingListService extends BasicServiceImp {
         shoppingList.setTotalPrice(totalPrice);
         
         this.productHasShoppingListRepository.deleteAll(productsShoppingList);
+    }
+    
+    public SaveShoppingListRes save(SaveShoppingListReq request) {
+        var shoppingList = new ShoppingList();
+        
+        shoppingList.setName(request.getName());
+        shoppingList.setTotalProducts(0);
+        shoppingList.setTotalCalories(new BigDecimal("0"));
+        shoppingList.setTotalPrice(new BigDecimal("0"));
+        shoppingList.setCreatedAt(LocalDateTime.now());
+        shoppingList.setUpdatedAt(LocalDateTime.now());
+        
+        var save = this.repository.save(shoppingList);
+        
+        return new SaveShoppingListRes(save.getId());
     }
     
     private FindByIdProductShoppingListRest findByIdProductMapperTo(ProductHasShoppingList productHasShoppingList) {

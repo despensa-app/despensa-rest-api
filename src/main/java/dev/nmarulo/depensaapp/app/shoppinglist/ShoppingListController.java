@@ -1,9 +1,6 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.DeleteProductsShoppingListReq;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindAllShoppingListRes;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdShoppingListRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.classes.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +35,11 @@ public class ShoppingListController {
         
         return ResponseEntity.noContent()
                              .build();
+    }
+    
+    @PostMapping
+    public ResponseEntity<SaveShoppingListRes> save(@RequestBody SaveShoppingListReq request) {
+        return ResponseEntity.ok(this.service.save(request));
     }
     
 }
