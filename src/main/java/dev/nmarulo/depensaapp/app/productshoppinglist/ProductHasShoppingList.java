@@ -1,9 +1,9 @@
 package dev.nmarulo.depensaapp.app.productshoppinglist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.nmarulo.depensaapp.app.products.Product;
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
-import dev.nmarulo.depensaapp.commons.gson.GsonExclude;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -40,19 +40,19 @@ public class ProductHasShoppingList {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
     @ToString.Exclude
-    @GsonExclude
+    @JsonIgnore
     private Product product;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopping_list_id", insertable = false, updatable = false)
     @ToString.Exclude
-    @GsonExclude
+    @JsonIgnore
     private ShoppingList shoppingList;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_type_id", insertable = false, updatable = false)
     @ToString.Exclude
-    @GsonExclude
+    @JsonIgnore
     private UnitType unitType;
     
     public boolean equals(final Object o) {

@@ -37,25 +37,7 @@ public class ProductService extends BasicServiceImp {
         //Obtener todos los productos que no estén en la lista de compra actual.
         var pageFindAll = this.repository.findAllByIdNotInShoppingList(excludeShoppingListId, getDataRequestScope().getPageable());
         
-        var products = pageFindAll.stream()
-                                  .map(this::mapperTo)
-                                  .toList();
-        
-        response.setContent(products);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
-        
-        return response;
-    }
-    
-    private FindAllProductRes.Product mapperTo(Product product) {
-        var response = new FindAllProductRes.Product();
-        
-        response.setId(product.getId());
-        response.setName(product.getName());
-        response.setPrice(product.getPrice());
+        getModelMapper().map(pageFindAll, response);
         
         return response;
     }
@@ -91,15 +73,14 @@ public class ProductService extends BasicServiceImp {
     private SaveShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {
         var response = new SaveShoppingListProductRes();
         
-        var shoppingListRes = new SaveShoppingListProductRes.ShoppingList(shoppingList.getId(), shoppingList.getName());
-        var unitTypeRes = new SaveShoppingListProductRes.UnitType(unitType.getId(), unitType.getName());
-        var productRes = new SaveShoppingListProductRes.Product(product.getId(), product.getName(), product.getPrice());
+        var shoppingListRes = getModelMapper().map(shoppingList, SaveShoppingListProductRes.ShoppingList.class);
+        var unitTypeRes = getModelMapper().map(unitType, SaveShoppingListProductRes.UnitType.class);
+        var productRes = getModelMapper().map(product, SaveShoppingListProductRes.Product.class);
         
-        response.setShoppingList(shoppingListRes);
-        response.setProduct(productRes);
-        response.setUnitType(unitTypeRes);
-        response.setTotalPrice(productHasShoppingListSave.getTotalPrice());
-        response.setUnitsPerProduct(productHasShoppingListSave.getUnitsPerProduct());
+        getModelMapper().map(shoppingList, response);
+        getModelMapper().map(unitType, response);
+        getModelMapper().map(product, response);
+        getModelMapper().map(productHasShoppingListSave, response);
         
         return response;
     }
