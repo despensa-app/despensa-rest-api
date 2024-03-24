@@ -1,5 +1,6 @@
 package dev.nmarulo.depensaapp.app.products;
 
+import dev.nmarulo.depensaapp.app.products.classes.FindAllProductRes;
 import dev.nmarulo.depensaapp.app.products.classes.FindAllShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductReq;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductRes;
@@ -86,6 +87,36 @@ public class ProductService extends BasicServiceImp {
         var productHasShoppingListSave = this.productHasShoppingListRepository.save(productHasShoppingList);
         
         return mapperTo(productOptional.get(), shoppingList, unityTipeOptional.get(), productHasShoppingListSave);
+    }
+    
+    public FindAllProductRes findAll() {
+        var response = new FindAllProductRes();
+        var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
+        
+        var products = pageFindAll.stream()
+                                  .map(this::findAllMapperTo)
+                                  .toList();
+        
+        response.setContent(products);
+        response.setCurrentPage(pageFindAll.getNumber());
+        response.setPageSize(pageFindAll.getNumberOfElements());
+        response.setTotalPages(pageFindAll.getTotalPages());
+        response.setTotal(pageFindAll.getTotalElements());
+        
+        return response;
+    }
+    
+    private FindAllProductRes.Product findAllMapperTo(Product product) {
+        var response = new FindAllProductRes.Product();
+        
+        response.setId(product.getId());
+        response.setName(product.getName());
+        response.setPrice(product.getPrice());
+        response.setImgUrl(product.getImgUrl());
+        response.setCalories(product.getCalories());
+        response.setDescription(product.getDescription());
+        
+        return response;
     }
     
     private SaveShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {

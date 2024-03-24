@@ -1,5 +1,6 @@
 package dev.nmarulo.depensaapp.app.products;
 
+import dev.nmarulo.depensaapp.app.products.classes.FindAllProductRes;
 import dev.nmarulo.depensaapp.app.products.classes.FindAllShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductReq;
 import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductRes;
@@ -25,6 +26,11 @@ public class ProductController {
     @PostMapping("/shopping-list")
     public ResponseEntity<SaveShoppingListProductRes> saveShoppingList(@RequestBody SaveShoppingListProductReq request) {
         return ResponseEntity.ok(this.service.saveShoppingList(request));
+    }
+    
+    @GetMapping
+    public ResponseEntity<FindAllProductRes> findAll() {
+        return ResponseEntity.ok(this.service.findAll());
     }
     
 }
