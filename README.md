@@ -119,12 +119,12 @@ Cualquier contribución que hagas será muy apreciada.
 
 ## Agradecimientos
 
-Gracias a [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) por proporcionar una licencia para IntelliJ para
+Gracias a [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) por proporcionar una licencia para IntelliJ IDEA para
 desarrollar este proyecto.
 
-| JetBrains                                                                                                 | IntelliJ                                                                                               |
-|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| ![jetbrains](https://github.com/despensa-app/despensa-rest-api/blob/master/img/jetbrains.svg "jetbrains") | ![intellij](https://github.com/despensa-app/despensa-rest-api/blob/master/img/intellij.svg "intellij") |
+| JetBrains                                                                                             | IntelliJ IDEA                                                                                                      |
+|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| ![JetBrains logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg) | ![IntelliJ IDEA logo](https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA_icon.svg) |
 
 ## Licencia
 
