@@ -56,7 +56,7 @@ public class ShoppingListService extends BasicServiceImp {
         
         response.setId(shoppingList.getId());
         response.setName(shoppingList.getName());
-        response.setItems(productsRes);
+        response.setProducts(productsRes);
         response.setTotalProducts(shoppingList.getTotalProducts());
         response.setTotalPrice(shoppingList.getTotalPrice());
         
@@ -145,10 +145,10 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
-    private FindByIdShoppingListRes.Item mapperTo(ProductHasShoppingList productHasShoppingList) {
-        var response = new FindByIdShoppingListRes.Item();
-        var productRes = new FindByIdShoppingListRes.Item.Product();
-        var unitTypeRes = new FindByIdShoppingListRes.Item.UnitType();
+    private FindByIdShoppingListRes.ProductShoppingList mapperTo(ProductHasShoppingList productHasShoppingList) {
+        var response = new FindByIdShoppingListRes.ProductShoppingList();
+        var productRes = new FindByIdShoppingListRes.ProductShoppingList.Product();
+        var unitTypeRes = new FindByIdShoppingListRes.ProductShoppingList.UnitType();
         var product = productHasShoppingList.getProduct();
         var unitType = productHasShoppingList.getUnitType();
         

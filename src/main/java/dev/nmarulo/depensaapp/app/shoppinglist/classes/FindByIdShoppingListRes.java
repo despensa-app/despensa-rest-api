@@ -16,10 +16,10 @@ public class FindByIdShoppingListRes {
     
     private BigDecimal totalPrice;
     
-    private List<Item> items;
+    private List<ProductShoppingList> products;
     
     @Data
-    public static class Item {
+    public static class ProductShoppingList {
         
         private Integer unitsPerProduct;
         
