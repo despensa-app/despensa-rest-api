@@ -42,4 +42,9 @@ public class ShoppingListController {
         return ResponseEntity.ok(this.service.save(request));
     }
     
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateShoppingListRes> update(@PathVariable Integer id, @RequestBody UpdateShoppingListReq request) {
+        return ResponseEntity.ok(this.service.update(id, request));
+    }
+    
 }

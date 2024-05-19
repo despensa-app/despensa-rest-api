@@ -112,6 +112,23 @@ public class ShoppingListService extends BasicServiceImp {
         return new SaveShoppingListRes(save.getId());
     }
     
+    public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request) {
+        var shoppingListOptional = this.repository.findById(id);
+        
+        if (shoppingListOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        var shoppingList = shoppingListOptional.get();
+        
+        shoppingList.setName(request.getName());
+        shoppingList.setUpdatedAt(LocalDateTime.now());
+        
+        var update = this.repository.save(shoppingList);
+        
+        return new UpdateShoppingListRes(update.getId());
+    }
+    
     private FindByIdProductShoppingListRest findByIdProductMapperTo(ProductHasShoppingList productHasShoppingList) {
         var response = new FindByIdProductShoppingListRest();
         var product = productHasShoppingList.getProduct();
