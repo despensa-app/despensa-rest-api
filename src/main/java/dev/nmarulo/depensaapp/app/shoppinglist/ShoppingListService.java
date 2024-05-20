@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -119,6 +120,8 @@ public class ShoppingListService extends BasicServiceImp {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
+        updateProducts(id, request.getProducts());
+        
         var shoppingList = shoppingListOptional.get();
         
         shoppingList.setName(request.getName());
@@ -127,6 +130,32 @@ public class ShoppingListService extends BasicServiceImp {
         var update = this.repository.save(shoppingList);
         
         return new UpdateShoppingListRes(update.getId());
+    }
+    
+    private void updateProducts(Integer shoppingListId, List<UpdateShoppingListReq.ProductShoppingList> productsReq) {
+        if (productsReq == null || productsReq.isEmpty()) {
+            return;
+        }
+        
+        var productsId = productsReq.stream()
+                                    .map(UpdateShoppingListReq.ProductShoppingList::getProductId)
+                                    .toList();
+        var unitTypesId = productsReq.stream()
+                                     .map(UpdateShoppingListReq.ProductShoppingList::getUnitTypeId)
+                                     .toList();
+        var result = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdInAndUnitTypeIdIn(shoppingListId, productsId, unitTypesId);
+        
+        result.forEach(value -> {
+            var productDTO = value.getProduct();
+            
+            productsReq.stream()
+                       .filter(productReq -> productReq.getProductId()
+                                                       .equals(productDTO.getId()))
+                       .findFirst()
+                       .ifPresent(productReq -> value.setSelected(productReq.isSelected()));
+            
+            this.productHasShoppingListRepository.save(value);
+        });
     }
     
     private FindByIdProductShoppingListRest findByIdProductMapperTo(ProductHasShoppingList productHasShoppingList) {
