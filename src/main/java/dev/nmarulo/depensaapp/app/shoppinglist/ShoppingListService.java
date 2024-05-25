@@ -8,6 +8,7 @@ import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -101,7 +102,7 @@ public class ShoppingListService extends BasicServiceImp {
     public SaveShoppingListRes save(SaveShoppingListReq request) {
         var shoppingList = new ShoppingList();
         
-        shoppingList.setName(request.getName());
+        shoppingList.setName(StringUtils.defaultIfBlank(request.getName(), "Sin título"));
         shoppingList.setTotalProducts(0);
         shoppingList.setTotalCalories(new BigDecimal("0"));
         shoppingList.setTotalPrice(new BigDecimal("0"));
@@ -110,7 +111,7 @@ public class ShoppingListService extends BasicServiceImp {
         
         var save = this.repository.save(shoppingList);
         
-        return new SaveShoppingListRes(save.getId());
+        return new SaveShoppingListRes(save.getId(), save.getName());
     }
     
     public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request) {

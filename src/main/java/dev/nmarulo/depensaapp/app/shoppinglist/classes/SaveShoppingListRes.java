@@ -9,4 +9,6 @@ public class SaveShoppingListRes {
     
     private Integer id;
     
+    private String name;
+    
 }
