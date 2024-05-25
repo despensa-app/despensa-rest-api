@@ -22,6 +22,8 @@ public class PagingAndSortingRequestInterceptor implements HandlerInterceptor {
     
     private static final String SORT_ORDER_REGEX = "(([a-zA-Z0-9_]+)(,asc|,desc)?:?,?)+";
     
+    private static final String DEFAULT_SORT_ORDER = "id,desc";
+    
     private final DataRequestScope dataRequestScope;
     
     private final AppProperties appProperties;
@@ -34,7 +36,7 @@ public class PagingAndSortingRequestInterceptor implements HandlerInterceptor {
         var pageNumber = 0;
         var pageSize = 0;
         
-        if (HttpMethod.GET.matches(request.getMethod()) && !StringUtils.isAllBlank(pageStr, sizeStr, sortStr)) {
+        if (HttpMethod.GET.matches(request.getMethod())) {
             if (StringUtils.isNumeric(pageStr)) {
                 pageNumber = Math.max(Integer.parseInt(pageStr), 0);
             }
@@ -46,7 +48,7 @@ public class PagingAndSortingRequestInterceptor implements HandlerInterceptor {
                 pageSize = this.appProperties.getPageableSize();
             }
             
-            List<Sort.Order> sortList = getOrders(sortStr);
+            List<Sort.Order> sortList = getOrders(StringUtils.defaultIfBlank(sortStr, DEFAULT_SORT_ORDER));
             
             this.dataRequestScope.setPageable(PageRequest.of(pageNumber, pageSize, Sort.by(sortList)));
         }
