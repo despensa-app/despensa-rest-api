@@ -47,4 +47,12 @@ public class ShoppingListController {
         return ResponseEntity.ok(this.service.update(id, request));
     }
     
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        this.service.delete(id);
+        
+        return ResponseEntity.noContent()
+                             .build();
+    }
+    
 }

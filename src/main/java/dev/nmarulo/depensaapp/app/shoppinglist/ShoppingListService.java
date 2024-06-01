@@ -208,4 +208,17 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
+    public void delete(Integer id) {
+        var shoppingListOptional = this.repository.findById(id);
+        
+        if (shoppingListOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        var shoppingList = shoppingListOptional.get();
+        
+        this.productHasShoppingListRepository.deleteAll(shoppingList.getProductHasShoppingList());
+        this.repository.deleteById(id);
+    }
+    
 }
