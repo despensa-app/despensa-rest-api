@@ -133,6 +133,19 @@ public class ShoppingListService extends BasicServiceImp {
         return new UpdateShoppingListRes(update.getId());
     }
     
+    public void delete(Integer id) {
+        var shoppingListOptional = this.repository.findById(id);
+        
+        if (shoppingListOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        var shoppingList = shoppingListOptional.get();
+        
+        this.productHasShoppingListRepository.deleteAll(shoppingList.getProductHasShoppingList());
+        this.repository.deleteById(id);
+    }
+    
     private void updateProducts(Integer shoppingListId, List<UpdateShoppingListReq.ProductShoppingList> productsReq) {
         if (productsReq == null || productsReq.isEmpty()) {
             return;
@@ -206,19 +219,6 @@ public class ShoppingListService extends BasicServiceImp {
         response.setCreatedAt(entity.getCreatedAt());
         
         return response;
-    }
-    
-    public void delete(Integer id) {
-        var shoppingListOptional = this.repository.findById(id);
-        
-        if (shoppingListOptional.isEmpty()) {
-            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
-        }
-        
-        var shoppingList = shoppingListOptional.get();
-        
-        this.productHasShoppingListRepository.deleteAll(shoppingList.getProductHasShoppingList());
-        this.repository.deleteById(id);
     }
     
 }
