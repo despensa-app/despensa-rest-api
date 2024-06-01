@@ -28,7 +28,7 @@ public class Product {
     private Integer id;
     
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false)
     private String name;
     
     @Basic
