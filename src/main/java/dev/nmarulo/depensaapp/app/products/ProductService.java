@@ -57,6 +57,7 @@ public class ProductService extends BasicServiceImp {
         response.setId(product.getId());
         response.setName(product.getName());
         response.setPrice(product.getPrice());
+        response.setImgUrl(product.getImgUrl());
         
         return response;
     }

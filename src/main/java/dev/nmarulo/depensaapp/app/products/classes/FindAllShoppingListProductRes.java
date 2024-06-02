@@ -18,6 +18,8 @@ public class FindAllShoppingListProductRes extends PagingAndSortingRes<FindAllSh
         
         private BigDecimal price;
         
+        private String imgUrl;
+        
     }
     
 }
