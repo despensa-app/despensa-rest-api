@@ -198,6 +198,7 @@ public class ShoppingListService extends BasicServiceImp {
         productRes.setId(product.getId());
         productRes.setName(product.getName());
         productRes.setPrice(product.getPrice());
+        productRes.setImgUrl(product.getImgUrl());
         unitTypeRes.setId(unitType.getId());
         unitTypeRes.setName(unitType.getName());
         

@@ -40,6 +40,8 @@ public class FindByIdShoppingListRes {
             
             private BigDecimal price;
             
+            private String imgUrl;
+            
         }
         
         @Data
