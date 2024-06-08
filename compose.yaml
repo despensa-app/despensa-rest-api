@@ -1,0 +1,38 @@
+services:
+  despensa-rest-api:
+    build:
+      context: .
+      target: development
+    ports:
+      - 8080:8080
+      - 5005:5005
+    environment:
+      - DATASOURCE_MYSQL_URL=jdbc:mysql://despensa-app-mysql:3306/despensa_app
+      - MYSQL_USER=despensa_app
+      - MYSQL_PASSWORD=despensa_app
+    depends_on:
+      despensa-app-mysql:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: .
+  despensa-app-mysql:
+    image: mysql:8
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - despensa-app-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=despensa_app
+      - MYSQL_PASSWORD=despensa_app
+      - MYSQL_DATABASE=despensa_app
+    ports:
+      - 3306:3306
+volumes:
+  despensa-app-mysql-data:
