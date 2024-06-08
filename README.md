@@ -33,8 +33,10 @@ No disponible, por el momento.
 <a name="create-database"></a>
 **Crear base de datos**
 
+- Creamos un usuario llamado `despensa_app` con la siguiente contraseña `despensa_app`.
 - Creamos el esquema `despensa_app`.
-- Ejecutamos el script [database.sql](database.sql)
+- Automáticamente, al iniciar spring se ejecutarán los scripts [schema.sql](src/main/resources/db/schema.sql)
+  y [data.sql](src/main/resources/db/data.sql)
 
 <a name="using-postman"></a>
 **Usando postman**
