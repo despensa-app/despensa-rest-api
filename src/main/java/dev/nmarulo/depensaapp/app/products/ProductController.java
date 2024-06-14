@@ -17,10 +17,11 @@ public class ProductController {
     
     private final ProductService service;
     
-    @GetMapping("/shopping-list")
-    public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@RequestParam(value = "exclude_shopping_list_id",
-                                                                                           required = false) Integer excludeShoppingListId) {
-        return ResponseEntity.ok(this.service.findAllShoppingList(excludeShoppingListId));
+    @GetMapping("/shopping-list/{id}")
+    public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@PathVariable("id") Integer shoppingListId, @RequestParam(
+            value = "exclude",
+            required = false) boolean isExclude) {
+        return ResponseEntity.ok(this.service.findAllShoppingList(shoppingListId, isExclude));
     }
     
     @PostMapping("/shopping-list")

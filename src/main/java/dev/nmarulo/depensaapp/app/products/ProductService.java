@@ -16,6 +16,7 @@ import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -33,10 +34,17 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public FindAllShoppingListProductRes findAllShoppingList(Integer excludeShoppingListId) {
+    public FindAllShoppingListProductRes findAllShoppingList(Integer shoppingListId, boolean isExclude) {
         var response = new FindAllShoppingListProductRes();
-        //Obtener todos los productos que no estén en la lista de compra actual.
-        var pageFindAll = this.repository.findAllByIdNotInShoppingList(excludeShoppingListId, getDataRequestScope().getPageable());
+        var pageable = getDataRequestScope().getPageable();
+        Page<Product> pageFindAll;
+        
+        if (isExclude) {
+            //Obtener todos los productos que no estén en la lista de compra actual.
+            pageFindAll = this.repository.findAllByIdNotInShoppingList(shoppingListId, pageable);
+        } else {
+            pageFindAll = this.repository.findAllByIdInShoppingList(shoppingListId, pageable);
+        }
         
         var products = pageFindAll.stream()
                                   .map(this::mapperTo)
