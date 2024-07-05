@@ -1,7 +1,7 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.ProductAdminReq;
-import dev.nmarulo.depensaapp.app.products.classes.ProductAdminRes;
+import dev.nmarulo.depensaapp.app.products.dtos.ProductAdminReq;
+import dev.nmarulo.depensaapp.app.products.dtos.ProductAdminRes;
 import dev.nmarulo.depensaapp.commons.controller.CrudController;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

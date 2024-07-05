@@ -1,14 +1,11 @@
-package dev.nmarulo.depensaapp.app.products.classes;
+package dev.nmarulo.depensaapp.app.products.dtos;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
-public class ProductAdminRes {
-    
-    private Integer id;
+public class ProductAdminReq {
     
     private String name;
     
@@ -19,9 +16,5 @@ public class ProductAdminRes {
     private BigDecimal calories;
     
     private String description;
-    
-    private LocalDateTime createdAt;
-    
-    private LocalDateTime updatedAt;
     
 }

@@ -1,4 +1,4 @@
-package dev.nmarulo.depensaapp.app.products.classes;
+package dev.nmarulo.depensaapp.app.products.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

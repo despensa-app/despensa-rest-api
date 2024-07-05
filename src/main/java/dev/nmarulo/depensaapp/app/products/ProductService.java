@@ -1,9 +1,9 @@
 package dev.nmarulo.depensaapp.app.products;
 
-import dev.nmarulo.depensaapp.app.products.classes.FindAllProductRes;
-import dev.nmarulo.depensaapp.app.products.classes.FindAllShoppingListProductRes;
-import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductReq;
-import dev.nmarulo.depensaapp.app.products.classes.SaveShoppingListProductRes;
+import dev.nmarulo.depensaapp.app.products.dtos.FindAllProductRes;
+import dev.nmarulo.depensaapp.app.products.dtos.FindAllShoppingListProductRes;
+import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductReq;
+import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListPK;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
