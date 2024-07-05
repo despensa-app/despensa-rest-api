@@ -1,4 +1,4 @@
-package dev.nmarulo.depensaapp.app.shoppinglist.classes;
+package dev.nmarulo.depensaapp.app.shoppinglist.dtos;
 
 import lombok.Data;
 

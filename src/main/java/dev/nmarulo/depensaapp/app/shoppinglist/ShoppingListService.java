@@ -2,8 +2,8 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.*;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.FindByIdProductShoppingListRest.UnitTypeRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
+import dev.nmarulo.depensaapp.app.shoppinglist.dtos.FindByIdProductShoppingListRest.UnitTypeRes;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
@@ -66,7 +66,9 @@ public class ShoppingListService extends BasicServiceImp {
     }
     
     public FindByIdProductShoppingListRest findByIdProduct(Integer id, Integer productId) {
-        Optional<ProductHasShoppingList> productShoppingListOptional = this.productHasShoppingListRepository.findByShoppingListIdAndProductId(id, productId);
+        Optional<ProductHasShoppingList> productShoppingListOptional = this.productHasShoppingListRepository.findByShoppingListIdAndProductId(
+            id,
+            productId);
         
         if (productShoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -84,7 +86,8 @@ public class ShoppingListService extends BasicServiceImp {
         
         var shoppingList = shoppingListOptional.get();
         
-        var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdIn(id, request.getProductsId());
+        var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdIn(id,
+                                                                                                               request.getProductsId());
         
         var totalProducts = shoppingList.getTotalProducts() - productsShoppingList.size();
         var reduce = productsShoppingList.stream()
@@ -157,7 +160,10 @@ public class ShoppingListService extends BasicServiceImp {
         var unitTypesId = productsReq.stream()
                                      .map(UpdateShoppingListReq.ProductShoppingList::getUnitTypeId)
                                      .toList();
-        var result = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdInAndUnitTypeIdIn(shoppingListId, productsId, unitTypesId);
+        var result = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdInAndUnitTypeIdIn(
+            shoppingListId,
+            productsId,
+            unitTypesId);
         
         result.forEach(value -> {
             var productDTO = value.getProduct();

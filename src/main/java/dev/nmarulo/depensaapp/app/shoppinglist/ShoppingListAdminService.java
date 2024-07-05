@@ -1,7 +1,7 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.ShoppingListAdminReq;
-import dev.nmarulo.depensaapp.app.shoppinglist.classes.ShoppingListAdminRes;
+import dev.nmarulo.depensaapp.app.shoppinglist.dtos.ShoppingListAdminReq;
+import dev.nmarulo.depensaapp.app.shoppinglist.dtos.ShoppingListAdminRes;
 import dev.nmarulo.depensaapp.commons.service.CrudServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
