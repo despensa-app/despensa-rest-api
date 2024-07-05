@@ -22,13 +22,13 @@ import java.util.Optional;
 @Getter
 public class ShoppingListService extends BasicServiceImp {
     
-    private final ShoppingListRepository repository;
+    private final ShoppingListRepository shoppingListRepository;
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
     public FindAllShoppingListRes findAll(final Pageable pageable) {
         var response = new FindAllShoppingListRes();
-        var pageFindAll = this.repository.findAll(pageable);
+        var pageFindAll = this.shoppingListRepository.findAll(pageable);
         
         var shoppingList = pageFindAll.stream()
                                       .map(this::mapperTo)
@@ -44,7 +44,7 @@ public class ShoppingListService extends BasicServiceImp {
     }
     
     public FindByIdShoppingListRes findById(Integer id) {
-        var findById = this.repository.findById(id);
+        var findById = this.shoppingListRepository.findById(id);
         
         if (findById.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -79,7 +79,7 @@ public class ShoppingListService extends BasicServiceImp {
     }
     
     public void deleteProducts(Integer id, DeleteProductsShoppingListReq request) {
-        var shoppingListOptional = this.repository.findById(id);
+        var shoppingListOptional = this.shoppingListRepository.findById(id);
         
         if (shoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -113,13 +113,13 @@ public class ShoppingListService extends BasicServiceImp {
         shoppingList.setCreatedAt(LocalDateTime.now());
         shoppingList.setUpdatedAt(LocalDateTime.now());
         
-        var save = this.repository.save(shoppingList);
+        var save = this.shoppingListRepository.save(shoppingList);
         
         return new SaveShoppingListRes(save.getId(), save.getName());
     }
     
     public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request) {
-        var shoppingListOptional = this.repository.findById(id);
+        var shoppingListOptional = this.shoppingListRepository.findById(id);
         
         if (shoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -132,13 +132,13 @@ public class ShoppingListService extends BasicServiceImp {
         shoppingList.setName(request.getName());
         shoppingList.setUpdatedAt(LocalDateTime.now());
         
-        var update = this.repository.save(shoppingList);
+        var update = this.shoppingListRepository.save(shoppingList);
         
         return new UpdateShoppingListRes(update.getId());
     }
     
     public void delete(Integer id) {
-        var shoppingListOptional = this.repository.findById(id);
+        var shoppingListOptional = this.shoppingListRepository.findById(id);
         
         if (shoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -147,7 +147,7 @@ public class ShoppingListService extends BasicServiceImp {
         var shoppingList = shoppingListOptional.get();
         
         this.productHasShoppingListRepository.deleteAll(shoppingList.getProductHasShoppingList());
-        this.repository.deleteById(id);
+        this.shoppingListRepository.deleteById(id);
     }
     
     private void updateProducts(Integer shoppingListId, List<UpdateShoppingListReq.ProductShoppingList> productsReq) {

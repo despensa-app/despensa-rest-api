@@ -27,7 +27,7 @@ import java.math.BigDecimal;
 @Getter
 public class ProductService extends BasicServiceImp {
     
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
     
     private final ShoppingListRepository shoppingListRepository;
     
@@ -43,9 +43,9 @@ public class ProductService extends BasicServiceImp {
         
         if (isExclude) {
             //Obtener todos los productos que no estén en la lista de compra actual.
-            pageFindAll = this.repository.findAllByIdNotInShoppingList(shoppingListId, pageable);
+            pageFindAll = this.productRepository.findAllByIdNotInShoppingList(shoppingListId, pageable);
         } else {
-            pageFindAll = this.repository.findAllByIdInShoppingList(shoppingListId, pageable);
+            pageFindAll = this.productRepository.findAllByIdInShoppingList(shoppingListId, pageable);
         }
         
         var products = pageFindAll.stream()
@@ -73,7 +73,7 @@ public class ProductService extends BasicServiceImp {
     }
     
     public SaveShoppingListProductRes saveShoppingList(SaveShoppingListProductReq request) {
-        var productOptional = this.repository.findById(request.getProductId());
+        var productOptional = this.productRepository.findById(request.getProductId());
         var shoppingListOptional = this.shoppingListRepository.findById(request.getShoppingListId());
         var unityTipeOptional = this.unitTypeRepository.findById(request.getUnitTypeId());
         var isEmptyShoppingList = shoppingListOptional.isEmpty();
@@ -102,7 +102,7 @@ public class ProductService extends BasicServiceImp {
     
     public FindAllProductRes findAll(final Pageable pageable) {
         var response = new FindAllProductRes();
-        var pageFindAll = this.repository.findAll(pageable);
+        var pageFindAll = this.productRepository.findAll(pageable);
         
         var products = pageFindAll.stream()
                                   .map(this::findAllMapperTo)
