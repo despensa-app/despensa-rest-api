@@ -11,6 +11,9 @@ import java.util.Locale;
 @Getter
 public class AppProperties {
     
+    @Value("${app.security.jwt.secret:}")
+    private String secretKey;
+    
     @Value("${app.name}")
     private String appName;
     
@@ -34,6 +37,12 @@ public class AppProperties {
     
     @Value("${app.pageable.size:10}")
     private int pageableSize;
+    
+    @Value("${app.jwt.expires-at:36000}")
+    private long jwtExpiresAt;
+    
+    @Value("${app.jwt.issuer:self}")
+    private String jwtIssuer;
     
     @Value("${app.locale.default:}")
     private Locale defaultLocale;
