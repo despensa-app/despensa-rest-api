@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.app.users;
 
-import dev.nmarulo.depensaapp.app.users.classes.FindByIdUserRes;
+import dev.nmarulo.depensaapp.app.users.dtos.FindByIdUserRes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

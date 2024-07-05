@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.app.users;
 
-import dev.nmarulo.depensaapp.app.users.classes.FindByIdUserRes;
+import dev.nmarulo.depensaapp.app.users.dtos.FindByIdUserRes;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;

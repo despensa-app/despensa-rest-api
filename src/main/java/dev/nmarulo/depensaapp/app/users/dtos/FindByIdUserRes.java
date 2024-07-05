@@ -1,4 +1,4 @@
-package dev.nmarulo.depensaapp.app.users.classes;
+package dev.nmarulo.depensaapp.app.users.dtos;
 
 import lombok.Data;
 
