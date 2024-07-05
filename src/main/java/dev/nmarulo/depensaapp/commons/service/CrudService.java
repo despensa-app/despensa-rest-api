@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.commons.service;
 
-import dev.nmarulo.depensaapp.commons.classes.PagingAndSortingRes;
+import dev.nmarulo.depensaapp.commons.dtos.PagingAndSortingRes;
 
 public interface CrudService<I, O, ID> extends BasicService {
     

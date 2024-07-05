@@ -1,4 +1,4 @@
-package dev.nmarulo.depensaapp.commons.classes;
+package dev.nmarulo.depensaapp.commons.dtos;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

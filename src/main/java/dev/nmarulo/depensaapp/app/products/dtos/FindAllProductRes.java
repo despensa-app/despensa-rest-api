@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.app.products.dtos;
 
-import dev.nmarulo.depensaapp.commons.classes.PagingAndSortingRes;
+import dev.nmarulo.depensaapp.commons.dtos.PagingAndSortingRes;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.commons.service;
 
-import dev.nmarulo.depensaapp.commons.classes.PagingAndSortingRes;
+import dev.nmarulo.depensaapp.commons.dtos.PagingAndSortingRes;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import lombok.Getter;
 import org.springframework.core.ResolvableType;

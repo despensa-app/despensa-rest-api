@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.commons.handler;
 
-import dev.nmarulo.depensaapp.commons.classes.ErrorRes;
+import dev.nmarulo.depensaapp.commons.dtos.ErrorRes;
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.ExceptionHandler;
