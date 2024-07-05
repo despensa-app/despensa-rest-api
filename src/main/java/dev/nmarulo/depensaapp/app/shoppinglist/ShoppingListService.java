@@ -9,6 +9,7 @@ import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,9 +26,9 @@ public class ShoppingListService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public FindAllShoppingListRes findAll() {
+    public FindAllShoppingListRes findAll(final Pageable pageable) {
         var response = new FindAllShoppingListRes();
-        var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
+        var pageFindAll = this.repository.findAll(pageable);
         
         var shoppingList = pageFindAll.stream()
                                       .map(this::mapperTo)

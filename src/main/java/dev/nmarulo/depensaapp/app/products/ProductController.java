@@ -6,6 +6,8 @@ import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductReq;
 import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductRes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +22,9 @@ public class ProductController {
     @GetMapping("/shopping-list/{id}")
     public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@PathVariable("id") Integer shoppingListId,
                                                                              @RequestParam(value = "exclude",
-                                                                                           required = false) boolean isExclude) {
-        return ResponseEntity.ok(this.service.findAllShoppingList(shoppingListId, isExclude));
+                                                                                           required = false) boolean isExclude,
+                                                                             @PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(this.service.findAllShoppingList(shoppingListId, isExclude, pageable));
     }
     
     @PostMapping("/shopping-list")
@@ -30,8 +33,8 @@ public class ProductController {
     }
     
     @GetMapping
-    public ResponseEntity<FindAllProductRes> findAll() {
-        return ResponseEntity.ok(this.service.findAll());
+    public ResponseEntity<FindAllProductRes> findAll(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(this.service.findAll(pageable));
     }
     
 }

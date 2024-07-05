@@ -5,6 +5,7 @@ import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import lombok.Getter;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
 
@@ -17,8 +18,8 @@ public abstract class CrudServiceImp<I, O, E, ID> extends BasicServiceImp implem
     protected abstract JpaRepository<E, ID> getRepository();
     
     @Override
-    public PagingAndSortingRes<O> findAll() {
-        Page<E> page = getRepository().findAll(getDataRequestScope().getPageable());
+    public PagingAndSortingRes<O> findAll(final Pageable pageable) {
+        Page<E> page = getRepository().findAll(pageable);
         
         return pageToResponse(page, getResponseClass());
     }

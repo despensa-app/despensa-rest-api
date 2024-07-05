@@ -3,6 +3,8 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,8 @@ public class ShoppingListController {
     private final ShoppingListService service;
     
     @GetMapping
-    public ResponseEntity<FindAllShoppingListRes> findAll() {
-        return ResponseEntity.ok(this.service.findAll());
+    public ResponseEntity<FindAllShoppingListRes> findAll(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(this.service.findAll(pageable));
     }
     
     @GetMapping("/{id}")

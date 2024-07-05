@@ -17,6 +17,7 @@ import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -34,9 +35,10 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public FindAllShoppingListProductRes findAllShoppingList(Integer shoppingListId, boolean isExclude) {
+    public FindAllShoppingListProductRes findAllShoppingList(Integer shoppingListId,
+                                                             boolean isExclude,
+                                                             Pageable pageable) {
         var response = new FindAllShoppingListProductRes();
-        var pageable = getDataRequestScope().getPageable();
         Page<Product> pageFindAll;
         
         if (isExclude) {
@@ -98,9 +100,9 @@ public class ProductService extends BasicServiceImp {
         return mapperTo(productOptional.get(), shoppingList, unityTipeOptional.get(), productHasShoppingListSave);
     }
     
-    public FindAllProductRes findAll() {
+    public FindAllProductRes findAll(final Pageable pageable) {
         var response = new FindAllProductRes();
-        var pageFindAll = this.repository.findAll(getDataRequestScope().getPageable());
+        var pageFindAll = this.repository.findAll(pageable);
         
         var products = pageFindAll.stream()
                                   .map(this::findAllMapperTo)

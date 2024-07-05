@@ -4,15 +4,17 @@ import dev.nmarulo.depensaapp.commons.component.LocalMessage;
 import dev.nmarulo.depensaapp.commons.exception.InternalServerErrorException;
 import dev.nmarulo.depensaapp.commons.service.CrudService;
 import dev.nmarulo.depensaapp.configuration.AppProperties;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.net.URI;
 
@@ -28,8 +30,8 @@ public abstract class CrudController<I, O, ID> {
     public abstract CrudService<I, O, ID> getService();
     
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        return ResponseEntity.ok(getService().findAll());
+    public ResponseEntity<?> findAll(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(getService().findAll(pageable));
     }
     
     @GetMapping("/{id}")
