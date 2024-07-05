@@ -128,7 +128,10 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    private SaveShoppingListProductRes mapperTo(Product product, ShoppingList shoppingList, UnitType unitType, ProductHasShoppingList productHasShoppingListSave) {
+    private SaveShoppingListProductRes mapperTo(Product product,
+                                                ShoppingList shoppingList,
+                                                UnitType unitType,
+                                                ProductHasShoppingList productHasShoppingListSave) {
         var response = new SaveShoppingListProductRes();
         
         var shoppingListRes = new SaveShoppingListProductRes.ShoppingList(shoppingList.getId(), shoppingList.getName());

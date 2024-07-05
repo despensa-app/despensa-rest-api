@@ -18,9 +18,9 @@ public class ProductController {
     private final ProductService service;
     
     @GetMapping("/shopping-list/{id}")
-    public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@PathVariable("id") Integer shoppingListId, @RequestParam(
-            value = "exclude",
-            required = false) boolean isExclude) {
+    public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@PathVariable("id") Integer shoppingListId,
+                                                                             @RequestParam(value = "exclude",
+                                                                                           required = false) boolean isExclude) {
         return ResponseEntity.ok(this.service.findAllShoppingList(shoppingListId, isExclude));
     }
     
