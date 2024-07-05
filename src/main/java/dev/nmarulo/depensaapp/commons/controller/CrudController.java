@@ -47,7 +47,9 @@ public abstract class CrudController<I, O, ID> {
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody I request, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<?> save(@RequestBody I request,
+                                  UriComponentsBuilder uriComponentsBuilder,
+                                  HttpServletRequest httpServletRequest) {
         O save = getService().save(request);
         Object valueId = getValueId(save);
         URI uri = uriComponentsBuilder.path(httpServletRequest.getServletPath())
@@ -77,14 +79,16 @@ public abstract class CrudController<I, O, ID> {
         Object fieldId;
         
         if (field == null) {
-            throw new InternalServerErrorException(this.localMessage.getMessage("error.class-does-not-have-property", "ID"));
+            throw new InternalServerErrorException(this.localMessage.getMessage("error.class-does-not-have-property",
+                                                                                "ID"));
         }
         
         try {
             ReflectionUtils.makeAccessible(field);
             fieldId = ReflectionUtils.getField(field, response);
         } catch (Exception ex) {
-            throw new InternalServerErrorException(this.localMessage.getMessage("error.obtaining-value-property", "ID"));
+            throw new InternalServerErrorException(this.localMessage.getMessage("error.obtaining-value-property",
+                                                                                "ID"));
         }
         
         return fieldId;

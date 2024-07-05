@@ -18,7 +18,8 @@ public class AppConfig implements WebMvcConfigurer {
     
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix(appProperties.getPathPrefix(), HandlerTypePredicate.forAnnotation(RestController.class));
+        configurer.addPathPrefix(appProperties.getPathPrefix(),
+                                 HandlerTypePredicate.forAnnotation(RestController.class));
     }
     
     @Bean
