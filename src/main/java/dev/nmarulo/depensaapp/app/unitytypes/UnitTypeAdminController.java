@@ -1,7 +1,7 @@
 package dev.nmarulo.depensaapp.app.unitytypes;
 
-import dev.nmarulo.depensaapp.app.unitytypes.classes.UnitTypeAdminReq;
-import dev.nmarulo.depensaapp.app.unitytypes.classes.UnitTypeAdminRes;
+import dev.nmarulo.depensaapp.app.unitytypes.dtos.UnitTypeAdminReq;
+import dev.nmarulo.depensaapp.app.unitytypes.dtos.UnitTypeAdminRes;
 import dev.nmarulo.depensaapp.commons.controller.CrudController;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

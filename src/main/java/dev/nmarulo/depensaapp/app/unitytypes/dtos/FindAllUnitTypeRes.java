@@ -1,4 +1,4 @@
-package dev.nmarulo.depensaapp.app.unitytypes.classes;
+package dev.nmarulo.depensaapp.app.unitytypes.dtos;
 
 import dev.nmarulo.depensaapp.commons.dtos.PagingAndSortingRes;
 import lombok.Data;

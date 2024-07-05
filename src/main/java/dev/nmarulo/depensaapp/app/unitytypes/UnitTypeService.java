@@ -1,6 +1,6 @@
 package dev.nmarulo.depensaapp.app.unitytypes;
 
-import dev.nmarulo.depensaapp.app.unitytypes.classes.FindAllUnitTypeRes;
+import dev.nmarulo.depensaapp.app.unitytypes.dtos.FindAllUnitTypeRes;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
