@@ -1,13 +1,14 @@
 package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.commons.gson.GsonExclude;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -55,6 +56,11 @@ public class ShoppingList {
     @ToString.Exclude
     @GsonExclude
     private Set<ProductHasShoppingList> productHasShoppingList;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    private User user;
     
     public ShoppingList() {
         this.productHasShoppingList = new HashSet<>();

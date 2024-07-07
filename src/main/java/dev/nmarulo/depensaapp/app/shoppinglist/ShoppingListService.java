@@ -4,6 +4,7 @@ import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.FindByIdProductShoppingListRest.UnitTypeRes;
+import dev.nmarulo.depensaapp.app.users.UserRepository;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
@@ -25,6 +26,8 @@ public class ShoppingListService extends BasicServiceImp {
     private final ShoppingListRepository shoppingListRepository;
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
+    
+    private final UserRepository userRepository;
     
     public FindAllShoppingListRes findAll(final Pageable pageable) {
         var response = new FindAllShoppingListRes();
@@ -103,8 +106,13 @@ public class ShoppingListService extends BasicServiceImp {
         this.productHasShoppingListRepository.deleteAll(productsShoppingList);
     }
     
-    public SaveShoppingListRes save(SaveShoppingListReq request) {
+    public SaveShoppingListRes save(SaveShoppingListReq request, String username) {
         var shoppingList = new ShoppingList();
+        final var userOptional = this.userRepository.findByUsername(username);
+        
+        if (userOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
         
         shoppingList.setName(StringUtils.defaultIfBlank(request.getName(), "Sin título"));
         shoppingList.setTotalProducts(0);
@@ -112,6 +120,7 @@ public class ShoppingListService extends BasicServiceImp {
         shoppingList.setTotalPrice(new BigDecimal("0"));
         shoppingList.setCreatedAt(LocalDateTime.now());
         shoppingList.setUpdatedAt(LocalDateTime.now());
+        shoppingList.setUser(userOptional.get());
         
         var save = this.shoppingListRepository.save(shoppingList);
         

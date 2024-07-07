@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,7 +45,19 @@ public class ShoppingListController {
     
     @PostMapping
     public ResponseEntity<SaveShoppingListRes> save(@RequestBody SaveShoppingListReq request) {
-        return ResponseEntity.ok(this.service.save(request));
+        //anonymousUser
+        final var principal = SecurityContextHolder.getContext()
+                                                   .getAuthentication()
+                                                   .getPrincipal();
+        String username;
+        
+        if (principal instanceof Jwt jwt) {
+            username = jwt.getSubject();
+        } else {
+            username = String.valueOf(principal);
+        }
+        
+        return ResponseEntity.ok(this.service.save(request, username));
     }
     
     @PutMapping("/{id}")
