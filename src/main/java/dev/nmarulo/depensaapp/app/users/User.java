@@ -1,12 +1,17 @@
 package dev.nmarulo.depensaapp.app.users;
 
-import lombok.*;
-
+import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -35,5 +40,13 @@ public class User {
     @Basic
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<ShoppingList> shoppingLists;
+    
+    public User() {
+        this.shoppingLists = new LinkedHashSet<>();
+    }
     
 }
