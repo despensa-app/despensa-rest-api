@@ -10,6 +10,7 @@ services:
       - DATASOURCE_MYSQL_URL=jdbc:mysql://despensa-app-mysql:3306/despensa_app
       - MYSQL_USER=despensa_app
       - MYSQL_PASSWORD=despensa_app
+      - APP_SECURITY_JWT_SECRET=my_secret_key_my_secret_key_1234
     depends_on:
       despensa-app-mysql:
         condition: service_healthy
