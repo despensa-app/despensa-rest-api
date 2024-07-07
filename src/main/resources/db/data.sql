@@ -10,6 +10,14 @@ WHERE id > 0;
 DELETE
 FROM unit_types
 WHERE id > 0;
+DELETE
+FROM users
+WHERE id > 0;
+
+
+INSERT INTO users (id, username, password, email, created_at, updated_at)
+VALUES (1, 'anonymousUser', 'anonymousUser', 'anonymousUser', '2024-07-07 17:34:12', '2024-07-07 17:34:12');
+
 
 INSERT INTO products (id, name, price, img_url, calories, description, created_at, updated_at)
 VALUES (4562, 'Masa fresca empanada Hacendado', 2.38,
