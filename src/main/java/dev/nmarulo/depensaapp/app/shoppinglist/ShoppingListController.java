@@ -59,7 +59,7 @@ public class ShoppingListController {
     
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        this.service.delete(id);
+        this.service.delete(id, this.dataRequestScope.getAuthenticationPrincipal());
         
         return ResponseEntity.noContent()
                              .build();

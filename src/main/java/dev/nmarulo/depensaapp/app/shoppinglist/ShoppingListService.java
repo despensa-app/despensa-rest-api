@@ -144,8 +144,8 @@ public class ShoppingListService extends BasicServiceImp {
         return new UpdateShoppingListRes(update.getId());
     }
     
-    public void delete(Integer id) {
-        var shoppingListOptional = this.shoppingListRepository.findById(id);
+    public void delete(Integer id, User user) {
+        var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (shoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -154,7 +154,7 @@ public class ShoppingListService extends BasicServiceImp {
         var shoppingList = shoppingListOptional.get();
         
         this.productHasShoppingListRepository.deleteAll(shoppingList.getProductHasShoppingList());
-        this.shoppingListRepository.deleteById(id);
+        this.shoppingListRepository.delete(shoppingList);
     }
     
     private void updateProducts(Integer shoppingListId,
