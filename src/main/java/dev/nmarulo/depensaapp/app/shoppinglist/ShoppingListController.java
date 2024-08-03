@@ -40,7 +40,7 @@ public class ShoppingListController {
     @DeleteMapping("/{id}/products")
     public ResponseEntity<?> deleteProducts(@PathVariable Integer id,
                                             @RequestBody DeleteProductsShoppingListReq request) {
-        this.service.deleteProducts(id, request);
+        this.service.deleteProducts(id, request, this.dataRequestScope.getAuthenticationPrincipal());
         
         return ResponseEntity.noContent()
                              .build();

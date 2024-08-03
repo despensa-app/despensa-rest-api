@@ -83,8 +83,8 @@ public class ShoppingListService extends BasicServiceImp {
         return findByIdProductMapperTo(productShoppingListOptional.get());
     }
     
-    public void deleteProducts(Integer id, DeleteProductsShoppingListReq request) {
-        var shoppingListOptional = this.shoppingListRepository.findById(id);
+    public void deleteProducts(Integer id, DeleteProductsShoppingListReq request, User user) {
+        var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (shoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
@@ -92,8 +92,9 @@ public class ShoppingListService extends BasicServiceImp {
         
         var shoppingList = shoppingListOptional.get();
         
-        var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdIn(id,
-                                                                                                               request.getProductsId());
+        var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingListIdAndUserAndProductIdIn(id,
+                                                                                                                      user,
+                                                                                                                      request.getProductsId());
         
         var totalProducts = shoppingList.getTotalProducts() - productsShoppingList.size();
         var reduce = productsShoppingList.stream()

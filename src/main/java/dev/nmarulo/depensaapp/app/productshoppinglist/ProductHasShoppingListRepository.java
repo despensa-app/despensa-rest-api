@@ -17,7 +17,11 @@ public interface ProductHasShoppingListRepository extends JpaRepository<ProductH
                                                                              User user,
                                                                              Integer productId);
     
-    List<ProductHasShoppingList> findAllByShoppingListIdAndProductIdIn(Integer id, List<Integer> productsId);
+    @Query(
+        "SELECT p FROM ProductHasShoppingList p WHERE p.shoppingList.id = :id AND p.shoppingList.user = :user AND p.product.id IN :productsId")
+    List<ProductHasShoppingList> findAllByShoppingListIdAndUserAndProductIdIn(Integer id,
+                                                                              User user,
+                                                                              List<Integer> productsId);
     
     List<ProductHasShoppingList> findAllByShoppingListIdAndProductIdInAndUnitTypeIdIn(Integer id, List<Integer> productsId, List<Integer> unitTypesId);
     
