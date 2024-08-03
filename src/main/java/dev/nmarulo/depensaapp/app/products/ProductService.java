@@ -11,6 +11,7 @@ import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingListRepository;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitTypeRepository;
+import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.commons.exception.BadRequestException;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
@@ -37,15 +38,16 @@ public class ProductService extends BasicServiceImp {
     
     public FindAllShoppingListProductRes findAllShoppingList(Integer shoppingListId,
                                                              boolean isExclude,
-                                                             Pageable pageable) {
+                                                             Pageable pageable,
+                                                             User user) {
         var response = new FindAllShoppingListProductRes();
         Page<Product> pageFindAll;
         
         if (isExclude) {
             //Obtener todos los productos que no estén en la lista de compra actual.
-            pageFindAll = this.productRepository.findAllByIdNotInShoppingList(shoppingListId, pageable);
+            pageFindAll = this.productRepository.findAllByIdNotInShoppingListIdAndUser(shoppingListId, user, pageable);
         } else {
-            pageFindAll = this.productRepository.findAllByIdInShoppingList(shoppingListId, pageable);
+            pageFindAll = this.productRepository.findAllByIdInShoppingListIdAndUser(shoppingListId, user, pageable);
         }
         
         var products = pageFindAll.stream()
