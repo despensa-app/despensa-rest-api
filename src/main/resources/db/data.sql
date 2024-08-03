@@ -1,4 +1,7 @@
 DELETE
+FROM users_has_shopping_list
+WHERE users_id > 0;
+DELETE
 FROM products_has_shopping_list
 WHERE product_id > 0;
 DELETE
