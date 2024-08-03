@@ -32,7 +32,9 @@ public class ShoppingListController {
     @GetMapping("/{id}/products/{productId}")
     public ResponseEntity<FindByIdProductShoppingListRest> findByIdProduct(@PathVariable Integer id,
                                                                            @PathVariable Integer productId) {
-        return ResponseEntity.ok(this.service.findByIdProduct(id, productId));
+        return ResponseEntity.ok(this.service.findByIdProduct(id,
+                                                              productId,
+                                                              this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @DeleteMapping("/{id}/products")
