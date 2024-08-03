@@ -47,8 +47,8 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
-    public FindByIdShoppingListRes findById(Integer id) {
-        var findById = this.shoppingListRepository.findById(id);
+    public FindByIdShoppingListRes findById(Integer id, User user) {
+        var findById = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (findById.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));

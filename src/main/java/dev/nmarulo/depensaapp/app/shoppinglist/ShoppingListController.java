@@ -26,7 +26,7 @@ public class ShoppingListController {
     
     @GetMapping("/{id}")
     public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(this.service.findById(id));
+        return ResponseEntity.ok(this.service.findById(id, this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @GetMapping("/{id}/products/{productId}")
