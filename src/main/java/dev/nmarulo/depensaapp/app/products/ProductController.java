@@ -35,7 +35,8 @@ public class ProductController {
     
     @PostMapping("/shopping-list")
     public ResponseEntity<SaveShoppingListProductRes> saveShoppingList(@RequestBody SaveShoppingListProductReq request) {
-        return ResponseEntity.ok(this.service.saveShoppingList(request));
+        return ResponseEntity.ok(this.service.saveShoppingList(request,
+                                                               this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @GetMapping

@@ -74,9 +74,9 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    public SaveShoppingListProductRes saveShoppingList(SaveShoppingListProductReq request) {
+    public SaveShoppingListProductRes saveShoppingList(SaveShoppingListProductReq request, User user) {
         var productOptional = this.productRepository.findById(request.getProductId());
-        var shoppingListOptional = this.shoppingListRepository.findById(request.getShoppingListId());
+        var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(request.getShoppingListId(), user);
         var unityTipeOptional = this.unitTypeRepository.findById(request.getUnitTypeId());
         var isEmptyShoppingList = shoppingListOptional.isEmpty();
         var isEmptyProduct = productOptional.isEmpty();
