@@ -21,7 +21,7 @@ public class ShoppingListController {
     
     @GetMapping
     public ResponseEntity<FindAllShoppingListRes> findAll(@PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(this.service.findAll(pageable));
+        return ResponseEntity.ok(this.service.findAll(pageable, this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @GetMapping("/{id}")

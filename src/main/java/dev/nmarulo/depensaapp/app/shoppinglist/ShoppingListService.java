@@ -30,9 +30,9 @@ public class ShoppingListService extends BasicServiceImp {
     
     private final UserRepository userRepository;
     
-    public FindAllShoppingListRes findAll(final Pageable pageable) {
+    public FindAllShoppingListRes findAll(final Pageable pageable, User user) {
         var response = new FindAllShoppingListRes();
-        var pageFindAll = this.shoppingListRepository.findAll(pageable);
+        var pageFindAll = this.shoppingListRepository.findAllByUser(user, pageable);
         
         var shoppingList = pageFindAll.stream()
                                       .map(this::mapperTo)
