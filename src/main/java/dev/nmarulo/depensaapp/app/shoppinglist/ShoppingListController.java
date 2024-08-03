@@ -54,7 +54,7 @@ public class ShoppingListController {
     @PutMapping("/{id}")
     public ResponseEntity<UpdateShoppingListRes> update(@PathVariable Integer id,
                                                         @RequestBody UpdateShoppingListReq request) {
-        return ResponseEntity.ok(this.service.update(id, request));
+        return ResponseEntity.ok(this.service.update(id, request, this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @DeleteMapping("/{id}")

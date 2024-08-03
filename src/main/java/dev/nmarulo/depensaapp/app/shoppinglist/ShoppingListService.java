@@ -125,14 +125,14 @@ public class ShoppingListService extends BasicServiceImp {
         return new SaveShoppingListRes(save.getId(), save.getName());
     }
     
-    public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request) {
-        var shoppingListOptional = this.shoppingListRepository.findById(id);
+    public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request, User user) {
+        var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (shoppingListOptional.isEmpty()) {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
-        updateProducts(id, request.getProducts());
+        updateProducts(id, request.getProducts(), user);
         
         var shoppingList = shoppingListOptional.get();
         
@@ -157,7 +157,9 @@ public class ShoppingListService extends BasicServiceImp {
         this.shoppingListRepository.deleteById(id);
     }
     
-    private void updateProducts(Integer shoppingListId, List<UpdateShoppingListReq.ProductShoppingList> productsReq) {
+    private void updateProducts(Integer shoppingListId,
+                                List<UpdateShoppingListReq.ProductShoppingList> productsReq,
+                                User user) {
         if (productsReq == null || productsReq.isEmpty()) {
             return;
         }
@@ -168,8 +170,9 @@ public class ShoppingListService extends BasicServiceImp {
         var unitTypesId = productsReq.stream()
                                      .map(UpdateShoppingListReq.ProductShoppingList::getUnitTypeId)
                                      .toList();
-        var result = this.productHasShoppingListRepository.findAllByShoppingListIdAndProductIdInAndUnitTypeIdIn(
+        var result = this.productHasShoppingListRepository.findAllByShoppingListIdAndUserAndProductIdInAndUnitTypeIdIn(
             shoppingListId,
+            user,
             productsId,
             unitTypesId);
         
