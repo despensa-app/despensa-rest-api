@@ -1,6 +1,7 @@
 package dev.nmarulo.depensaapp.app.users;
 
 import dev.nmarulo.depensaapp.app.users.dtos.FindByIdUserRes;
+import dev.nmarulo.depensaapp.commons.component.DataRequestScope;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,11 @@ public class UserController {
     
     private final UserService service;
     
+    private final DataRequestScope dataRequestScope;
+    
     @GetMapping("/{id}")
     public ResponseEntity<FindByIdUserRes> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(this.service.findById(id));
+        return ResponseEntity.ok(this.service.findById(id, this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
 }
