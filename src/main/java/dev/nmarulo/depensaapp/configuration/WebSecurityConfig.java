@@ -20,16 +20,15 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -93,10 +92,14 @@ public class WebSecurityConfig {
     @Bean
     public JwtDecoder jwtDecoder() throws KeyLengthException {
         MACSigner macSigner = new MACSigner(appProperties.getSecretKey());
+        final var withClockSkew = new DelegatingOAuth2TokenValidator<>(new JwtTimestampValidator(Duration.ZERO));
+        NimbusJwtDecoder build = NimbusJwtDecoder.withSecretKey(macSigner.getSecretKey())
+                                                 .macAlgorithm(MacAlgorithm.HS256)
+                                                 .build();
         
-        return NimbusJwtDecoder.withSecretKey(macSigner.getSecretKey())
-                               .macAlgorithm(MacAlgorithm.HS256)
-                               .build();
+        build.setJwtValidator(withClockSkew);
+        
+        return build;
     }
     
     private Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>> configOAuth2() {
