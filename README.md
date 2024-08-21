@@ -23,9 +23,9 @@ No disponible, por el momento.
 
 ### Requisitos
 
-* [Java 17](https://jdk.java.net/archive/)
+* [Java 22](https://jdk.java.net/archive/)
 * [MySQL 8](https://dev.mysql.com/downloads/mysql/)
-* [Maven 3.9.5](https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.zip) (Opcional)
+* [Maven 3.9.7](https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.zip) (Opcional)
 * [Wildfly 30](https://github.com/wildfly/wildfly/releases/download/30.0.0.Final/wildfly-30.0.0.Final.zip) (Opcional)
 
 ### Empezar a trabajar
