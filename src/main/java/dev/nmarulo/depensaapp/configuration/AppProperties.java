@@ -29,6 +29,9 @@ public class AppProperties {
     @Value("${app.licenses.url:}")
     private String appLicensesUrl;
     
+    @Value("${app.github.url:}")
+    private String appGithubUrl;
+    
     @Value("${app.http.path.prefix}")
     private String pathPrefix;
     
