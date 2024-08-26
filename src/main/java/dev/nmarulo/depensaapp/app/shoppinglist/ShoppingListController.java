@@ -2,6 +2,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
 import dev.nmarulo.depensaapp.commons.component.DataRequestScope;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/shopping-lists")
 @RequiredArgsConstructor
 @Getter
+@Tag(name = "Shopping List", description = "Endpoints for managing shopping lists")
 public class ShoppingListController {
     
     private final ShoppingListService service;

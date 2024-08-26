@@ -4,6 +4,7 @@ import dev.nmarulo.depensaapp.app.authentication.dtos.AuthenticationReq;
 import dev.nmarulo.depensaapp.app.authentication.dtos.AuthenticationRes;
 import dev.nmarulo.depensaapp.app.authentication.dtos.RegisterAuthenticationReq;
 import dev.nmarulo.depensaapp.app.authentication.dtos.RegisterAuthenticationRes;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @Getter
+@Tag(name = "Authentication")
 public class AuthenticationController {
     
     private final AuthenticationService authenticationService;

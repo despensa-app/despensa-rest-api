@@ -1,6 +1,7 @@
 package dev.nmarulo.depensaapp.app.unitytypes;
 
 import dev.nmarulo.depensaapp.app.unitytypes.dtos.FindAllUnitTypeRes;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/unit-types")
 @RequiredArgsConstructor
 @Getter
+@Tag(name = "Unit Type", description = "Endpoints for managing unit types")
 public class UnitTypeController {
     
     private final UnitTypeService service;

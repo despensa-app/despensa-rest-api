@@ -5,6 +5,7 @@ import dev.nmarulo.depensaapp.app.products.dtos.FindAllShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductReq;
 import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductRes;
 import dev.nmarulo.depensaapp.commons.component.DataRequestScope;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 @Getter
+@Tag(name = "Product", description = "Endpoints for managing products")
 public class ProductController {
     
     private final ProductService service;
