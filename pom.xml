@@ -22,6 +22,7 @@
     <properties>
         <java.version>21</java.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
+        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -120,6 +121,39 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/dtos/**</exclude>
+                        <exclude>**/exception/**</exclude>
+                        <exclude>**/AppProperties.class</exclude>
+                        <exclude>**/Product.class</exclude>
+                        <exclude>**/ProductHasShoppingList.class</exclude>
+                        <exclude>**/ProductHasShoppingListPK.class</exclude>
+                        <exclude>**/ShoppingList.class</exclude>
+                        <exclude>**/UnitType.class</exclude>
+                        <exclude>**/User.class</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
