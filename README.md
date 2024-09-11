@@ -1,13 +1,25 @@
-# Despensa-app - REST API
+<a href="https://github.com/despensa-app/despensa-rest-api/issues/2">
+<div align="center">
 
-[![Twitch nmarulo](https://img.shields.io/twitch/status/nmarulo?color=%23A970FF&label=twitch%20nmarulo&style=flat-square)](https://www.twitch.tv/nmarulo)
+![Milestone hacktoberfest][github-milestone-shield]
+
+</div>
+</a>
+
 ---
+
+[![DeepSource][deepsource-issues-badge]][deepsource-project-url]
+![Docker Pulls][docker-pull-shield]
+![Docker Image Version][docker-version-shield]
+![Twitch nmarulo][twitch-shield]
+
+# Despensa-app - REST API
 
 ## Descripción
 
 Despensa-app es una aplicación que te permite gestionar los productos que compras de forma habitual.
 
-Este proyecto proporciona los recursos a consumir por el [proyecto web](https://github.com/despensa-app/despensa-web).
+Este proyecto proporciona los recursos a consumir por el [proyecto web][github-project-web-url].
 
 ## Demostración
 
@@ -131,3 +143,18 @@ desarrollar este proyecto.
 ## Licencia
 
 [MIT license](LICENSE).
+
+
+[deepsource-issues-badge]: https://app.deepsource.com/gh/despensa-app/despensa-rest-api.svg/?label=active+issues&show_trend=true&token=UvUyf5Wchx79wdiTOVRyO6RN
+
+[deepsource-project-url]: https://app.deepsource.com/gh/despensa-app/despensa-rest-api/
+
+[twitch-shield]: https://img.shields.io/twitch/status/andyonthewings?style=flat-square&label=Twitch%20nMarulo&labelColor=A970FF&link=https%3A%2F%2Fwww.twitch.tv%2Fnmarulo
+
+[docker-pull-shield]: https://img.shields.io/docker/pulls/nmarulo/despensa-app?style=flat-square&link=https%3A%2F%2Fhub.docker.com%2Fr%2Fnmarulo%2Fdespensa-app
+
+[docker-version-shield]: https://img.shields.io/docker/v/nmarulo/despensa-app?sort=date&style=flat-square&label=Docker%20versi%C3%B3n&link=https%3A%2F%2Fhub.docker.com%2Fr%2Fnmarulo%2Fdespensa-app%2Ftags
+
+[github-milestone-shield]: https://img.shields.io/github/milestones/progress/despensa-app/despensa-rest-api/1?style=flat-square
+
+[github-project-web-url]: https://github.com/despensa-app/despensa-web
