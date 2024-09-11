@@ -39,6 +39,7 @@ RUN cp -r /build/target/extracted/dependencies/. ./
 RUN cp -r /build/target/extracted/spring-boot-loader/. ./
 RUN cp -r /build/target/extracted/snapshot-dependencies/. ./
 RUN cp -r /build/target/extracted/application/. ./
+EXPOSE 8080
 CMD [ "java", "-Dspring.profiles.active=local", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'", "org.springframework.boot.loader.launch.WarLauncher" ]
 
 FROM eclipse-temurin:21-jre-jammy AS final
@@ -57,5 +58,5 @@ COPY --from=extract build/target/extracted/dependencies/ ./
 COPY --from=extract build/target/extracted/spring-boot-loader/ ./
 COPY --from=extract build/target/extracted/snapshot-dependencies/ ./
 COPY --from=extract build/target/extracted/application/ ./
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT [ "java", "-Dspring.profiles.active=production", "org.springframework.boot.loader.launch.WarLauncher" ]
