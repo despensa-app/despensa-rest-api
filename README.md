@@ -21,9 +21,22 @@ Despensa-app es una aplicación que te permite gestionar los productos que compr
 
 Este proyecto proporciona los recursos a consumir por el [proyecto web][github-project-web-url].
 
-## Demostración
+<details>
+<summary>Características</summary>
 
-No disponible, por el momento.
+- Ver/Crear/Modificar/Eliminar listas
+- Listas publicas
+- Listas por usuario (privadas)
+- Agregar productos a la lista
+- Filtrar productos
+- Ver información de un producto
+- Marcar productos de la lista
+- Crear usuario
+- Autenticación
+- Autorización JWT
+- Administración (Pendiente)
+
+</details>
 
 ## Despliegue local
 
