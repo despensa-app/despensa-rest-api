@@ -39,6 +39,9 @@ indent_style = tab
 ij_csv_keep_indents_on_empty_lines = true
 ij_csv_wrap_long_lines = false
 
+[*.dcl]
+ij_declarative_keep_indents_on_empty_lines = false
+
 [*.java]
 ij_continuation_indent_size = 4
 ij_java_align_consecutive_assignments = false
@@ -157,6 +160,7 @@ ij_java_for_statement_right_paren_on_new_line = false
 ij_java_for_statement_wrap = off
 ij_java_generate_final_locals = false
 ij_java_generate_final_parameters = false
+ij_java_generate_use_type_annotation_before_type = true
 ij_java_if_brace_force = always
 ij_java_imports_layout = *,|,javax.**,java.**,|,$*
 ij_java_indent_case_from_switch = true
@@ -303,6 +307,7 @@ ij_java_spaces_around_relational_operators = true
 ij_java_spaces_around_shift_operators = true
 ij_java_spaces_around_type_bounds_in_type_parameters = true
 ij_java_spaces_around_unary_operator = false
+ij_java_spaces_inside_block_braces_when_body_is_present = false
 ij_java_spaces_within_angle_brackets = false
 ij_java_spaces_within_annotation_parentheses = false
 ij_java_spaces_within_array_initializer_braces = false
@@ -967,6 +972,7 @@ ij_kotlin_finally_on_new_line = false
 ij_kotlin_if_rparen_on_new_line = true
 ij_kotlin_import_nested_classes = false
 ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
+ij_kotlin_indent_before_arrow_on_new_line = true
 ij_kotlin_insert_whitespaces_in_simple_one_line_method = true
 ij_kotlin_keep_blank_lines_before_right_brace = 2
 ij_kotlin_keep_blank_lines_in_code = 2
@@ -1016,7 +1022,7 @@ ij_kotlin_wrap_elvis_expressions = 1
 ij_kotlin_wrap_expression_body_functions = 1
 ij_kotlin_wrap_first_method_in_call_chain = false
 
-[{*.har,*.jsb2,*.jsb3,*.json,*.jsonc,*.postman_collection,*.postman_collection.json,*.postman_environment,*.postman_environment.json,.babelrc,.eslintrc,.prettierrc,.stylelintrc,.ws-context,bowerrc,jest.config}]
+[{*.har,*.jsb2,*.jsb3,*.json,*.jsonc,*.postman_collection,*.postman_collection.json,*.postman_environment,*.postman_environment.json,.babelrc,.eslintrc,.prettierrc,.stylelintrc,.ws-context,jest.config}]
 ij_json_array_wrapping = split_into_lines
 ij_json_keep_blank_lines_in_code = 0
 ij_json_keep_indents_on_empty_lines = false
@@ -1127,6 +1133,9 @@ ij_yaml_block_mapping_on_new_line = false
 ij_yaml_indent_sequence_value = true
 ij_yaml_keep_indents_on_empty_lines = false
 ij_yaml_keep_line_breaks = true
+ij_yaml_line_comment_add_space = false
+ij_yaml_line_comment_add_space_on_reformat = false
+ij_yaml_line_comment_at_first_column = true
 ij_yaml_sequence_on_new_line = false
 ij_yaml_space_before_colon = false
 ij_yaml_spaces_within_braces = true
