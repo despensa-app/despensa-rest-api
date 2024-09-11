@@ -11,6 +11,12 @@ antes de hacer un cambio.
 - Si vas a enviar un PR, por favor, haz un fork desde `master`, y envía tu PR de vuelta como una rama de feature/fix. (
   si existe, hacer referencia al número de incidencia)
 
+### ¿Necesitas ayuda?
+
+Si tienes alguna pregunta o necesitas ayuda, no dudes en abrir un "issue" en el repositorio.
+
+¡Gracias por contribuir!
+
 ### Información de interés
 
 - [Artículo útil sobre Fork](https://help.github.com/articles/fork-a-repo/ "Artículo útil sobre Fork")
