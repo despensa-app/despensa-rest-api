@@ -12,7 +12,7 @@ public class FindAllProductRes extends PagingAndSortingRes<FindAllProductRes.Pro
     @Data
     public static class Product {
         
-        private Integer id;
+        private Long id;
         
         private String name;
         

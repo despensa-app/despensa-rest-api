@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class DeleteProductsShoppingListReq {
     
-    private List<Integer> productsId;
+    private List<Long> productsId;
     
 }
