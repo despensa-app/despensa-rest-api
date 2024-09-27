@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `products`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users`
 (
-    `id`         INT          NOT NULL AUTO_INCREMENT,
+    `id`         BIGINT          NOT NULL AUTO_INCREMENT,
     `username`   VARCHAR(45)  NOT NULL,
     `password`   VARCHAR(60)  NOT NULL,
     `email`      VARCHAR(100) NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `shopping_list`
     `total_products` INT UNSIGNED            NOT NULL DEFAULT 0 COMMENT 'Número total de productos.',
     `total_calories` DECIMAL(11, 2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Total de calorías de todos los productos.',
     `total_price`    DECIMAL(11, 2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Precio total de los productos.',
-    `user_id`        INT                     NOT NULL,
+    `user_id`        BIGINT                     NOT NULL,
     `created_at`     TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`     TIMESTAMP               NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
