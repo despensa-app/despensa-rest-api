@@ -23,7 +23,7 @@ public class UserController {
     private final DataRequestScope dataRequestScope;
     
     @GetMapping("/{id}")
-    public ResponseEntity<FindByIdUserRes> findById(@PathVariable Integer id) {
+    public ResponseEntity<FindByIdUserRes> findById(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.findById(id, this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
