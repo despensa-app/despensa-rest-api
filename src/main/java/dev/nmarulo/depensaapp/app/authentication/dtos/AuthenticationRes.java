@@ -18,7 +18,7 @@ public class AuthenticationRes {
     @NoArgsConstructor
     public static class User {
         
-        private Integer id;
+        private Long id;
         
         private String username;
         

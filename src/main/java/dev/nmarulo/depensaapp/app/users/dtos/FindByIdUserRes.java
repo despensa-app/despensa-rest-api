@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class FindByIdUserRes {
     
-    private Integer id;
+    private Long id;
     
     private String username;
     
