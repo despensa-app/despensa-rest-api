@@ -17,7 +17,7 @@ public class UserService extends BasicServiceImp {
     
     private final UserRepository userRepository;
     
-    public FindByIdUserRes findById(Integer id, User userToken) {
+    public FindByIdUserRes findById(Long id, User userToken) {
         var userId = id;
         
         if (!Objects.equals(userToken.getId(), id)) {
