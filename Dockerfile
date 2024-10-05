@@ -40,7 +40,8 @@ RUN cp -r /build/target/extracted/spring-boot-loader/. ./
 RUN cp -r /build/target/extracted/snapshot-dependencies/. ./
 RUN cp -r /build/target/extracted/application/. ./
 EXPOSE 8080
-CMD [ "java", "-Dspring.profiles.active=dockerdev", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'", "org.springframework.boot.loader.launch.WarLauncher" ]
+ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+CMD [ "java", "-Dspring.profiles.active=dockerdev", "org.springframework.boot.loader.launch.WarLauncher" ]
 
 FROM eclipse-temurin:21-jre-jammy AS final
 # https://docs.docker.com/go/dockerfile-user-best-practices/
