@@ -116,8 +116,6 @@ public class ShoppingListService extends BasicServiceImp {
         shoppingList.setTotalProducts(0);
         shoppingList.setTotalCalories(new BigDecimal("0"));
         shoppingList.setTotalPrice(new BigDecimal("0"));
-        shoppingList.setCreatedAt(LocalDateTime.now());
-        shoppingList.setUpdatedAt(LocalDateTime.now());
         shoppingList.setUser(user);
         
         var save = this.shoppingListRepository.save(shoppingList);
@@ -137,7 +135,6 @@ public class ShoppingListService extends BasicServiceImp {
         var shoppingList = shoppingListOptional.get();
         
         shoppingList.setName(request.getName());
-        shoppingList.setUpdatedAt(LocalDateTime.now());
         
         var update = this.shoppingListRepository.save(shoppingList);
         
