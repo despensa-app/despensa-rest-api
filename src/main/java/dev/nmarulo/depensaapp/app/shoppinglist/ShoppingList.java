@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,6 +22,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "shopping_list")
 @ToString
 public class ShoppingList {
@@ -44,10 +48,12 @@ public class ShoppingList {
     private BigDecimal totalPrice;
     
     @Basic
-    @Column(name = "created_at")
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
     
     @Basic
+    @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
