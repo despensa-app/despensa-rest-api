@@ -70,7 +70,7 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
-    public FindByIdProductShoppingListRest findByIdProduct(Integer id, Integer productId, User user) {
+    public FindByIdProductShoppingListRest findByIdProduct(Integer id, Long productId, User user) {
         Optional<ProductHasShoppingList> productShoppingListOptional = this.productHasShoppingListRepository.findByShoppingListIdAndUserAndProductId(
             id,
             user,

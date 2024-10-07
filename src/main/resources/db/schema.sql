@@ -17,7 +17,7 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `products`
 (
-    `id`          INT                     NOT NULL AUTO_INCREMENT,
+    `id`          BIGINT                     NOT NULL AUTO_INCREMENT,
     `name`        VARCHAR(255)            NOT NULL COMMENT 'Nombre del producto',
     `price`       DECIMAL(11, 2) UNSIGNED NOT NULL COMMENT 'Precio del producto',
     `img_url`     VARCHAR(255)            NOT NULL COMMENT 'Url de la imagen del producto.',
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `unit_types`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `products_has_shopping_list`
 (
-    `product_id`        INT                     NOT NULL,
+    `product_id`        BIGINT                     NOT NULL,
     `shopping_list_id`  INT                     NOT NULL,
     `unit_type_id`      INT                     NOT NULL,
     `units_per_product` INT UNSIGNED            NOT NULL DEFAULT 1 COMMENT 'Unidades por producto.',

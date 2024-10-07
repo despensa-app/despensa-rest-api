@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Getter
-public class ProductAdminService extends CrudServiceImp<ProductAdminReq, ProductAdminRes, Product, Integer> {
+public class ProductAdminService extends CrudServiceImp<ProductAdminReq, ProductAdminRes, Product, Long> {
     
     private final ProductRepository repository;
     

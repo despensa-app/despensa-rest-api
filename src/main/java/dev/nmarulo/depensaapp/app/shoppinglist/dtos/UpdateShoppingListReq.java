@@ -16,7 +16,7 @@ public class UpdateShoppingListReq {
         
         private boolean selected;
         
-        private Integer productId;
+        private Long productId;
         
         private Integer unitTypeId;
         

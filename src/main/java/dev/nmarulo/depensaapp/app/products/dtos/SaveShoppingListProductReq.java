@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SaveShoppingListProductReq {
     
-    private Integer productId;
+    private Long productId;
     
     private Integer shoppingListId;
     

@@ -18,7 +18,7 @@ import java.util.Objects;
 public class ProductHasShoppingListPK implements Serializable {
     
     @Column(name = "product_id", nullable = false)
-    private Integer productId;
+    private Long productId;
     
     @Column(name = "shopping_list_id", nullable = false)
     private Integer shoppingListId;

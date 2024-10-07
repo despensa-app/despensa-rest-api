@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Getter
 @Tag(name = "Product Admin", description = "Endpoints for managing products")
-public class ProductAdminController extends CrudController<ProductAdminReq, ProductAdminRes, Integer> {
+public class ProductAdminController extends CrudController<ProductAdminReq, ProductAdminRes, Long> {
     
     private final ProductAdminService service;
     

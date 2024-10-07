@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class ProductAdminRes {
     
-    private Integer id;
+    private Long id;
     
     private String name;
     
