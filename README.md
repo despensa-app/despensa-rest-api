@@ -14,6 +14,8 @@
 
 # Despensa-app - REST API
 
+📚 **Translations Readme**: [English](translations/README.en.md)
+
 ## Descripción
 
 Despensa-app es una aplicación que te permite gestionar los productos que compras de forma habitual.
@@ -24,7 +26,7 @@ Este proyecto proporciona los recursos a consumir por el [proyecto web][github-p
 <summary>Características</summary>
 
 - Ver/Crear/Modificar/Eliminar listas
-- Listas publicas
+- Listas públicas
 - Listas por usuario (privadas)
 - Agregar productos a la lista
 - Filtrar productos
