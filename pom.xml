@@ -23,6 +23,7 @@
         <java.version>21</java.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <datafaker.version>2.4.0</datafaker.version>
     </properties>
 
     <dependencies>
@@ -84,6 +85,12 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${datafaker.version}</version>
         </dependency>
 
         <!-- -->
