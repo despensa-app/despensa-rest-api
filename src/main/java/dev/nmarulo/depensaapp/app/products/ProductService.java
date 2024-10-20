@@ -36,10 +36,10 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
-    public FindAllShoppingListProductRes findAllShoppingList(Integer shoppingListId,
-                                                             boolean isExclude,
-                                                             Pageable pageable,
-                                                             User user) {
+    public FindAllShoppingListProductRes findAllProductsByShoppingListId(Integer shoppingListId,
+                                                                         boolean isExclude,
+                                                                         Pageable pageable,
+                                                                         User user) {
         var response = new FindAllShoppingListProductRes();
         Page<Product> pageFindAll;
         
@@ -74,7 +74,7 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    public SaveShoppingListProductRes saveShoppingList(SaveShoppingListProductReq request, User user) {
+    public SaveShoppingListProductRes saveProductInShoppingList(SaveShoppingListProductReq request, User user) {
         var productOptional = this.productRepository.findById(request.getProductId());
         var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(request.getShoppingListId(), user);
         var unityTipeOptional = this.unitTypeRepository.findById(request.getUnitTypeId());

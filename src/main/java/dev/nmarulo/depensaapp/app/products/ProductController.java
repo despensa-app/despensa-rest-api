@@ -25,20 +25,20 @@ public class ProductController {
     private final DataRequestScope dataRequestScope;
     
     @GetMapping("/shopping-list/{id}")
-    public ResponseEntity<FindAllShoppingListProductRes> findAllShoppingList(@PathVariable("id") Integer shoppingListId,
-                                                                             @RequestParam(value = "exclude",
-                                                                                           required = false) boolean isExclude,
-                                                                             @PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(this.service.findAllShoppingList(shoppingListId,
-                                                                  isExclude,
-                                                                  pageable,
-                                                                  this.dataRequestScope.getAuthenticationPrincipal()));
+    public ResponseEntity<FindAllShoppingListProductRes> findAllProductsByShoppingListId(@PathVariable("id") Integer shoppingListId,
+                                                                                         @RequestParam(value = "exclude",
+                                                                                                       required = false) boolean isExclude,
+                                                                                         @PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(this.service.findAllProductsByShoppingListId(shoppingListId,
+                                                                              isExclude,
+                                                                              pageable,
+                                                                              this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @PostMapping("/shopping-list")
-    public ResponseEntity<SaveShoppingListProductRes> saveShoppingList(@RequestBody SaveShoppingListProductReq request) {
-        return ResponseEntity.ok(this.service.saveShoppingList(request,
-                                                               this.dataRequestScope.getAuthenticationPrincipal()));
+    public ResponseEntity<SaveShoppingListProductRes> saveProductInShoppingList(@RequestBody SaveShoppingListProductReq request) {
+        return ResponseEntity.ok(this.service.saveProductInShoppingList(request,
+                                                                        this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @GetMapping
