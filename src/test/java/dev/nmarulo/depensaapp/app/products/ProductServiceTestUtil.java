@@ -33,14 +33,15 @@ public class ProductServiceTestUtil {
         this.excluded = true;
         this.user = initUser();
         this.productsPage = initProductsPage(product);
-        this.findAllShoppingListProductRes = initFindAllShoppingListProductRes(product, this.productsPage);
+        this.findAllShoppingListProductRes = initFindAllShoppingListProductRes(this.productsPage);
         this.notExcluded = false;
     }
     
-    private FindAllShoppingListProductRes initFindAllShoppingListProductRes(Product product,
-                                                                            Page<Product> productsPage) {
+    private FindAllShoppingListProductRes initFindAllShoppingListProductRes(Page<Product> productsPage) {
         final var findAllShoppingListProductRes = new FindAllShoppingListProductRes();
         final var productRes = new FindAllShoppingListProductRes.Product();
+        final var product = productsPage.getContent()
+                                        .getFirst();
         
         productRes.setId(product.getId());
         productRes.setName(product.getName());
