@@ -44,5 +44,10 @@ public final class FakeTestUtil {
         return faker.internet()
                     .username();
     }
+
+    public static String randomImage() {
+        return faker.internet()
+                    .image();
+    }
     
 }

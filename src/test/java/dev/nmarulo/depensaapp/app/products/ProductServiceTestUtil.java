@@ -70,7 +70,7 @@ public class ProductServiceTestUtil {
         product.setId(FakeTestUtil.randomLong());
         product.setName(FakeTestUtil.randomWord());
         product.setPrice(BigDecimal.ZERO);
-        product.setImgUrl("product.setImgUrl");
+        product.setImgUrl(FakeTestUtil.randomImage());
         product.setCalories(BigDecimal.ZERO);
         product.setDescription(FakeTestUtil.randomSentence());
         product.setCreatedAt(LocalDateTime.now());
