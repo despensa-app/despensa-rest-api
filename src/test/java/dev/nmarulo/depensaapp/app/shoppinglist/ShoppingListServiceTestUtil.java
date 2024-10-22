@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.List;
 
 @Getter
 public class ShoppingListServiceTestUtil {
@@ -44,7 +43,7 @@ public class ShoppingListServiceTestUtil {
     }
     
     private ShoppingList initShoppingList(User user) {
-        ShoppingList shoppingList = new ShoppingList();
+        final var shoppingList = new ShoppingList();
         
         shoppingList.setId(FakeTestUtil.randomInteger());
         shoppingList.setName(FakeTestUtil.randomSentence());
@@ -60,7 +59,7 @@ public class ShoppingListServiceTestUtil {
     }
     
     private Page<ShoppingList> initShoppingListPage(ShoppingList shoppingList) {
-        List<ShoppingList> content = Collections.singletonList(shoppingList);
+        final var content = Collections.singletonList(shoppingList);
         final var pageable = PageRequest.of(FakeTestUtil.randomInteger(), FakeTestUtil.randomInteger());
         
         return new PageImpl<>(content, pageable, FakeTestUtil.randomInteger());
