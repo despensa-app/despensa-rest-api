@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Pageable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,7 +37,7 @@ class ShoppingListServiceTest {
         final var user = shoppingListServiceTestUtil.getUser();
         final var shoppingListPage = shoppingListServiceTestUtil.getShoppingListPage();
         
-        when(shoppingListRepository.findAllByUser(user, pageable)).thenReturn(shoppingListPage);
+        when(shoppingListRepository.findAllByUser(eq(user), eq(pageable))).thenReturn(shoppingListPage);
         
         final var actual = shoppingListService.findAll(this.pageable, user);
         
