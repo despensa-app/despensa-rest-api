@@ -5,7 +5,6 @@ import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,7 @@ public class UnitTypeService extends BasicServiceImp {
     
     private final UnitTypeRepository unitTypeRepository;
     
-    public FindAllUnitTypeRes findAll(@PageableDefault Pageable pageable) {
+    public FindAllUnitTypeRes findAll(Pageable pageable) {
         var response = new FindAllUnitTypeRes();
         var pageFindAll = this.unitTypeRepository.findAll(pageable);
         
