@@ -61,9 +61,9 @@ public class ShoppingListServiceTestUtil {
     
     private Page<ShoppingList> initShoppingListPage(ShoppingList shoppingList) {
         List<ShoppingList> content = Collections.singletonList(shoppingList);
-        final var pageable = PageRequest.of(0, 10);
+        final var pageable = PageRequest.of(FakeTestUtil.randomInteger(), FakeTestUtil.randomInteger());
         
-        return new PageImpl<>(content, pageable, 1);
+        return new PageImpl<>(content, pageable, FakeTestUtil.randomInteger());
     }
     
     private FindAllShoppingListRes initFindAllShoppingListRes(Page<ShoppingList> shoppingListPage) {

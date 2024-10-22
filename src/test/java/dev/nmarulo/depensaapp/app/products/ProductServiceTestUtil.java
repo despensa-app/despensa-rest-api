@@ -59,9 +59,9 @@ public class ProductServiceTestUtil {
     
     private Page<Product> initProductsPage(Product product) {
         final var products = Collections.singletonList(product);
-        final var pageable = PageRequest.of(0, 10);
+        final var pageable = PageRequest.of(FakeTestUtil.randomInteger(), FakeTestUtil.randomInteger());
         
-        return new PageImpl<>(products, pageable, 1);
+        return new PageImpl<>(products, pageable, FakeTestUtil.randomInteger());
     }
     
     private static Product initProduct() {
