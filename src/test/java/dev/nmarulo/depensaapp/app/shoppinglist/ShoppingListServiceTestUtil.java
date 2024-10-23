@@ -36,7 +36,7 @@ public class ShoppingListServiceTestUtil {
         user.setPassword(FakeTestUtil.randomPassword());
         user.setEmail(FakeTestUtil.randomEmail());
         user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
+        user.setUpdatedAt(FakeTestUtil.randomFuture());
         user.setShoppingLists(Collections.emptySet());
         
         return user;
@@ -51,7 +51,7 @@ public class ShoppingListServiceTestUtil {
         shoppingList.setTotalCalories(BigDecimal.ZERO);
         shoppingList.setTotalPrice(BigDecimal.ZERO);
         shoppingList.setCreatedAt(LocalDateTime.now());
-        shoppingList.setUpdatedAt(LocalDateTime.now());
+        shoppingList.setUpdatedAt(FakeTestUtil.randomFuture());
         shoppingList.setProductHasShoppingList(Collections.emptySet());
         shoppingList.setUser(user);
         
