@@ -2,6 +2,9 @@ package dev.nmarulo.depensaapp;
 
 import net.datafaker.Faker;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 public final class FakeTestUtil {
     
     public static final Faker faker;
@@ -44,10 +47,15 @@ public final class FakeTestUtil {
         return faker.internet()
                     .username();
     }
-
+    
     public static String randomImage() {
         return faker.internet()
                     .image();
+    }
+    
+    public static LocalDateTime randomFuture() {
+        return LocalDateTime.ofInstant(faker.timeAndDate()
+                                            .future(), ZoneId.systemDefault());
     }
     
 }
