@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
@@ -31,6 +30,7 @@ jobs:
         run: mvn -B test --file pom.xml
 
       - name: Report results to DeepSource
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           # Install deepsource CLI
           curl https://deepsource.io/cli | sh
