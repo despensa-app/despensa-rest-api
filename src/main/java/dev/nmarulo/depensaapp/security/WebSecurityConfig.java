@@ -1,4 +1,4 @@
-package dev.nmarulo.depensaapp.configuration;
+package dev.nmarulo.depensaapp.security;
 
 import com.nimbusds.jose.KeyLengthException;
 import com.nimbusds.jose.crypto.MACSigner;
@@ -8,6 +8,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import dev.nmarulo.depensaapp.app.users.UserRepository;
 import dev.nmarulo.depensaapp.commons.component.LocalMessage;
 import dev.nmarulo.depensaapp.commons.converter.CustomJwtAuthenticationConverter;
+import dev.nmarulo.depensaapp.configuration.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.context.annotation.Bean;
@@ -42,6 +43,8 @@ public class WebSecurityConfig {
     private final UserRepository userRepository;
     
     private final LocalMessage localeMessage;
+    
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -105,7 +108,8 @@ public class WebSecurityConfig {
     private Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>> configOAuth2() {
         final var converter = new CustomJwtAuthenticationConverter(this.userRepository, this.localeMessage);
         
-        return oauth -> oauth.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(converter));
+        return oauth -> oauth.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                             .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(converter));
     }
     
 }
