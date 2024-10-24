@@ -73,7 +73,7 @@ public class ProductServiceTestUtil {
         product.setImgUrl(FakeTestUtil.randomImage());
         product.setCalories(BigDecimal.ZERO);
         product.setDescription(FakeTestUtil.randomSentence());
-        product.setCreatedAt(LocalDateTime.now());
+        product.setCreatedAt(FakeTestUtil.randomPast());
         product.setUpdatedAt(FakeTestUtil.randomFuture());
         product.setProductHasShoppingList(Collections.emptySet());
         
@@ -87,7 +87,7 @@ public class ProductServiceTestUtil {
         user.setUsername(FakeTestUtil.randomUsername());
         user.setPassword(FakeTestUtil.randomPassword());
         user.setEmail(FakeTestUtil.randomEmail());
-        user.setCreatedAt(LocalDateTime.now());
+        user.setCreatedAt(FakeTestUtil.randomPast());
         user.setUpdatedAt(FakeTestUtil.randomFuture());
         user.setShoppingLists(Collections.emptySet());
         
