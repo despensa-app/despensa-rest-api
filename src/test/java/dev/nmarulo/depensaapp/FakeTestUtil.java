@@ -58,4 +58,8 @@ public final class FakeTestUtil {
                                             .future(), ZoneId.systemDefault());
     }
     
+    public static LocalDateTime randomPast() {
+        return LocalDateTime.ofInstant(faker.timeAndDate()
+                                            .past(), ZoneId.systemDefault());
+    }
 }

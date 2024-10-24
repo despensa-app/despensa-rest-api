@@ -46,7 +46,7 @@ public class UnitTypeServiceTestUtil {
         
         unitType.setId(FakeTestUtil.randomInteger());
         unitType.setName(FakeTestUtil.randomWord());
-        unitType.setCreatedAt(LocalDateTime.now());
+        unitType.setCreatedAt(FakeTestUtil.randomPast());
         unitType.setUpdatedAt(FakeTestUtil.randomFuture());
         unitType.setProductHasShoppingList(Collections.emptySet());
         
