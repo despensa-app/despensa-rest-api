@@ -22,6 +22,17 @@ public class GsonUtil {
         if (isList) {
             return fromJsonTo(json, TypeToken.getParameterized(List.class, clazz));
         }
+
+        Integer.valueOf(3).compareTo(2)
+        new Integer(3).compareTo(2)
+        HashMap<URL, Integer> hits = new HashMap<>();
+        for (HashMap.Entry<URL, Integer> e : hits) {
+            // ... This can become very slow for larger hashmaps of URLS.
+        }
+        String x = "foo";
+        if (x.equals(null)) {
+            doSomething();
+        }
         
         return fromJsonTo(json, TypeToken.get(clazz));
     }
