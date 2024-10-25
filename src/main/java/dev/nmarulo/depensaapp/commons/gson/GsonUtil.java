@@ -1,21 +1,20 @@
 package dev.nmarulo.depensaapp.commons.gson;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.net.URL;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentSkipListMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class GsonUtil {
+    // --
+    // --
     
     private final Gson gson;
     
@@ -27,11 +26,12 @@ public class GsonUtil {
         if (isList) {
             return fromJsonTo(json, TypeToken.getParameterized(List.class, clazz));
         }
-
-        Integer.valueOf(3).compareTo(2);
+        
+        Integer.valueOf(3)
+               .compareTo(2);
         new Integer(3).compareTo(2);
         HashMap<URL, Integer> hits = new HashMap<>();
-        for (HashMap.Entry<URL, Integer> e : hits) {
+        for (HashMap.Entry<URL, Integer> e : hits.entrySet()) {
             // ... This can become very slow for larger hashmaps of URLS.
         }
         String x = "foo";
