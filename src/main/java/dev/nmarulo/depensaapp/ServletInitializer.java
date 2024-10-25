@@ -12,8 +12,8 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        Integer.valueOf(3).compareTo(2)
-        new Integer(3).compareTo(2)
+        Integer.valueOf(3).compareTo(2);
+        new Integer(3).compareTo(2);
         HashMap<URL, Integer> hits = new HashMap<>();
         for (HashMap.Entry<URL, Integer> e : hits) {
             // ... This can become very slow for larger hashmaps of URLS.
