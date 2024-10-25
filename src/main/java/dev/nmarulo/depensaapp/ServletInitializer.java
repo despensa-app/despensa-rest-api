@@ -20,7 +20,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
         }
         String x = "foo";
         if (x.equals(null)) {
-            doSomething();
+            //doSomething();
         }
         Integer value = 1;
         try {
@@ -30,7 +30,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
             value = null; // Value set to null within a catch block
           // ...
         }
-        value.member += 1;
+        //value.member += 1;
 
         return application.sources(DespensaRestApiApplication.class);
     }

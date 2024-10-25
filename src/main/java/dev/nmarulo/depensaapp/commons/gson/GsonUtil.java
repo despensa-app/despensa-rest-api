@@ -1,5 +1,10 @@
 package dev.nmarulo.depensaapp.commons.gson;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.net.URL;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +36,7 @@ public class GsonUtil {
         }
         String x = "foo";
         if (x.equals(null)) {
-            doSomething();
+            //doSomething();
         }
         
         return fromJsonTo(json, TypeToken.get(clazz));
