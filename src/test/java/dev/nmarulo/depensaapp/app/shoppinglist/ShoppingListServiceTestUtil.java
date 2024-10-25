@@ -8,8 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 @Getter
@@ -48,8 +46,8 @@ public class ShoppingListServiceTestUtil {
         shoppingList.setId(FakeTestUtil.randomInteger());
         shoppingList.setName(FakeTestUtil.randomSentence());
         shoppingList.setTotalProducts(0);
-        shoppingList.setTotalCalories(BigDecimal.ZERO);
-        shoppingList.setTotalPrice(BigDecimal.ZERO);
+        shoppingList.setTotalCalories(FakeTestUtil.randomBigDecimal());
+        shoppingList.setTotalPrice(FakeTestUtil.randomBigDecimal());
         shoppingList.setCreatedAt(FakeTestUtil.randomPast());
         shoppingList.setUpdatedAt(FakeTestUtil.randomFuture());
         shoppingList.setProductHasShoppingList(Collections.emptySet());
