@@ -22,7 +22,7 @@ public abstract class CrudServiceTestUtil2<E, R, T, ID> {
     
     private final List<T> entityList;
     
-    public CrudServiceTestUtil() {
+    public CrudServiceTestUtil2() {
         setInit();
         this.responseList = List.of(this.response);
         this.entityList = List.of(this.entity);
