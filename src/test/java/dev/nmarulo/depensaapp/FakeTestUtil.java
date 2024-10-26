@@ -15,7 +15,7 @@ public final class FakeTestUtil {
     }
 
     public static BigDecimal randomBigDecimal(){
-        double randomValue = Math.random() * 999 + 1;
+        double randomValue = faker.number().randomDouble(2, 1, 1000);
         return BigDecimal.valueOf(randomValue);
     }
     
