@@ -2,6 +2,7 @@ package dev.nmarulo.depensaapp;
 
 import net.datafaker.Faker;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -11,6 +12,11 @@ public final class FakeTestUtil {
     
     static {
         faker = new Faker();
+    }
+
+    public static BigDecimal randomBigDecimal(){
+        double randomValue = faker.number().randomDouble(2, 1, 1000);
+        return BigDecimal.valueOf(randomValue);
     }
     
     public static Integer randomInteger() {

@@ -7,9 +7,6 @@ import lombok.Getter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 @Getter
@@ -69,9 +66,9 @@ public class ProductServiceTestUtil {
         
         product.setId(FakeTestUtil.randomLong());
         product.setName(FakeTestUtil.randomWord());
-        product.setPrice(BigDecimal.ZERO);
+        product.setPrice(FakeTestUtil.randomBigDecimal());
         product.setImgUrl(FakeTestUtil.randomImage());
-        product.setCalories(BigDecimal.ZERO);
+        product.setCalories(FakeTestUtil.randomBigDecimal());
         product.setDescription(FakeTestUtil.randomSentence());
         product.setCreatedAt(FakeTestUtil.randomPast());
         product.setUpdatedAt(FakeTestUtil.randomFuture());
