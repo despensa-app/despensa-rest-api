@@ -1,6 +1,7 @@
 package dev.nmarulo.depensaapp.app.authentication;
 
 import dev.nmarulo.depensaapp.app.authentication.dtos.AuthenticationRes;
+import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.app.users.UserRepository;
 import dev.nmarulo.depensaapp.configuration.AppProperties;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,6 +16,7 @@ import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,6 +95,28 @@ class AuthenticationServiceTest {
                                             .thenReturn(jwtEncoderParametersMock);
             
             AuthenticationRes actual = this.authenticationService.login(request);
+            
+            assertEquals(expected, actual);
+        }
+    }
+    
+    @Test
+    void testRegister() {
+        final var request = authenticationServiceTestUtil.getRegisterAuthenticationReq();
+        final var expected = authenticationServiceTestUtil.getRegisterAuthenticationRes();
+        final var newUser = authenticationServiceTestUtil.getNewUser();
+        final var userOptional = Optional.<User>empty();
+        final var localDateTime = newUser.getCreatedAt();
+        
+        when(this.userRepository.findByUsername(eq(request.getUsername()))).thenReturn(userOptional);
+        when(this.passwordEncoder.encode(eq(request.getPassword()))).thenReturn(newUser.getPassword());
+        when(this.userRepository.save(eq(newUser))).thenReturn(newUser);
+        
+        try (MockedStatic<LocalDateTime> localDateTimeMockedStatic = mockStatic(LocalDateTime.class)) {
+            localDateTimeMockedStatic.when(LocalDateTime::now)
+                                     .thenReturn(localDateTime);
+            
+            final var actual = this.authenticationService.register(request);
             
             assertEquals(expected, actual);
         }

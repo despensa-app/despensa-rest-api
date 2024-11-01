@@ -3,6 +3,8 @@ package dev.nmarulo.depensaapp.app.authentication;
 import dev.nmarulo.depensaapp.FakeTestUtil;
 import dev.nmarulo.depensaapp.app.authentication.dtos.AuthenticationReq;
 import dev.nmarulo.depensaapp.app.authentication.dtos.AuthenticationRes;
+import dev.nmarulo.depensaapp.app.authentication.dtos.RegisterAuthenticationReq;
+import dev.nmarulo.depensaapp.app.authentication.dtos.RegisterAuthenticationRes;
 import dev.nmarulo.depensaapp.app.users.User;
 import lombok.Getter;
 
@@ -21,6 +23,12 @@ public class AuthenticationServiceTestUtil {
     
     private final long plusSecondsJwtExpiresAt;
     
+    private final User newUser;
+    
+    private final RegisterAuthenticationReq registerAuthenticationReq;
+    
+    private final RegisterAuthenticationRes registerAuthenticationRes;
+    
     public AuthenticationServiceTestUtil() {
         this.user = initUser();
         
@@ -30,6 +38,18 @@ public class AuthenticationServiceTestUtil {
         this.authenticationRes = initAuthenticationRes(userRes);
         this.jwtIssuer = FakeTestUtil.randomWord();
         this.plusSecondsJwtExpiresAt = FakeTestUtil.randomLong();
+        this.newUser = initNewUser();
+        this.registerAuthenticationReq = initRegisterAuthenticationReq(newUser);
+        this.registerAuthenticationRes = new RegisterAuthenticationRes(this.newUser.getUsername());
+    }
+    
+    private RegisterAuthenticationReq initRegisterAuthenticationReq(User newUser) {
+        final var registerAuthenticationReq = new RegisterAuthenticationReq();
+        
+        registerAuthenticationReq.setUsername(newUser.getUsername());
+        registerAuthenticationReq.setPassword(FakeTestUtil.randomPassword());
+        
+        return registerAuthenticationReq;
     }
     
     private AuthenticationRes.User initUserRes(User user) {
@@ -71,6 +91,19 @@ public class AuthenticationServiceTestUtil {
         authenticationReq.setPassword(user.getPassword());
         
         return authenticationReq;
+    }
+    
+    private User initNewUser() {
+        final var user = new User();
+        final var createdAt = FakeTestUtil.randomPast();
+        
+        user.setUsername(FakeTestUtil.randomUsername());
+        user.setPassword(FakeTestUtil.randomPassword());
+        user.setCreatedAt(createdAt);
+        user.setUpdatedAt(createdAt);
+        user.setShoppingLists(Collections.emptySet());
+        
+        return user;
     }
     
 }
