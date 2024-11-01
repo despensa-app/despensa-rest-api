@@ -2,10 +2,7 @@ package dev.nmarulo.depensaapp.app.users;
 
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -17,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @ToString
+@EqualsAndHashCode
 public class User {
     
     @Id
@@ -43,6 +41,7 @@ public class User {
     
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<ShoppingList> shoppingLists;
     
     public User() {
