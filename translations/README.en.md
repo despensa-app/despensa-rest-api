@@ -61,9 +61,6 @@ This project provides with the needed resources for [web project][github-project
 - Create the `despensa_app` schema.
 - Set the password for the `root` user in the `spring.datasource.password`
   property of the [application.properties](../src/main/resources/application.properties) file.
-- Manually execute the following scripts:
-    - [schema.sql](../src/main/resources/db/schema.sql)
-    - [data.sql](../src/main/resources/db/data.sql)
 
 #### Compile and start the project
 
@@ -74,8 +71,7 @@ Open a terminal in the root of the project and run the following commands:
 
 ### Deployment with docker
 
-With this option, we won't need to install MySQL. The scripts (`schema.sql` and `data.sql`) will always run at
-startup, as the application will start with the **dockerdev** profile.
+With this option, we won't need to install MySQL. The application will start with the **dockerdev** profile.
 MySQL will use port `3307`.
 
 **Start Docker Hub image**

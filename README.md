@@ -63,9 +63,6 @@ Este proyecto proporciona los recursos a consumir por el [proyecto web][github-p
 - Crear el esquema `despensa_app`.
 - Establecer la contraseña del usuario `root` en la propiedad
   `spring.datasource.password` del archivo [application.properties](src/main/resources/application.properties).
-- Ejecutar manualmente los siguientes scripts:
-    - [schema.sql](src/main/resources/db/schema.sql)
-    - [data.sql](src/main/resources/db/data.sql)
 
 #### Compilar e iniciar el proyecto
 
@@ -76,8 +73,7 @@ Abrir una consola en la raíz del proyecto y ejecutar los siguientes comandos:
 
 ### Despliegue con docker
 
-Con esta opción no necesitaremos instalar mysql y al iniciar siempre se ejecutarán los scripts (`schema.sql` y
-`data.sql`), ya que la aplicación se iniciara con el perfil **dockerdev**.
+Con esta opción no necesitaremos instalar mysql. La aplicación se iniciará con el perfil **dockerdev**.
 MySQL utilizará el puerto `3307`.
 
 **Iniciar imagen de docker hub**
