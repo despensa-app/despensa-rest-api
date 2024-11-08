@@ -78,6 +78,7 @@ Abrir una consola en la raíz del proyecto y ejecutar los siguientes comandos:
 
 Con esta opción no necesitaremos instalar mysql y al iniciar siempre se ejecutarán los scripts (`schema.sql` y
 `data.sql`), ya que la aplicación se iniciara con el perfil **dockerdev**.
+MySQL utilizará el puerto `3307`.
 
 **Iniciar imagen de docker hub**
 

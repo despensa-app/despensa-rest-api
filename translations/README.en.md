@@ -48,7 +48,6 @@ This project provides with the needed resources for [web project][github-project
 - [Swagger](#swagger)
 - [Using Postman](#using-postman)
 
-
 ### Local deployment
 
 #### Requirements
@@ -77,6 +76,7 @@ Open a terminal in the root of the project and run the following commands:
 
 With this option, we won't need to install MySQL. The scripts (`schema.sql` and `data.sql`) will always run at
 startup, as the application will start with the **dockerdev** profile.
+MySQL will use port `3307`.
 
 **Start Docker Hub image**
 
@@ -164,6 +164,7 @@ As an alternative to Swagger, you can fork or view the application's resource co
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">][postman-url]
 
 ## Contributions
+
 Any contribution you make will be greatly appreciated.
 
 Before you start coding, please read the [contribution guidelines](../CONTRIBUTING.md).

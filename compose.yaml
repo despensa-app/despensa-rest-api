@@ -34,6 +34,6 @@ services:
       - MYSQL_PASSWORD=despensa_app
       - MYSQL_DATABASE=despensa_app
     ports:
-      - 3306:3306
+      - 3307:3306
 volumes:
   despensa-app-mysql-data:
