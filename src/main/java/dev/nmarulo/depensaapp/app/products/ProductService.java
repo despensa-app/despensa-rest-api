@@ -7,9 +7,7 @@ import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListPK;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
-import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingListRepository;
-import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitTypeRepository;
 import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.commons.exception.BadRequestException;
@@ -51,7 +49,7 @@ public class ProductService extends BasicServiceImp {
         }
         
         var products = pageFindAll.stream()
-                                  .map(this::mapperTo)
+                                  .map(ProductMapper::toFindAllShoppingListProductResProduct)
                                   .toList();
         
         response.setContent(products);
@@ -63,16 +61,6 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    private FindAllShoppingListProductRes.Product mapperTo(Product product) {
-        var response = new FindAllShoppingListProductRes.Product();
-        
-        response.setId(product.getId());
-        response.setName(product.getName());
-        response.setPrice(product.getPrice());
-        response.setImgUrl(product.getImgUrl());
-        
-        return response;
-    }
     
     public SaveShoppingListProductRes saveProductInShoppingList(SaveShoppingListProductReq request, User user) {
         var productOptional = this.productRepository.findById(request.getProductId());
@@ -99,7 +87,10 @@ public class ProductService extends BasicServiceImp {
         //TODO: Como el "save" no me retorna las FK estoy consultando previamente cada uno de los campos.
         var productHasShoppingListSave = this.productHasShoppingListRepository.save(productHasShoppingList);
         
-        return mapperTo(productOptional.get(), shoppingList, unityTipeOptional.get(), productHasShoppingListSave);
+        return ProductMapper.toSaveShoppingListProductRes(productOptional.get(),
+                                                          shoppingList,
+                                                          unityTipeOptional.get(),
+                                                          productHasShoppingListSave);
     }
     
     public FindAllProductRes findAll(final Pageable pageable) {
@@ -107,7 +98,7 @@ public class ProductService extends BasicServiceImp {
         var pageFindAll = this.productRepository.findAll(pageable);
         
         var products = pageFindAll.stream()
-                                  .map(this::findAllMapperTo)
+                                  .map(ProductMapper::toFindAllProductResProduct)
                                   .toList();
         
         response.setContent(products);
@@ -119,37 +110,6 @@ public class ProductService extends BasicServiceImp {
         return response;
     }
     
-    private FindAllProductRes.Product findAllMapperTo(Product product) {
-        var response = new FindAllProductRes.Product();
-        
-        response.setId(product.getId());
-        response.setName(product.getName());
-        response.setPrice(product.getPrice());
-        response.setImgUrl(product.getImgUrl());
-        response.setCalories(product.getCalories());
-        response.setDescription(product.getDescription());
-        
-        return response;
-    }
-    
-    private SaveShoppingListProductRes mapperTo(Product product,
-                                                ShoppingList shoppingList,
-                                                UnitType unitType,
-                                                ProductHasShoppingList productHasShoppingListSave) {
-        var response = new SaveShoppingListProductRes();
-        
-        var shoppingListRes = new SaveShoppingListProductRes.ShoppingList(shoppingList.getId(), shoppingList.getName());
-        var unitTypeRes = new SaveShoppingListProductRes.UnitType(unitType.getId(), unitType.getName());
-        var productRes = new SaveShoppingListProductRes.Product(product.getId(), product.getName(), product.getPrice());
-        
-        response.setShoppingList(shoppingListRes);
-        response.setProduct(productRes);
-        response.setUnitType(unitTypeRes);
-        response.setTotalPrice(productHasShoppingListSave.getTotalPrice());
-        response.setUnitsPerProduct(productHasShoppingListSave.getUnitsPerProduct());
-        
-        return response;
-    }
     
     private ProductHasShoppingList getEntity(SaveShoppingListProductReq request, Product product) {
         var productHasShoppingListPK = new ProductHasShoppingListPK();

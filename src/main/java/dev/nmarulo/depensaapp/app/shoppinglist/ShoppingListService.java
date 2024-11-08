@@ -3,7 +3,6 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
-import dev.nmarulo.depensaapp.app.shoppinglist.dtos.FindByIdProductShoppingListRest.UnitTypeRes;
 import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.app.users.UserRepository;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +33,7 @@ public class ShoppingListService extends BasicServiceImp {
         var pageFindAll = this.shoppingListRepository.findAllByUser(user, pageable);
         
         var shoppingList = pageFindAll.stream()
-                                      .map(this::mapperTo)
+                                      .map(ShoppingListMapper::toFindAllShoppingListResShoppingList)
                                       .toList();
         
         response.setContent(shoppingList);
@@ -58,7 +56,7 @@ public class ShoppingListService extends BasicServiceImp {
         var shoppingList = findById.get();
         var productsRes = shoppingList.getProductHasShoppingList()
                                       .stream()
-                                      .map(this::mapperTo)
+                                      .map(ShoppingListMapper::toFindByIdShoppingListResProductShoppingList)
                                       .toList();
         
         response.setId(shoppingList.getId());
@@ -80,7 +78,7 @@ public class ShoppingListService extends BasicServiceImp {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
-        return findByIdProductMapperTo(productShoppingListOptional.get());
+        return ShoppingListMapper.toFindByIdProductShoppingListRest(productShoppingListOptional.get());
     }
     
     public void deleteProducts(Integer id, DeleteProductsShoppingListReq request, User user) {
@@ -120,7 +118,7 @@ public class ShoppingListService extends BasicServiceImp {
         
         var save = this.shoppingListRepository.save(shoppingList);
         
-        return new SaveShoppingListRes(save.getId(), save.getName());
+        return ShoppingListMapper.toSaveShoppingListRes(save);
     }
     
     public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request, User user) {
@@ -138,7 +136,7 @@ public class ShoppingListService extends BasicServiceImp {
         
         var update = this.shoppingListRepository.save(shoppingList);
         
-        return new UpdateShoppingListRes(update.getId());
+        return ShoppingListMapper.toUpdateShoppingListRes(update);
     }
     
     public void delete(Integer id, User user) {
@@ -186,54 +184,5 @@ public class ShoppingListService extends BasicServiceImp {
         });
     }
     
-    private FindByIdProductShoppingListRest findByIdProductMapperTo(ProductHasShoppingList productHasShoppingList) {
-        var response = new FindByIdProductShoppingListRest();
-        var product = productHasShoppingList.getProduct();
-        var unitType = productHasShoppingList.getUnitType();
-        var unitTypeRes = new UnitTypeRes(unitType.getId(), unitType.getName());
-        
-        response.setName(product.getName());
-        response.setPrice(product.getPrice());
-        response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
-        response.setTotalPrice(productHasShoppingList.getTotalPrice());
-        response.setImgUrl(product.getImgUrl());
-        response.setUnitType(unitTypeRes);
-        
-        return response;
-    }
-    
-    private FindByIdShoppingListRes.ProductShoppingList mapperTo(ProductHasShoppingList productHasShoppingList) {
-        var response = new FindByIdShoppingListRes.ProductShoppingList();
-        var productRes = new FindByIdShoppingListRes.ProductShoppingList.Product();
-        var unitTypeRes = new FindByIdShoppingListRes.ProductShoppingList.UnitType();
-        var product = productHasShoppingList.getProduct();
-        var unitType = productHasShoppingList.getUnitType();
-        
-        productRes.setId(product.getId());
-        productRes.setName(product.getName());
-        productRes.setPrice(product.getPrice());
-        productRes.setImgUrl(product.getImgUrl());
-        unitTypeRes.setId(unitType.getId());
-        unitTypeRes.setName(unitType.getName());
-        
-        response.setProduct(productRes);
-        response.setUnitType(unitTypeRes);
-        response.setTotalPrice(productHasShoppingList.getTotalPrice());
-        response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
-        response.setSelected(productHasShoppingList.isSelected());
-        
-        return response;
-    }
-    
-    private FindAllShoppingListRes.ShoppingList mapperTo(ShoppingList entity) {
-        var response = new FindAllShoppingListRes.ShoppingList();
-        
-        response.setId(entity.getId());
-        response.setName(entity.getName());
-        response.setTotalProducts(entity.getTotalProducts());
-        response.setCreatedAt(entity.getCreatedAt());
-        
-        return response;
-    }
     
 }

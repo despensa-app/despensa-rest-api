@@ -19,7 +19,7 @@ public class UnitTypeService extends BasicServiceImp {
         var pageFindAll = this.unitTypeRepository.findAll(pageable);
         
         var unitTypeList = pageFindAll.stream()
-                                      .map(this::mapperTo)
+                                      .map(UnitTypeMapper::toFindAllUnitTypeResUnitType)
                                       .toList();
         
         response.setContent(unitTypeList);
@@ -31,13 +31,5 @@ public class UnitTypeService extends BasicServiceImp {
         return response;
     }
     
-    private FindAllUnitTypeRes.UnitType mapperTo(UnitType unitType) {
-        var response = new FindAllUnitTypeRes.UnitType();
-        
-        response.setId(unitType.getId());
-        response.setName(unitType.getName());
-        
-        return response;
-    }
     
 }
