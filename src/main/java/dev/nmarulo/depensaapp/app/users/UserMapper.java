@@ -2,8 +2,9 @@ package dev.nmarulo.depensaapp.app.users;
 
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.users.dtos.FindByIdUserRes;
+import dev.nmarulo.depensaapp.commons.mapper.CommonMapper;
 
-public final class UserMapper {
+public final class UserMapper extends CommonMapper {
     
     private UserMapper() {
     }

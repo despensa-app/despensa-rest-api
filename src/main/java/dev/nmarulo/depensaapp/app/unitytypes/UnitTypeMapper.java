@@ -1,8 +1,10 @@
 package dev.nmarulo.depensaapp.app.unitytypes;
 
 import dev.nmarulo.depensaapp.app.unitytypes.dtos.FindAllUnitTypeRes;
+import dev.nmarulo.depensaapp.commons.mapper.CommonMapper;
+import org.springframework.data.domain.Page;
 
-public final class UnitTypeMapper {
+public final class UnitTypeMapper extends CommonMapper {
     
     private UnitTypeMapper() {
     }

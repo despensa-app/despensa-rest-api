@@ -6,8 +6,10 @@ import dev.nmarulo.depensaapp.app.products.dtos.SaveShoppingListProductRes;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
+import dev.nmarulo.depensaapp.commons.mapper.CommonMapper;
+import org.springframework.data.domain.Page;
 
-public final class ProductMapper {
+public final class ProductMapper extends CommonMapper {
     
     private ProductMapper() {
     }
