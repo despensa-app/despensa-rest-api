@@ -59,4 +59,12 @@ public final class ProductMapper extends CommonMapper {
         return response;
     }
     
+    public static FindAllShoppingListProductRes toFindAllShoppingListProductRes(final Page<Product> page) {
+        return pageTo(page, FindAllShoppingListProductRes::new, ProductMapper::toFindAllShoppingListProductResProduct);
+    }
+    
+    public static FindAllProductRes toFindAllProductRes(final Page<Product> page) {
+        return pageTo(page, FindAllProductRes::new, ProductMapper::toFindAllProductResProduct);
+    }
+    
 }

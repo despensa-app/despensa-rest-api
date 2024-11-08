@@ -68,4 +68,8 @@ public final class ShoppingListMapper extends CommonMapper {
         return new UpdateShoppingListRes(update.getId());
     }
     
+    public static FindAllShoppingListRes toFindAllShoppingListRes(final Page<ShoppingList> page) {
+        return pageTo(page, FindAllShoppingListRes::new, ShoppingListMapper::toFindAllShoppingListResShoppingList);
+    }
+    
 }

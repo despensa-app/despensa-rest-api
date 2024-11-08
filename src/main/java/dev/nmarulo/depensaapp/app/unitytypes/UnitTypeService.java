@@ -15,20 +15,9 @@ public class UnitTypeService extends BasicServiceImp {
     private final UnitTypeRepository unitTypeRepository;
     
     public FindAllUnitTypeRes findAll(Pageable pageable) {
-        var response = new FindAllUnitTypeRes();
         var pageFindAll = this.unitTypeRepository.findAll(pageable);
         
-        var unitTypeList = pageFindAll.stream()
-                                      .map(UnitTypeMapper::toFindAllUnitTypeResUnitType)
-                                      .toList();
-        
-        response.setContent(unitTypeList);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
-        
-        return response;
+        return UnitTypeMapper.toFindAllUnitTypeRes(pageFindAll);
     }
     
     

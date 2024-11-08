@@ -18,4 +18,8 @@ public final class UnitTypeMapper extends CommonMapper {
         return response;
     }
     
+    public static FindAllUnitTypeRes toFindAllUnitTypeRes(final Page<UnitType> page) {
+        return pageTo(page, FindAllUnitTypeRes::new, UnitTypeMapper::toFindAllUnitTypeResUnitType);
+    }
+    
 }

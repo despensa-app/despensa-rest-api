@@ -38,7 +38,6 @@ public class ProductService extends BasicServiceImp {
                                                                          boolean isExclude,
                                                                          Pageable pageable,
                                                                          User user) {
-        var response = new FindAllShoppingListProductRes();
         Page<Product> pageFindAll;
         
         if (isExclude) {
@@ -48,19 +47,8 @@ public class ProductService extends BasicServiceImp {
             pageFindAll = this.productRepository.findAllByIdInShoppingListIdAndUser(shoppingListId, user, pageable);
         }
         
-        var products = pageFindAll.stream()
-                                  .map(ProductMapper::toFindAllShoppingListProductResProduct)
-                                  .toList();
-        
-        response.setContent(products);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
-        
-        return response;
+        return ProductMapper.toFindAllShoppingListProductRes(pageFindAll);
     }
-    
     
     public SaveShoppingListProductRes saveProductInShoppingList(SaveShoppingListProductReq request, User user) {
         var productOptional = this.productRepository.findById(request.getProductId());
@@ -94,22 +82,10 @@ public class ProductService extends BasicServiceImp {
     }
     
     public FindAllProductRes findAll(final Pageable pageable) {
-        var response = new FindAllProductRes();
         var pageFindAll = this.productRepository.findAll(pageable);
         
-        var products = pageFindAll.stream()
-                                  .map(ProductMapper::toFindAllProductResProduct)
-                                  .toList();
-        
-        response.setContent(products);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
-        
-        return response;
+        return ProductMapper.toFindAllProductRes(pageFindAll);
     }
-    
     
     private ProductHasShoppingList getEntity(SaveShoppingListProductReq request, Product product) {
         var productHasShoppingListPK = new ProductHasShoppingListPK();

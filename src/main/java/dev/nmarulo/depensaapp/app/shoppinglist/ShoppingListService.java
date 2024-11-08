@@ -29,20 +29,9 @@ public class ShoppingListService extends BasicServiceImp {
     private final UserRepository userRepository;
     
     public FindAllShoppingListRes findAll(final Pageable pageable, User user) {
-        var response = new FindAllShoppingListRes();
         var pageFindAll = this.shoppingListRepository.findAllByUser(user, pageable);
         
-        var shoppingList = pageFindAll.stream()
-                                      .map(ShoppingListMapper::toFindAllShoppingListResShoppingList)
-                                      .toList();
-        
-        response.setContent(shoppingList);
-        response.setCurrentPage(pageFindAll.getNumber());
-        response.setPageSize(pageFindAll.getNumberOfElements());
-        response.setTotalPages(pageFindAll.getTotalPages());
-        response.setTotal(pageFindAll.getTotalElements());
-        
-        return response;
+        return ShoppingListMapper.toFindAllShoppingListRes(pageFindAll);
     }
     
     public FindByIdShoppingListRes findById(Integer id, User user) {
@@ -183,6 +172,5 @@ public class ShoppingListService extends BasicServiceImp {
             this.productHasShoppingListRepository.save(value);
         });
     }
-    
     
 }
