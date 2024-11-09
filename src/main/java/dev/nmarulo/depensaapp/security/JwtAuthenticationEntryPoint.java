@@ -22,7 +22,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     
     private final AuthenticationEntryPoint delegate = new BearerTokenAuthenticationEntryPoint();
     
-    private final ObjectMapper mapper;
+    private final ObjectMapper objectMapper;
     
     @Override
     public void commence(HttpServletRequest request,
@@ -39,7 +39,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             
             response.setContentType("application/json");
             
-            mapper.writeValue(response.getWriter(), new ErrorRes(problemDetail));
+            objectMapper.writeValue(response.getWriter(), new ErrorRes(problemDetail));
         }
     }
     
