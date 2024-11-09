@@ -34,6 +34,8 @@ This project provides with the needed resources for [web project][github-project
 - Authentication
 - JWT Authorization
 - Management (Pending)
+- Containerization with docker
+- Database versioning with Flyway
 
 </details>
 

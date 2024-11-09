@@ -36,6 +36,8 @@ Este proyecto proporciona los recursos a consumir por el [proyecto web][github-p
 - Autenticación
 - Autorización JWT
 - Administración (Pendiente)
+- Contenerización con docker
+- Versionado de base de datos con Flyway
 
 </details>
 
