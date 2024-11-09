@@ -29,19 +29,7 @@ public class UserService extends BasicServiceImp {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
-        var response = new FindByIdUserRes();
-        var user = findById.get();
-        final var shoppingList = user.getShoppingLists()
-                                     .stream()
-                                     .map(UserMapper::toFindByIdUserResShoppingList)
-                                     .toList();
-        
-        response.setId(user.getId());
-        response.setUsername(user.getUsername());
-        response.setEmail(user.getEmail());
-        response.setShoppingList(shoppingList);
-        
-        return response;
+        return UserMapper.toFindByIdUserRes(findById.get());
     }
     
 }

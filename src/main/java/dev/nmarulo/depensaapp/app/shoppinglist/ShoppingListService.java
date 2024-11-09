@@ -41,20 +41,7 @@ public class ShoppingListService extends BasicServiceImp {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
-        var response = new FindByIdShoppingListRes();
-        var shoppingList = findById.get();
-        var productsRes = shoppingList.getProductHasShoppingList()
-                                      .stream()
-                                      .map(ShoppingListMapper::toFindByIdShoppingListResProductShoppingList)
-                                      .toList();
-        
-        response.setId(shoppingList.getId());
-        response.setName(shoppingList.getName());
-        response.setProducts(productsRes);
-        response.setTotalProducts(shoppingList.getTotalProducts());
-        response.setTotalPrice(shoppingList.getTotalPrice());
-        
-        return response;
+        return ShoppingListMapper.toFindByIdShoppingListRes(findById.get());
     }
     
     public FindByIdProductShoppingListRest findByIdProduct(Integer id, Long productId, User user) {

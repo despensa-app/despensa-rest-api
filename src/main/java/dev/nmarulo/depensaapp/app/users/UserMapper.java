@@ -18,4 +18,19 @@ public final class UserMapper extends CommonMapper {
         return shoppingListRes;
     }
     
+    public static FindByIdUserRes toFindByIdUserRes(final User user) {
+        final var response = new FindByIdUserRes();
+        final var shoppingList = user.getShoppingLists()
+                                     .stream()
+                                     .map(UserMapper::toFindByIdUserResShoppingList)
+                                     .toList();
+        
+        response.setId(user.getId());
+        response.setUsername(user.getUsername());
+        response.setEmail(user.getEmail());
+        response.setShoppingList(shoppingList);
+        
+        return response;
+    }
+    
 }
