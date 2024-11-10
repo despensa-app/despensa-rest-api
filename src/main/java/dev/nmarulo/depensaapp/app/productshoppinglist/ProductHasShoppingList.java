@@ -4,10 +4,14 @@ import dev.nmarulo.depensaapp.app.products.Product;
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.unitytypes.UnitType;
 import dev.nmarulo.depensaapp.commons.gson.GsonExclude;
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -15,6 +19,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "products_has_shopping_list")
 @ToString
 public class ProductHasShoppingList {
@@ -36,6 +41,16 @@ public class ProductHasShoppingList {
     
     @Column(name = "selected", nullable = false)
     private boolean selected;
+    
+    @Basic
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+    
+    @Basic
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
