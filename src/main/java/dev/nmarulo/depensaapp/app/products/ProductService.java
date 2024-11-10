@@ -13,13 +13,12 @@ import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.commons.exception.BadRequestException;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
+import dev.nmarulo.depensaapp.commons.util.BigDecimalUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -97,8 +96,8 @@ public class ProductService extends BasicServiceImp {
         
         throwIsExisteProductInShoppingList(productHasShoppingListPK);
         
-        var totalPrice = multiply(product.getPrice(), request.getUnitsPerProduct());
-        var totalCalories = multiply(product.getCalories(), request.getUnitsPerProduct());
+        var totalPrice = BigDecimalUtil.multiply(product.getPrice(), request.getUnitsPerProduct());
+        var totalCalories = BigDecimalUtil.multiply(product.getCalories(), request.getUnitsPerProduct());
         
         productHasShoppingList.setProductHasShoppingListPK(productHasShoppingListPK);
         productHasShoppingList.setUnitsPerProduct(request.getUnitsPerProduct());
@@ -107,10 +106,6 @@ public class ProductService extends BasicServiceImp {
         productHasShoppingList.setSelected(false);
         
         return productHasShoppingList;
-    }
-    
-    private BigDecimal multiply(BigDecimal valueBigDecimal, Integer valueInteger) {
-        return valueBigDecimal.multiply(new BigDecimal(valueInteger));
     }
     
     private void throwIsExisteProductInShoppingList(ProductHasShoppingListPK productHasShoppingListPK) {
