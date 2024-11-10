@@ -26,7 +26,7 @@ public class FindByIdProductShoppingListRest {
     @NoArgsConstructor
     public static class UnitTypeRes {
         
-        private Integer id;
+        private Long id;
         
         private String name;
         

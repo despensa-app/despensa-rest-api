@@ -26,7 +26,7 @@ public class ShoppingListController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Integer id) {
+    public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Long id) {
         return ResponseEntity.ok(this.shoppingListService.findById(id,
                                                                    this.dataRequestScope.getAuthenticationPrincipal()));
     }
@@ -40,8 +40,7 @@ public class ShoppingListController {
     }
     
     @DeleteMapping("/{id}/products")
-    public ResponseEntity<?> deleteProducts(@PathVariable Integer id,
-                                            @RequestBody DeleteProductsShoppingListReq request) {
+    public ResponseEntity<?> deleteProducts(@PathVariable Long id, @RequestBody DeleteProductsShoppingListReq request) {
         this.shoppingListService.deleteProducts(id, request, this.dataRequestScope.getAuthenticationPrincipal());
         
         return ResponseEntity.noContent()
@@ -55,7 +54,7 @@ public class ShoppingListController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateShoppingListRes> update(@PathVariable Integer id,
+    public ResponseEntity<UpdateShoppingListRes> update(@PathVariable Long id,
                                                         @RequestBody UpdateShoppingListReq request) {
         return ResponseEntity.ok(this.shoppingListService.update(id,
                                                                  request,
@@ -63,7 +62,7 @@ public class ShoppingListController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         this.shoppingListService.delete(id, this.dataRequestScope.getAuthenticationPrincipal());
         
         return ResponseEntity.noContent()

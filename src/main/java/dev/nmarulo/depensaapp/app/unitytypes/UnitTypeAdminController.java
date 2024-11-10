@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Getter
 @Tag(name = "Unit Type Admin", description = "Endpoints for managing unit types")
-public class UnitTypeAdminController extends CrudController<UnitTypeAdminReq, UnitTypeAdminRes, Integer> {
+public class UnitTypeAdminController extends CrudController<UnitTypeAdminReq, UnitTypeAdminRes, Long> {
     
     private final UnitTypeAdminService service;
     

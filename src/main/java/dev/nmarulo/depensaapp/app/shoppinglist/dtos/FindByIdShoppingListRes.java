@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class FindByIdShoppingListRes {
     
-    private Integer id;
+    private Long id;
     
     private String name;
     
@@ -47,7 +47,7 @@ public class FindByIdShoppingListRes {
         @Data
         public static class UnitType {
             
-            private Integer id;
+            private Long id;
             
             private String name;
             

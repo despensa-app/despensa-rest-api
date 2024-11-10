@@ -21,10 +21,10 @@ public class ProductHasShoppingListPK implements Serializable {
     private Long productId;
     
     @Column(name = "shopping_list_id", nullable = false)
-    private Integer shoppingListId;
+    private Long shoppingListId;
     
     @Column(name = "unit_type_id", nullable = false)
-    private Integer unitTypeId;
+    private Long unitTypeId;
     
     public String toString() {return "ProductHasShoppingListPK(productId=" + this.getProductId() + ", shoppingListId=" + this.getShoppingListId() + ", unitTypeId=" + this.getUnitTypeId() + ")";}
     

@@ -43,7 +43,7 @@ public class ShoppingListServiceTestUtil {
     private ShoppingList initShoppingList(User user) {
         final var shoppingList = new ShoppingList();
         
-        shoppingList.setId(FakeTestUtil.randomInteger());
+        shoppingList.setId(FakeTestUtil.randomLong());
         shoppingList.setName(FakeTestUtil.randomSentence());
         shoppingList.setTotalProducts(0);
         shoppingList.setTotalCalories(FakeTestUtil.randomBigDecimal());

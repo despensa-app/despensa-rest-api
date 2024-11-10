@@ -7,10 +7,10 @@ public class SaveShoppingListProductReq {
     
     private Long productId;
     
-    private Integer shoppingListId;
+    private Long shoppingListId;
     
     private Integer unitsPerProduct;
     
-    private Integer unitTypeId;
+    private Long unitTypeId;
     
 }

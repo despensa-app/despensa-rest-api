@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ShoppingListRepository extends JpaRepository<ShoppingList, Integer> {
+public interface ShoppingListRepository extends JpaRepository<ShoppingList, Long> {
     
     Page<ShoppingList> findAllByUser(User user, Pageable pageable);
     
-    Optional<ShoppingList> findByIdAndUser(Integer id, User user);
+    Optional<ShoppingList> findByIdAndUser(Long id, User user);
     
 }

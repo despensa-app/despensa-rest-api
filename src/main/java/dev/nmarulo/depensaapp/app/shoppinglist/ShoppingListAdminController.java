@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Getter
 @Tag(name = "Shopping List Admin", description = "Endpoints for managing shopping lists")
-public class ShoppingListAdminController extends CrudController<ShoppingListAdminReq, ShoppingListAdminRes, Integer> {
+public class ShoppingListAdminController extends CrudController<ShoppingListAdminReq, ShoppingListAdminRes, Long> {
     
     private final ShoppingListAdminService service;
     

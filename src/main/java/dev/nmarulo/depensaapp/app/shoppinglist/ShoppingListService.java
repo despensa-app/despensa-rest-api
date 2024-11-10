@@ -34,7 +34,7 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toFindAllShoppingListRes(pageFindAll);
     }
     
-    public FindByIdShoppingListRes findById(Integer id, User user) {
+    public FindByIdShoppingListRes findById(Long id, User user) {
         var findById = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (findById.isEmpty()) {
@@ -57,7 +57,7 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toFindByIdProductShoppingListRest(productShoppingListOptional.get());
     }
     
-    public void deleteProducts(Integer id, DeleteProductsShoppingListReq request, User user) {
+    public void deleteProducts(Long id, DeleteProductsShoppingListReq request, User user) {
         var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (shoppingListOptional.isEmpty()) {
@@ -97,7 +97,7 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toSaveShoppingListRes(save);
     }
     
-    public UpdateShoppingListRes update(Integer id, UpdateShoppingListReq request, User user) {
+    public UpdateShoppingListRes update(Long id, UpdateShoppingListReq request, User user) {
         var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (shoppingListOptional.isEmpty()) {
@@ -115,7 +115,7 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toUpdateShoppingListRes(update);
     }
     
-    public void delete(Integer id, User user) {
+    public void delete(Long id, User user) {
         var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (shoppingListOptional.isEmpty()) {
@@ -128,7 +128,7 @@ public class ShoppingListService extends BasicServiceImp {
         this.shoppingListRepository.delete(shoppingList);
     }
     
-    private void updateProducts(Integer shoppingListId,
+    private void updateProducts(Long shoppingListId,
                                 List<UpdateShoppingListReq.ProductShoppingList> productsReq,
                                 User user) {
         if (productsReq == null || productsReq.isEmpty()) {

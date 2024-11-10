@@ -24,7 +24,7 @@ public class SaveShoppingListProductRes {
     @NoArgsConstructor
     public static class ShoppingList {
         
-        private Integer id;
+        private Long id;
         
         private String name;
         
@@ -48,7 +48,7 @@ public class SaveShoppingListProductRes {
     @NoArgsConstructor
     public static class UnitType {
         
-        private Integer id;
+        private Long id;
         
         private String name;
         

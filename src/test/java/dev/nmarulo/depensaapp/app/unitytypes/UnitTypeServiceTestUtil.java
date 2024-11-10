@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 @Getter
@@ -44,7 +43,7 @@ public class UnitTypeServiceTestUtil {
     private UnitType initUnitType() {
         final var unitType = new UnitType();
         
-        unitType.setId(FakeTestUtil.randomInteger());
+        unitType.setId(FakeTestUtil.randomLong());
         unitType.setName(FakeTestUtil.randomWord());
         unitType.setCreatedAt(FakeTestUtil.randomPast());
         unitType.setUpdatedAt(FakeTestUtil.randomFuture());

@@ -12,7 +12,7 @@ public class FindAllShoppingListRes extends PagingAndSortingRes<FindAllShoppingL
     @Data
     public static class ShoppingList {
         
-        private Integer id;
+        private Long id;
         
         private String name;
         

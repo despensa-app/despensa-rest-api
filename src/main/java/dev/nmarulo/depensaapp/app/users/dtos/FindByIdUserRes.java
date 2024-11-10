@@ -18,7 +18,7 @@ public class FindByIdUserRes {
     @Data
     public static class ShoppingList {
         
-        private Integer id;
+        private Long id;
         
         private String name;
         

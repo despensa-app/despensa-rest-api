@@ -10,7 +10,7 @@ public class FindAllUnitTypeRes extends PagingAndSortingRes<FindAllUnitTypeRes.U
     @Data
     public static class UnitType {
         
-        public Integer id;
+        public Long id;
         
         public String name;
         

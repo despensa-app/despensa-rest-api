@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class UpdateShoppingListRes {
     
-    private Integer id;
+    private Long id;
     
 }
