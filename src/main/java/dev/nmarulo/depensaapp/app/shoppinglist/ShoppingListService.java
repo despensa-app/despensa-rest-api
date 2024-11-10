@@ -88,8 +88,8 @@ public class ShoppingListService extends BasicServiceImp {
         
         shoppingList.setName(StringUtils.defaultIfBlank(request.getName(), "Sin título"));
         shoppingList.setTotalProducts(0);
-        shoppingList.setTotalCalories(new BigDecimal("0"));
-        shoppingList.setTotalPrice(new BigDecimal("0"));
+        shoppingList.setTotalCalories(BigDecimal.ZERO);
+        shoppingList.setTotalPrice(BigDecimal.ZERO);
         shoppingList.setUser(user);
         
         var save = this.shoppingListRepository.save(shoppingList);
