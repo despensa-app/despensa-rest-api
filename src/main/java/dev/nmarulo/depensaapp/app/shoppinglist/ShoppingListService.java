@@ -7,6 +7,8 @@ import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.app.users.UserRepository;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
 import dev.nmarulo.depensaapp.commons.service.BasicServiceImp;
+import dev.nmarulo.depensaapp.commons.util.BigDecimalUtil;
+import dev.nmarulo.depensaapp.commons.util.IntegerUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +43,27 @@ public class ShoppingListService extends BasicServiceImp {
             throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
         }
         
-        return ShoppingListMapper.toFindByIdShoppingListRes(findById.get());
+        final var shoppingList = findById.get();
+        final var response = ShoppingListMapper.toFindByIdShoppingListRes(shoppingList);
+        final var totalUnitsPerProducts = IntegerUtil.newAtomicReference(response.getTotalUnitsPerProducts());
+        final var totalSelectedProducts = IntegerUtil.newAtomicReference(response.getTotalSelectedProducts());
+        final var totalPriceSelectedProducts = BigDecimalUtil.newAtomicReference(response.getTotalPriceSelectedProducts());
+        
+        shoppingList.getProductHasShoppingList()
+                    .forEach(value -> {
+                        if (value.isSelected()) {
+                            totalSelectedProducts.accumulateAndGet(1, Integer::sum);
+                            totalPriceSelectedProducts.accumulateAndGet(value.getTotalPrice(), BigDecimal::add);
+                        }
+                        
+                        totalUnitsPerProducts.accumulateAndGet(value.getUnitsPerProduct(), Integer::sum);
+                    });
+        
+        response.setTotalUnitsPerProducts(totalUnitsPerProducts.get());
+        response.setTotalSelectedProducts(totalSelectedProducts.get());
+        response.setTotalPriceSelectedProducts(totalPriceSelectedProducts.get());
+        
+        return response;
     }
     
     public FindByIdProductShoppingListRest findByIdProduct(Integer id, Long productId, User user) {
