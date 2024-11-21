@@ -9,4 +9,6 @@ public class UpdateShoppingListRes {
     
     private Long id;
     
+    private String name;
+    
 }

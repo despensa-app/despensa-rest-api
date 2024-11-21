@@ -65,7 +65,7 @@ public final class ShoppingListMapper extends CommonMapper {
     }
     
     public static UpdateShoppingListRes toUpdateShoppingListRes(final ShoppingList update) {
-        return new UpdateShoppingListRes(update.getId());
+        return new UpdateShoppingListRes(update.getId(), update.getName());
     }
     
     public static FindAllShoppingListRes toFindAllShoppingListRes(final Page<ShoppingList> page) {
