@@ -69,4 +69,14 @@ public class ShoppingListController {
                              .build();
     }
     
+    @GetMapping("/{id}/products")
+    public ResponseEntity<FindByIdProductListRes> findAllProducts(@PathVariable Long id,
+                                                                  @ModelAttribute FindByIdProductListReq request,
+                                                                  @PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(this.shoppingListService.findByIdProductList(id,
+                                                                              this.dataRequestScope.getAuthenticationPrincipal(),
+                                                                              request,
+                                                                              pageable));
+    }
+    
 }

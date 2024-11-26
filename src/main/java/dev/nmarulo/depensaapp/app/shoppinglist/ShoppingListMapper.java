@@ -88,4 +88,34 @@ public final class ShoppingListMapper extends CommonMapper {
         return response;
     }
     
+    public static FindByIdProductListRes toFindByIdProductListRes(final Page<ProductHasShoppingList> page) {
+        return pageTo(page,
+                      FindByIdProductListRes::new,
+                      ShoppingListMapper::toFindByIdProductListResProductShoppingListRes);
+    }
+    
+    private static FindByIdProductListRes.ProductListRes toFindByIdProductListResProductShoppingListRes(final ProductHasShoppingList productHasShoppingList) {
+        final var response = new FindByIdProductListRes.ProductListRes();
+        final var productRes = new FindByIdProductListRes.ProductListRes.ProductRes();
+        final var unitTypeRes = new FindByIdProductListRes.ProductListRes.UnitTypeRes();
+        final var unitType = productHasShoppingList.getUnitType();
+        final var product = productHasShoppingList.getProduct();
+        
+        unitTypeRes.setId(unitType.getId());
+        unitTypeRes.setName(unitType.getName());
+        
+        productRes.setId(product.getId());
+        productRes.setName(product.getName());
+        productRes.setPrice(product.getPrice());
+        productRes.setImgUrl(product.getImgUrl());
+        
+        response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
+        response.setSelected(productHasShoppingList.isSelected());
+        response.setProduct(productRes);
+        response.setUnitType(unitTypeRes);
+        response.setTotalPrice(productHasShoppingList.getTotalPrice());
+        
+        return response;
+    }
+    
 }

@@ -3,6 +3,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
+import dev.nmarulo.depensaapp.app.shoppinglist.specifications.ProductHasShoppingListSpecs;
 import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.app.users.UserRepository;
 import dev.nmarulo.depensaapp.commons.exception.NotFoundException;
@@ -148,6 +149,29 @@ public class ShoppingListService extends BasicServiceImp {
         
         this.productHasShoppingListRepository.deleteAll(shoppingList.getProductHasShoppingList());
         this.shoppingListRepository.delete(shoppingList);
+    }
+    
+    public FindByIdProductListRes findByIdProductList(final Long id,
+                                                      final User user,
+                                                      final FindByIdProductListReq request,
+                                                      final Pageable pageable) {
+        var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(id, user);
+        
+        if (shoppingListOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        return findAllProductList(shoppingListOptional.get(), user, request, pageable);
+    }
+    
+    private FindByIdProductListRes findAllProductList(final ShoppingList shoppingList,
+                                                      final User user,
+                                                      final FindByIdProductListReq request,
+                                                      final Pageable pageable) {
+        final var specification = ProductHasShoppingListSpecs.findAll(request, user, shoppingList);
+        final var productListPage = this.productHasShoppingListRepository.findAll(specification, pageable);
+        
+        return ShoppingListMapper.toFindByIdProductListRes(productListPage);
     }
     
     private void updateProducts(Long shoppingListId,
