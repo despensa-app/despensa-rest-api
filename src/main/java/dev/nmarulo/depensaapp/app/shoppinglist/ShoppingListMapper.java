@@ -10,29 +10,6 @@ public final class ShoppingListMapper extends CommonMapper {
     private ShoppingListMapper() {
     }
     
-    public static FindByIdShoppingListRes.ProductShoppingList toFindByIdShoppingListResProductShoppingList(final ProductHasShoppingList productHasShoppingList) {
-        final var response = new FindByIdShoppingListRes.ProductShoppingList();
-        final var productRes = new FindByIdShoppingListRes.ProductShoppingList.Product();
-        final var unitTypeRes = new FindByIdShoppingListRes.ProductShoppingList.UnitType();
-        final var product = productHasShoppingList.getProduct();
-        final var unitType = productHasShoppingList.getUnitType();
-        
-        productRes.setId(product.getId());
-        productRes.setName(product.getName());
-        productRes.setPrice(product.getPrice());
-        productRes.setImgUrl(product.getImgUrl());
-        unitTypeRes.setId(unitType.getId());
-        unitTypeRes.setName(unitType.getName());
-        
-        response.setProduct(productRes);
-        response.setUnitType(unitTypeRes);
-        response.setTotalPrice(productHasShoppingList.getTotalPrice());
-        response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
-        response.setSelected(productHasShoppingList.isSelected());
-        
-        return response;
-    }
-    
     public static FindAllShoppingListRes.ShoppingList toFindAllShoppingListResShoppingList(final ShoppingList entity) {
         var response = new FindAllShoppingListRes.ShoppingList();
         
@@ -74,14 +51,9 @@ public final class ShoppingListMapper extends CommonMapper {
     
     public static FindByIdShoppingListRes toFindByIdShoppingListRes(final ShoppingList shoppingList) {
         final var response = new FindByIdShoppingListRes();
-        final var productsRes = shoppingList.getProductHasShoppingList()
-                                            .stream()
-                                            .map(ShoppingListMapper::toFindByIdShoppingListResProductShoppingList)
-                                            .toList();
         
         response.setId(shoppingList.getId());
         response.setName(shoppingList.getName());
-        response.setProducts(productsRes);
         response.setTotalProducts(shoppingList.getTotalProducts());
         response.setTotalPrice(shoppingList.getTotalPrice());
         

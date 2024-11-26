@@ -37,7 +37,10 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toFindAllShoppingListRes(pageFindAll);
     }
     
-    public FindByIdShoppingListRes findById(Long id, User user) {
+    public FindByIdShoppingListRes findById(final Long id,
+                                            final User user,
+                                            final FindByIdProductListReq request,
+                                            final Pageable pageable) {
         var findById = this.shoppingListRepository.findByIdAndUser(id, user);
         
         if (findById.isEmpty()) {
@@ -45,6 +48,7 @@ public class ShoppingListService extends BasicServiceImp {
         }
         
         final var shoppingList = findById.get();
+        final var productListPage = findAllProductList(shoppingList, user, request, pageable);
         final var response = ShoppingListMapper.toFindByIdShoppingListRes(shoppingList);
         final var totalUnitsPerProducts = IntegerUtil.newAtomicReference(response.getTotalUnitsPerProducts());
         final var totalSelectedProducts = IntegerUtil.newAtomicReference(response.getTotalSelectedProducts());
@@ -63,6 +67,7 @@ public class ShoppingListService extends BasicServiceImp {
         response.setTotalUnitsPerProducts(totalUnitsPerProducts.get());
         response.setTotalSelectedProducts(totalSelectedProducts.get());
         response.setTotalPriceSelectedProducts(totalPriceSelectedProducts.get());
+        response.setProductList(productListPage);
         
         return response;
     }

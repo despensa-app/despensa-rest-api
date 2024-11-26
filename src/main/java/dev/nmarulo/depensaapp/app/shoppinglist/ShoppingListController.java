@@ -26,9 +26,13 @@ public class ShoppingListController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Long id) {
+    public ResponseEntity<FindByIdShoppingListRes> findById(@PathVariable Long id,
+                                                            @ModelAttribute FindByIdProductListReq request,
+                                                            @PageableDefault Pageable pageable) {
         return ResponseEntity.ok(this.shoppingListService.findById(id,
-                                                                   this.dataRequestScope.getAuthenticationPrincipal()));
+                                                                   this.dataRequestScope.getAuthenticationPrincipal(),
+                                                                   request,
+                                                                   pageable));
     }
     
     @GetMapping("/{id}/products/{productId}")
