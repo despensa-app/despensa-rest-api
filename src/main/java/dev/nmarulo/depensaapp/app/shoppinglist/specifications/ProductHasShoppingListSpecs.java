@@ -3,6 +3,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist.specifications;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.FindByIdProductListReq;
+import dev.nmarulo.depensaapp.app.shoppinglist.enums.SelectedProducts;
 import dev.nmarulo.depensaapp.app.users.User;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -26,7 +27,7 @@ public class ProductHasShoppingListSpecs {
             predicates.add(builder.equal(shoppingListRoot.get("id"), shoppingList.getId()));
             predicates.add(builder.equal(userRoot.get("id"), user.getId()));
             
-            if (selectedReq != null && !FindByIdProductListReq.SelectedProducts.ALL.equals(selectedReq)) {
+            if (selectedReq != null && !SelectedProducts.ALL.equals(selectedReq)) {
                 final var selectedRoot = root.<Boolean>get("selected");
                 final var selectedPredicate = switch (selectedReq) {
                     case YES -> builder.isTrue(selectedRoot);
