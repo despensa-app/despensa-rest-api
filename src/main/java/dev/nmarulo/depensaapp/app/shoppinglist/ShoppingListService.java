@@ -3,6 +3,7 @@ package dev.nmarulo.depensaapp.app.shoppinglist;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.depensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
 import dev.nmarulo.depensaapp.app.shoppinglist.dtos.*;
+import dev.nmarulo.depensaapp.app.shoppinglist.enums.SelectedProducts;
 import dev.nmarulo.depensaapp.app.shoppinglist.specifications.ProductHasShoppingListSpecs;
 import dev.nmarulo.depensaapp.app.users.User;
 import dev.nmarulo.depensaapp.app.users.UserRepository;
@@ -46,6 +47,9 @@ public class ShoppingListService extends BasicServiceImp {
         final var totalUnitsPerProducts = IntegerUtil.newAtomicReference(response.getTotalUnitsPerProducts());
         final var totalSelectedProducts = IntegerUtil.newAtomicReference(response.getTotalSelectedProducts());
         final var totalPriceSelectedProducts = BigDecimalUtil.newAtomicReference(response.getTotalPriceSelectedProducts());
+        final var selectProductOption = List.of(new SelectOption<>(SelectedProducts.NO, "Pendientes", true),
+                                                new SelectOption<>(SelectedProducts.YES, "Finalizados"),
+                                                new SelectOption<>(SelectedProducts.ALL, "Todos"));
         
         shoppingList.getProductHasShoppingList()
                     .forEach(value -> {
@@ -61,6 +65,7 @@ public class ShoppingListService extends BasicServiceImp {
         response.setTotalSelectedProducts(totalSelectedProducts.get());
         response.setTotalPriceSelectedProducts(totalPriceSelectedProducts.get());
         response.setProductList(productListPage);
+        response.setSelectProductOption(selectProductOption);
         
         return response;
     }

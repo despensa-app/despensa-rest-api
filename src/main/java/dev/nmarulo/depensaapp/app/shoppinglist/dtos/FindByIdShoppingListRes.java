@@ -1,8 +1,10 @@
 package dev.nmarulo.depensaapp.app.shoppinglist.dtos;
 
+import dev.nmarulo.depensaapp.app.shoppinglist.enums.SelectedProducts;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class FindByIdShoppingListRes {
@@ -22,5 +24,7 @@ public class FindByIdShoppingListRes {
     private BigDecimal totalPriceSelectedProducts;
     
     private FindByIdProductListRes productList;
+    
+    private List<SelectOption<SelectedProducts, String>> selectProductOption;
     
 }
