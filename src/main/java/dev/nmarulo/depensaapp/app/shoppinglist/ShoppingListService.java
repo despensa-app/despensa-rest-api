@@ -163,7 +163,7 @@ public class ShoppingListService extends BasicServiceImp {
         var unitTypesId = productsReq.stream()
                                      .map(UpdateShoppingListReq.ProductShoppingList::getUnitTypeId)
                                      .toList();
-        var result = this.productHasShoppingListRepository.findAllByShoppingListIdAndUserAndProductIdInAndUnitTypeIdIn(
+        var result = this.productHasShoppingListRepository.findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdInAndUnitType_IdIn(
             shoppingListId,
             user,
             productsId,
