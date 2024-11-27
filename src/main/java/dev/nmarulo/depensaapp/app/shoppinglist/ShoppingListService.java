@@ -80,9 +80,10 @@ public class ShoppingListService extends BasicServiceImp {
     
     public void deleteProducts(Long id, DeleteProductsShoppingListReq request, User user) {
         final var shoppingList = getShoppingList(id, user);
-        var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingListIdAndUserAndProductIdIn(id,
-                                                                                                                      user,
-                                                                                                                      request.getProductsId());
+        final var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdIn(
+            id,
+            user,
+            request.getProductsId());
         
         var totalProducts = shoppingList.getTotalProducts() - productsShoppingList.size();
         var reduce = productsShoppingList.stream()
