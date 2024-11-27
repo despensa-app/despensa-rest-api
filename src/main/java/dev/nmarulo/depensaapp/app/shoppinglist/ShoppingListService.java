@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -67,7 +66,7 @@ public class ShoppingListService extends BasicServiceImp {
     }
     
     public FindByIdProductShoppingListRest findByIdProduct(Integer id, Long productId, User user) {
-        Optional<ProductHasShoppingList> productShoppingListOptional = this.productHasShoppingListRepository.findByShoppingListIdAndUserAndProductId(
+        final var productShoppingListOptional = this.productHasShoppingListRepository.findByShoppingList_IdAndShoppingList_UserAndProduct_Id(
             id,
             user,
             productId);
