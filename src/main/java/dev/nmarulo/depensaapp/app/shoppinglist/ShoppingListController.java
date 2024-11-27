@@ -36,7 +36,7 @@ public class ShoppingListController {
     }
     
     @GetMapping("/{id}/products/{productId}")
-    public ResponseEntity<FindByIdProductShoppingListRest> findByIdProduct(@PathVariable Integer id,
+    public ResponseEntity<FindByIdProductShoppingListRest> findByIdProduct(@PathVariable Long id,
                                                                            @PathVariable Long productId) {
         return ResponseEntity.ok(this.shoppingListService.findByIdProduct(id,
                                                                           productId,

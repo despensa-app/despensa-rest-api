@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ProductHasShoppingListRepository extends JpaRepository<ProductHasShoppingList, ProductHasShoppingListPK>, JpaSpecificationExecutor<ProductHasShoppingList> {
     
-    Optional<ProductHasShoppingList> findByShoppingList_IdAndShoppingList_UserAndProduct_Id(Integer shoppingListId,
+    Optional<ProductHasShoppingList> findByShoppingList_IdAndShoppingList_UserAndProduct_Id(Long shoppingListId,
                                                                                             User user,
                                                                                             Long productId);
     
@@ -19,9 +19,9 @@ public interface ProductHasShoppingListRepository extends JpaRepository<ProductH
                                                                                              User user,
                                                                                              List<Long> productsId);
     
-    List<ProductHasShoppingList> findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdInAndUnitType_IdIn(Long id,
+    List<ProductHasShoppingList> findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdInAndUnitType_IdIn(Long shoppingListId,
                                                                                                              User user,
                                                                                                              List<Long> productsId,
-                                                                                                             List<Integer> unitTypesId);
+                                                                                                             List<Long> unitTypesId);
     
 }

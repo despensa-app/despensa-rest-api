@@ -18,7 +18,7 @@ public class UpdateShoppingListReq {
         
         private Long productId;
         
-        private Integer unitTypeId;
+        private Long unitTypeId;
         
     }
     
