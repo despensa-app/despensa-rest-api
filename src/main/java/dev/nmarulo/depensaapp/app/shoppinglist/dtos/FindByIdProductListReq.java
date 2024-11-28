@@ -9,7 +9,7 @@ public class FindByIdProductListReq {
     private SelectedProducts selected;
     
     public FindByIdProductListReq() {
-        this.selected = SelectedProducts.ALL;
+        this.selected = SelectedProducts.NO;
     }
     
 }
