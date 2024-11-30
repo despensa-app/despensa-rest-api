@@ -5,6 +5,9 @@ on:
     branches: [ "master" ]
   pull_request:
 
+env:
+  IMAGE_NAME_FUSE: "despensa-rest-api:0.0.1"
+
 jobs:
   build:
 
@@ -85,10 +88,26 @@ jobs:
           echo "envvars.FLYWAY_DEFAULT_SCHEMA=${{ secrets.FLYWAY_DEFAULT_SCHEMA }}" >> $FILE_NAME
           echo "Secrets stored safely."
 
+      - name: Define the Image Name
+        run: |
+          IMAGE_NAME_FUSE_DATE=$IMAGE_NAME_FUSE.$(date +'%d%m%Y')
+          
+          SEARCH_IMAGE=$(${PWD}/boxfuse/boxfuse ls -vault=true | grep -o "| [^/]*/$IMAGE_NAME_FUSE_DATE.[^|]*" | sed 's/^| //' | tail -n 1)
+          
+          if [ -n "$SEARCH_IMAGE" ]; then
+            echo "Ya existe una imagen que contiene el texto $IMAGE_NAME_FUSE_DATE. Incrementando versión."
+            VERSION=$(echo "$SEARCH_IMAGE" | sed 's/ *$//' | grep -oE '[0-9]+$')
+            IMAGE_NAME_FUSE_DATE=$IMAGE_NAME_FUSE_DATE.$((VERSION + 1))
+          else 
+            echo "La imagen no existe."
+            IMAGE_NAME_FUSE_DATE=$IMAGE_NAME_FUSE_DATE.1
+          fi
+          
+          echo "IMAGE_NAME_FUSE_DATE=$IMAGE_NAME_FUSE_DATE" >> $GITHUB_ENV
+
       - name: Fuses a Payload together with the Components it requires into an Image
         run: |
-          DATE=$(date +'%d%m%Y')
-          RESULT=$(${PWD}/boxfuse/boxfuse fuse ${PWD}/target/despensa-rest-api.war -image=despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
+          RESULT=$(${PWD}/boxfuse/boxfuse fuse ${PWD}/target/despensa-rest-api.war -image=$IMAGE_NAME_FUSE_DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
           if [ "$RESULT" == "ERROR" ]; then
             echo "Error fusing Image."
@@ -102,7 +121,7 @@ jobs:
           echo "Total: $TOTAL"
           
           if [ "$TOTAL" -eq 3 ]; then
-            IMAGE=$(${PWD}/boxfuse/boxfuse ls -vault=true | grep -o '| [^/]*/despensa-rest-api:0.0.1.[^|]*' | sed 's/^| //' | head -n 1)
+            IMAGE=$(${PWD}/boxfuse/boxfuse ls -vault=true | grep -o "| [^/]*/$IMAGE_NAME_FUSE.[^|]*" | sed 's/^| //' | head -n 1)
             RESULT=$(${PWD}/boxfuse/boxfuse rm $IMAGE -vault=true | awk '/ERROR/{print $1}' | sed 's/://')
           
             if [ "$RESULT" == "ERROR" ]; then
@@ -117,8 +136,7 @@ jobs:
 
       - name: Pushes this Image to the CloudCaptain Vault
         run: |
-          DATE=$(date +'%d%m%Y')
-          RESULT=$(${PWD}/boxfuse/boxfuse push despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
+          RESULT=$(${PWD}/boxfuse/boxfuse push $IMAGE_NAME_FUSE_DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
           if [ "$RESULT" == "ERROR" ]; then
             echo "Error pushing Image."
@@ -127,8 +145,7 @@ jobs:
 
       - name: Run the Image Instance in the AWS environment
         run: |
-          DATE=$(date +'%d%m%Y')
-          RESULT=$(${PWD}/boxfuse/boxfuse run despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
+          RESULT=$(${PWD}/boxfuse/boxfuse run $IMAGE_NAME_FUSE_DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
           if [ "$RESULT" == "ERROR" ]; then
             echo "Error running Image."
