@@ -61,7 +61,7 @@ jobs:
 
       - name: Install CloudCaptain CLI
         run: |
-          curl https://files.cloudcaptain.sh/com/boxfuse/client/boxfuse-commandline/1.33.0.1460/boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz -o boxfuse-commandline.tar.gz
+          curl https://files.cloudcaptain.sh/com/boxfuse/client/boxfuse-commandline/1.36.2.2021/boxfuse-commandline-1.36.2.2021-linux-x64.tar.gz -o boxfuse-commandline.tar.gz
           mkdir boxfuse
           tar -xzf boxfuse-commandline.tar.gz -C boxfuse --strip-components=1
           ${PWD}/boxfuse/boxfuse -v
