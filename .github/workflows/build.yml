@@ -64,7 +64,6 @@ jobs:
           curl https://files.cloudcaptain.sh/com/boxfuse/client/boxfuse-commandline/1.33.0.1460/boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz -o boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz
           tar -xzf boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz
           echo "${PWD}/boxfuse" >> $GITHUB_PATH
-          chmod +x ${PWD}/boxfuse/boxfuse
           boxfuse -v
 
       - name: Write to config file
