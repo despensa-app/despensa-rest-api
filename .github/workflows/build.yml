@@ -61,10 +61,10 @@ jobs:
 
       - name: Install CloudCaptain CLI
         run: |
-          curl https://files.cloudcaptain.sh/com/boxfuse/client/boxfuse-commandline/1.33.0.1460/boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz -o boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz
-          tar -xzf boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz
-          echo "${PWD}/boxfuse" >> $GITHUB_PATH
-          boxfuse -v
+          curl https://files.cloudcaptain.sh/com/boxfuse/client/boxfuse-commandline/1.33.0.1460/boxfuse-commandline-1.33.0.1460-linux-x64.tar.gz -o boxfuse-commandline.tar.gz
+          mkdir boxfuse
+          tar -xzf boxfuse-commandline.tar.gz -C boxfuse --strip-components=1
+          ${PWD}/boxfuse/boxfuse -v
 
       - name: Write to config file
         run: |
@@ -88,7 +88,7 @@ jobs:
       - name: Fuses a Payload together with the Components it requires into an Image
         run: |
           DATE=$(date +'%d%m%Y')
-          RESULT=$(boxfuse fuse ${PWD}/target/despensa-rest-api.war -image=despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
+          RESULT=$(${PWD}/boxfuse/boxfuse fuse ${PWD}/target/despensa-rest-api.war -image=despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
           if [ "$RESULT" == "ERROR" ]; then
             echo "Error fusing Image."
@@ -97,13 +97,13 @@ jobs:
 
       - name: Removes the last Image from the CloudCaptain Vault
         run: |
-          TOTAL=$(boxfuse ls -vault=true | awk '/Total:/ {print $2}')
+          TOTAL=$(${PWD}/boxfuse/boxfuse ls -vault=true | awk '/Total:/ {print $2}')
           
           echo "Total: $TOTAL"
           
           if [ "$TOTAL" -eq 3 ]; then
-            IMAGE=$(boxfuse ls -vault=true | grep -o '| [^/]*/despensa-rest-api:0.0.1.[^|]*' | sed 's/^| //' | head -n 1)
-            RESULT=$(boxfuse rm $IMAGE -vault=true | awk '/ERROR/{print $1}' | sed 's/://')
+            IMAGE=$(${PWD}/boxfuse/boxfuse ls -vault=true | grep -o '| [^/]*/despensa-rest-api:0.0.1.[^|]*' | sed 's/^| //' | head -n 1)
+            RESULT=$(${PWD}/boxfuse/boxfuse rm $IMAGE -vault=true | awk '/ERROR/{print $1}' | sed 's/://')
           
             if [ "$RESULT" == "ERROR" ]; then
               echo "Error removing Image."
@@ -118,7 +118,7 @@ jobs:
       - name: Pushes this Image to the CloudCaptain Vault
         run: |
           DATE=$(date +'%d%m%Y')
-          RESULT=$(boxfuse push despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
+          RESULT=$(${PWD}/boxfuse/boxfuse push despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
           if [ "$RESULT" == "ERROR" ]; then
             echo "Error pushing Image."
@@ -128,7 +128,7 @@ jobs:
       - name: Run the Image Instance in the AWS environment
         run: |
           DATE=$(date +'%d%m%Y')
-          RESULT=$(boxfuse run despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
+          RESULT=$(${PWD}/boxfuse/boxfuse run despensa-rest-api:0.0.1.$DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
           if [ "$RESULT" == "ERROR" ]; then
             echo "Error running Image."
