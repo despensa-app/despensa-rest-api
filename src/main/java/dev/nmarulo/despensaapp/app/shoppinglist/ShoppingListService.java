@@ -47,9 +47,7 @@ public class ShoppingListService extends BasicServiceImp {
         final var totalUnitsPerProducts = IntegerUtil.newAtomicReference(response.getTotalUnitsPerProducts());
         final var totalSelectedProducts = IntegerUtil.newAtomicReference(response.getTotalSelectedProducts());
         final var totalPriceSelectedProducts = BigDecimalUtil.newAtomicReference(response.getTotalPriceSelectedProducts());
-        final var selectProductOption = List.of(new SelectOption<>(SelectedProducts.NO, "Pendientes", true),
-                                                new SelectOption<>(SelectedProducts.YES, "Finalizados"),
-                                                new SelectOption<>(SelectedProducts.ALL, "Todos"));
+        final var selectProductOption = getSelectOptionList(request);
         
         shoppingList.getProductHasShoppingList()
                     .forEach(value -> {
@@ -195,6 +193,14 @@ public class ShoppingListService extends BasicServiceImp {
         }
         
         return shoppingListOptional.get();
+    }
+    
+    private List<SelectOption<SelectedProducts, String>> getSelectOptionList(FindByIdProductListReq request) {
+        final var selected = request.getSelected() == null ? SelectedProducts.NO : request.getSelected();
+        
+        return List.of(new SelectOption<>(SelectedProducts.NO, "Pendientes", SelectedProducts.NO == selected),
+                       new SelectOption<>(SelectedProducts.YES, "Finalizados", SelectedProducts.YES == selected),
+                       new SelectOption<>(SelectedProducts.ALL, "Todos", SelectedProducts.ALL == selected));
     }
     
 }
