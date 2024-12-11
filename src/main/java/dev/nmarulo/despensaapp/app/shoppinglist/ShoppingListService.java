@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -201,6 +202,21 @@ public class ShoppingListService extends BasicServiceImp {
         return List.of(new SelectOption<>(SelectedProducts.NO, "Pendientes", SelectedProducts.NO == selected),
                        new SelectOption<>(SelectedProducts.YES, "Finalizados", SelectedProducts.YES == selected),
                        new SelectOption<>(SelectedProducts.ALL, "Todos", SelectedProducts.ALL == selected));
+    }
+    
+    @Transactional
+    public void productsSelected(Long id, ProductsSelectedReq request, User user) {
+        if (request.getAction() == null) {
+            return;
+        }
+        
+        if (!this.shoppingListRepository.existsByIdAndUser(id, user)) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        final var select = ProductsSelectedReq.ActionType.SELECT == request.getAction();
+        
+        this.productHasShoppingListRepository.updateSelectedByShoppingList_IdShoppingList_User(select, id, user);
     }
     
 }

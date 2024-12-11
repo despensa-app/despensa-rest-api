@@ -3,6 +3,8 @@ package dev.nmarulo.despensaapp.app.productshoppinglist;
 import dev.nmarulo.despensaapp.app.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,5 +25,10 @@ public interface ProductHasShoppingListRepository extends JpaRepository<ProductH
                                                                                                              User user,
                                                                                                              List<Long> productsId,
                                                                                                              List<Long> unitTypesId);
+    
+    @Modifying
+    @Query(
+        "UPDATE ProductHasShoppingList phsl SET phsl.selected = :selected WHERE phsl.shoppingList.id = :shoppingListId AND phsl.shoppingList.user = :user")
+    void updateSelectedByShoppingList_IdShoppingList_User(boolean selected, Long shoppingListId, User user);
     
 }

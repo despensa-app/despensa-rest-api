@@ -83,4 +83,12 @@ public class ShoppingListController {
                                                                               pageable));
     }
     
+    @PutMapping("/{id}/products-selected")
+    public ResponseEntity<Void> productsSelected(@PathVariable Long id, @RequestBody ProductsSelectedReq request) {
+        this.shoppingListService.productsSelected(id, request, this.dataRequestScope.getAuthenticationPrincipal());
+        
+        return ResponseEntity.noContent()
+                             .build();
+    }
+    
 }
