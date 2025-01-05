@@ -1,6 +1,9 @@
 package dev.nmarulo.despensa_app.app.pantry.products;
 
+import dev.nmarulo.despensa_app.app.pantry.product_categories.ProductCategory;
+import dev.nmarulo.despensa_app.app.pantry.product_images.ProductImage;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingList;
+import dev.nmarulo.despensa_app.app.pantry.supermarkets.Supermarket;
 import dev.nmarulo.despensa_app.commons.gson.GsonExclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,8 +38,12 @@ public class Product {
     @Column(name = "price", nullable = false, precision = 2)
     private BigDecimal price;
     
+    /**
+     * @deprecated Use {@link ProductImage} instead
+     */
     @Basic
     @Column(name = "img_url", nullable = false)
+    @Deprecated
     private String imgUrl;
     
     @Basic
@@ -61,8 +68,23 @@ public class Product {
     @GsonExclude
     private Set<ProductHasShoppingList> productHasShoppingList;
     
+    @ToString.Exclude
+    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private Set<ProductImage> productImages;
+    
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "supermarkets_id", nullable = false)
+    private Supermarket supermarkets;
+    
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_categories_id", nullable = false)
+    private ProductCategory productCategories;
+    
     public Product() {
         this.productHasShoppingList = new HashSet<>();
+        this.productImages = new HashSet<>();
     }
     
     public boolean equals(final Object o) {
