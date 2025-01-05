@@ -4,7 +4,7 @@ import dev.nmarulo.despensaapp.app.pantry.product_shopping_list.ProductHasShoppi
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllProductRes;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllShoppingListProductRes;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.SaveShoppingListProductRes;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.ShoppingList;
 import dev.nmarulo.despensaapp.app.pantry.unitytypes.UnitType;
 import dev.nmarulo.despensaapp.commons.mapper.CommonMapper;
 import org.springframework.data.domain.Page;

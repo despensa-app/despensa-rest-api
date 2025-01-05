@@ -1,7 +1,7 @@
-package dev.nmarulo.despensaapp.app.pantry.shoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.shopping_list;
 
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.ShoppingListAdminReq;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.ShoppingListAdminRes;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.dtos.ShoppingListAdminReq;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.dtos.ShoppingListAdminRes;
 import dev.nmarulo.despensaapp.commons.service.CrudServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
-package dev.nmarulo.despensaapp.app.pantry.shoppinglist.specifications;
+package dev.nmarulo.despensaapp.app.pantry.shopping_list.specifications;
 
 import dev.nmarulo.despensaapp.app.pantry.product_shopping_list.ProductHasShoppingList;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingList;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.FindByIdProductListReq;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.enums.SelectedProducts;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.ShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.dtos.FindByIdProductListReq;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.enums.SelectedProducts;
 import dev.nmarulo.despensaapp.app.users.User;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;

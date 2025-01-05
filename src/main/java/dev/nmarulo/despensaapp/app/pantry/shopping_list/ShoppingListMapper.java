@@ -1,7 +1,7 @@
-package dev.nmarulo.despensaapp.app.pantry.shoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.shopping_list;
 
 import dev.nmarulo.despensaapp.app.pantry.product_shopping_list.ProductHasShoppingList;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.*;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.dtos.*;
 import dev.nmarulo.despensaapp.commons.mapper.CommonMapper;
 import org.springframework.data.domain.Page;
 

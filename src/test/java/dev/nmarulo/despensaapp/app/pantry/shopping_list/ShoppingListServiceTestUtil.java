@@ -1,7 +1,7 @@
-package dev.nmarulo.despensaapp.app.pantry.shoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.shopping_list;
 
 import dev.nmarulo.despensaapp.FakeTestUtil;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.FindAllShoppingListRes;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.dtos.FindAllShoppingListRes;
 import dev.nmarulo.despensaapp.app.users.User;
 import lombok.Getter;
 import org.springframework.data.domain.Page;

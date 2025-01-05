@@ -1,6 +1,6 @@
-package dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos;
+package dev.nmarulo.despensaapp.app.pantry.shopping_list.dtos;
 
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.enums.SelectedProducts;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.enums.SelectedProducts;
 import lombok.Data;
 
 @Data

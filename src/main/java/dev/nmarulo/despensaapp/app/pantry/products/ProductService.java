@@ -7,7 +7,7 @@ import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllProductRes;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllShoppingListProductRes;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.SaveShoppingListProductReq;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.SaveShoppingListProductRes;
-import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingListRepository;
+import dev.nmarulo.despensaapp.app.pantry.shopping_list.ShoppingListRepository;
 import dev.nmarulo.despensaapp.app.pantry.unitytypes.UnitTypeRepository;
 import dev.nmarulo.despensaapp.app.users.User;
 import dev.nmarulo.despensaapp.commons.exception.BadRequestException;
