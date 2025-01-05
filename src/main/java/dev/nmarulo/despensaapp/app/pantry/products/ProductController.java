@@ -1,9 +1,9 @@
-package dev.nmarulo.despensaapp.app.products;
+package dev.nmarulo.despensaapp.app.pantry.products;
 
-import dev.nmarulo.despensaapp.app.products.dtos.FindAllProductRes;
-import dev.nmarulo.despensaapp.app.products.dtos.FindAllShoppingListProductRes;
-import dev.nmarulo.despensaapp.app.products.dtos.SaveShoppingListProductReq;
-import dev.nmarulo.despensaapp.app.products.dtos.SaveShoppingListProductRes;
+import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllProductRes;
+import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllShoppingListProductRes;
+import dev.nmarulo.despensaapp.app.pantry.products.dtos.SaveShoppingListProductReq;
+import dev.nmarulo.despensaapp.app.pantry.products.dtos.SaveShoppingListProductRes;
 import dev.nmarulo.despensaapp.commons.component.DataRequestScope;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

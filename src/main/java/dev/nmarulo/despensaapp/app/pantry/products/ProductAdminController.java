@@ -1,7 +1,7 @@
-package dev.nmarulo.despensaapp.app.products;
+package dev.nmarulo.despensaapp.app.pantry.products;
 
-import dev.nmarulo.despensaapp.app.products.dtos.ProductAdminReq;
-import dev.nmarulo.despensaapp.app.products.dtos.ProductAdminRes;
+import dev.nmarulo.despensaapp.app.pantry.products.dtos.ProductAdminReq;
+import dev.nmarulo.despensaapp.app.pantry.products.dtos.ProductAdminRes;
 import dev.nmarulo.despensaapp.commons.controller.CrudController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.products.dtos;
+package dev.nmarulo.despensaapp.app.pantry.products.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

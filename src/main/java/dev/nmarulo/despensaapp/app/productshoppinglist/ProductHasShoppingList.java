@@ -1,6 +1,6 @@
 package dev.nmarulo.despensaapp.app.productshoppinglist;
 
-import dev.nmarulo.despensaapp.app.products.Product;
+import dev.nmarulo.despensaapp.app.pantry.products.Product;
 import dev.nmarulo.despensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.despensaapp.app.unitytypes.UnitType;
 import dev.nmarulo.despensaapp.commons.gson.GsonExclude;

@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.products;
+package dev.nmarulo.despensaapp.app.pantry.products;
 
 import dev.nmarulo.despensaapp.app.users.User;
 import org.springframework.data.domain.Page;
