@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.pantry.productshoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.product_shopping_list;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

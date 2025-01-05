@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.pantry.productshoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.product_shopping_list;
 
 import dev.nmarulo.despensaapp.app.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;

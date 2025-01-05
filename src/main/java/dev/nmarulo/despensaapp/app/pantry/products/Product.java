@@ -1,6 +1,6 @@
 package dev.nmarulo.despensaapp.app.pantry.products;
 
-import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.product_shopping_list.ProductHasShoppingList;
 import dev.nmarulo.despensaapp.commons.gson.GsonExclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

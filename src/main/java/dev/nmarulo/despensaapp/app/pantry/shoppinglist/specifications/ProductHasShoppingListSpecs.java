@@ -1,6 +1,6 @@
 package dev.nmarulo.despensaapp.app.pantry.shoppinglist.specifications;
 
-import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.product_shopping_list.ProductHasShoppingList;
 import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingList;
 import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.FindByIdProductListReq;
 import dev.nmarulo.despensaapp.app.pantry.shoppinglist.enums.SelectedProducts;
