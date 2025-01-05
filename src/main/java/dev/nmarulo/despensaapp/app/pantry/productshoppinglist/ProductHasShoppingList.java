@@ -2,7 +2,7 @@ package dev.nmarulo.despensaapp.app.pantry.productshoppinglist;
 
 import dev.nmarulo.despensaapp.app.pantry.products.Product;
 import dev.nmarulo.despensaapp.app.pantry.unitytypes.UnitType;
-import dev.nmarulo.despensaapp.app.shoppinglist.ShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingList;
 import dev.nmarulo.despensaapp.commons.gson.GsonExclude;
 import jakarta.persistence.*;
 import lombok.*;

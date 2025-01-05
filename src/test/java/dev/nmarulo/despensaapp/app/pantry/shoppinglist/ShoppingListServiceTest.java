@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.shoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.shoppinglist;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

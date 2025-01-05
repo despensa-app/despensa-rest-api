@@ -1,6 +1,6 @@
-package dev.nmarulo.despensaapp.app.shoppinglist.dtos;
+package dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos;
 
-import dev.nmarulo.despensaapp.app.shoppinglist.enums.SelectedProducts;
+import dev.nmarulo.despensaapp.app.pantry.shoppinglist.enums.SelectedProducts;
 import lombok.Data;
 
 import java.math.BigDecimal;

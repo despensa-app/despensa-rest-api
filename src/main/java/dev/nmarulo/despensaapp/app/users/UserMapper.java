@@ -1,6 +1,6 @@
 package dev.nmarulo.despensaapp.app.users;
 
-import dev.nmarulo.despensaapp.app.shoppinglist.ShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingList;
 import dev.nmarulo.despensaapp.app.users.dtos.FindByIdUserRes;
 import dev.nmarulo.despensaapp.commons.mapper.CommonMapper;
 

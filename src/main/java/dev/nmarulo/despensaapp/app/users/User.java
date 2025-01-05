@@ -1,6 +1,6 @@
 package dev.nmarulo.despensaapp.app.users;
 
-import dev.nmarulo.despensaapp.app.shoppinglist.ShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.shoppinglist.ShoppingList;
 import jakarta.persistence.*;
 import lombok.*;
 

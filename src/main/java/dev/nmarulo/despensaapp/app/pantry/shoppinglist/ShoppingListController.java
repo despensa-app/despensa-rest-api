@@ -1,6 +1,6 @@
-package dev.nmarulo.despensaapp.app.shoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.shoppinglist;
 
-import dev.nmarulo.despensaapp.app.shoppinglist.dtos.*;
+import dev.nmarulo.despensaapp.app.pantry.shoppinglist.dtos.*;
 import dev.nmarulo.despensaapp.commons.component.DataRequestScope;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
