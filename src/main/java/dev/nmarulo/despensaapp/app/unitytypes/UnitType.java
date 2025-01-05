@@ -1,6 +1,6 @@
 package dev.nmarulo.despensaapp.app.unitytypes;
 
-import dev.nmarulo.despensaapp.app.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.despensaapp.commons.gson.GsonExclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package dev.nmarulo.despensaapp.app.shoppinglist;
 
-import dev.nmarulo.despensaapp.app.productshoppinglist.ProductHasShoppingList;
-import dev.nmarulo.despensaapp.app.productshoppinglist.ProductHasShoppingListRepository;
+import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingListRepository;
 import dev.nmarulo.despensaapp.app.shoppinglist.dtos.*;
 import dev.nmarulo.despensaapp.app.shoppinglist.enums.SelectedProducts;
 import dev.nmarulo.despensaapp.app.shoppinglist.specifications.ProductHasShoppingListSpecs;

@@ -3,7 +3,7 @@ package dev.nmarulo.despensaapp.app.pantry.products;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllProductRes;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.FindAllShoppingListProductRes;
 import dev.nmarulo.despensaapp.app.pantry.products.dtos.SaveShoppingListProductRes;
-import dev.nmarulo.despensaapp.app.productshoppinglist.ProductHasShoppingList;
+import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.despensaapp.app.shoppinglist.ShoppingList;
 import dev.nmarulo.despensaapp.app.unitytypes.UnitType;
 import dev.nmarulo.despensaapp.commons.mapper.CommonMapper;

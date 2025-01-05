@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.productshoppinglist;
+package dev.nmarulo.despensaapp.app.pantry.productshoppinglist;
 
 import dev.nmarulo.despensaapp.app.pantry.products.Product;
 import dev.nmarulo.despensaapp.app.shoppinglist.ShoppingList;
