@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos;
+package dev.nmarulo.despensaapp.app.pantry.unity_types.dtos;
 
 import lombok.Data;
 

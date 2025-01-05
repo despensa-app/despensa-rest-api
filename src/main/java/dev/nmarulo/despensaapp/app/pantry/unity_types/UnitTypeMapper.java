@@ -1,6 +1,6 @@
-package dev.nmarulo.despensaapp.app.pantry.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unity_types;
 
-import dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos.FindAllUnitTypeRes;
+import dev.nmarulo.despensaapp.app.pantry.unity_types.dtos.FindAllUnitTypeRes;
 import dev.nmarulo.despensaapp.commons.mapper.CommonMapper;
 import org.springframework.data.domain.Page;
 
