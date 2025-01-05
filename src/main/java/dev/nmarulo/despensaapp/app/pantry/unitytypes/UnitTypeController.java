@@ -1,6 +1,6 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
-import dev.nmarulo.despensaapp.app.unitytypes.dtos.FindAllUnitTypeRes;
+import dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos.FindAllUnitTypeRes;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

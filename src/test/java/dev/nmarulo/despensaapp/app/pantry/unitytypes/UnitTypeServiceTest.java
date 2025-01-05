@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
 import dev.nmarulo.despensaapp.FakeTestUtil;
-import dev.nmarulo.despensaapp.app.unitytypes.dtos.FindAllUnitTypeRes;
+import dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos.FindAllUnitTypeRes;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

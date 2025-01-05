@@ -1,6 +1,6 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
-import dev.nmarulo.despensaapp.app.unitytypes.dtos.FindAllUnitTypeRes;
+import dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos.FindAllUnitTypeRes;
 import dev.nmarulo.despensaapp.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,5 @@ public class UnitTypeService extends BasicServiceImp {
         
         return UnitTypeMapper.toFindAllUnitTypeRes(pageFindAll);
     }
-    
     
 }

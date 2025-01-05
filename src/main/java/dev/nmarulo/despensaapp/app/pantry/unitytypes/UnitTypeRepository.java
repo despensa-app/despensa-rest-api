@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

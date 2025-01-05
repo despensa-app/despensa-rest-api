@@ -1,4 +1,4 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
 import dev.nmarulo.despensaapp.app.pantry.productshoppinglist.ProductHasShoppingList;
 import dev.nmarulo.despensaapp.commons.gson.GsonExclude;

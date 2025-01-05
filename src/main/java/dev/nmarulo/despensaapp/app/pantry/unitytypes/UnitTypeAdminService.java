@@ -1,7 +1,7 @@
-package dev.nmarulo.despensaapp.app.unitytypes;
+package dev.nmarulo.despensaapp.app.pantry.unitytypes;
 
-import dev.nmarulo.despensaapp.app.unitytypes.dtos.UnitTypeAdminReq;
-import dev.nmarulo.despensaapp.app.unitytypes.dtos.UnitTypeAdminRes;
+import dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos.UnitTypeAdminReq;
+import dev.nmarulo.despensaapp.app.pantry.unitytypes.dtos.UnitTypeAdminRes;
 import dev.nmarulo.despensaapp.commons.service.CrudServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
