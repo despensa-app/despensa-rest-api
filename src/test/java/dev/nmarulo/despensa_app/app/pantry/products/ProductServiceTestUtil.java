@@ -1,6 +1,7 @@
 package dev.nmarulo.despensa_app.app.pantry.products;
 
 import dev.nmarulo.despensa_app.FakeTestUtil;
+import dev.nmarulo.despensa_app.app.pantry.product_images.ProductImage;
 import dev.nmarulo.despensa_app.app.pantry.products.dtos.FindAllShoppingListProductRes;
 import dev.nmarulo.despensa_app.app.users.User;
 import lombok.Getter;
@@ -40,11 +41,15 @@ public class ProductServiceTestUtil {
         final var productRes = new FindAllShoppingListProductRes.Product();
         final var product = productsPage.getContent()
                                         .getFirst();
+        final var productImage = product.getProductImages()
+                                        .stream()
+                                        .toList()
+                                        .getFirst();
         
         productRes.setId(product.getId());
         productRes.setName(product.getName());
         productRes.setPrice(product.getPrice());
-        productRes.setImgUrl(product.getImgUrl());
+        productRes.setImgUrl(productImage.getUrl());
         
         findAllShoppingListProductRes.setCurrentPage(productsPage.getNumber());
         findAllShoppingListProductRes.setPageSize(productsPage.getNumberOfElements());
@@ -62,20 +67,32 @@ public class ProductServiceTestUtil {
         return new PageImpl<>(products, pageable, FakeTestUtil.randomInteger());
     }
     
-    private static Product initProduct() {
+    private Product initProduct() {
         final var product = new Product();
+        final var productImage = initProductImage();
         
         product.setId(FakeTestUtil.randomLong());
         product.setName(FakeTestUtil.randomWord());
         product.setPrice(FakeTestUtil.randomBigDecimal());
-        product.setImgUrl(FakeTestUtil.randomImage());
         product.setCalories(FakeTestUtil.randomBigDecimal());
         product.setDescription(FakeTestUtil.randomSentence());
         product.setCreatedAt(FakeTestUtil.randomPast());
         product.setUpdatedAt(FakeTestUtil.randomFuture());
         product.setProductHasShoppingList(Collections.emptySet());
+        product.setProductImages(Collections.singleton(productImage));
         
         return product;
+    }
+    
+    private ProductImage initProductImage() {
+        final var productImage = new ProductImage();
+        
+        productImage.setId(FakeTestUtil.randomLong());
+        productImage.setUrl(FakeTestUtil.randomImage());
+        productImage.setCreatedAt(FakeTestUtil.randomPast());
+        productImage.setUpdatedAt(FakeTestUtil.randomFuture());
+        
+        return productImage;
     }
     
     private User initUser() {

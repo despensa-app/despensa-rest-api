@@ -1,5 +1,6 @@
 package dev.nmarulo.despensa_app.app.pantry.products;
 
+import dev.nmarulo.despensa_app.app.pantry.product_images.ProductImage;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingList;
 import dev.nmarulo.despensa_app.app.pantry.products.dtos.FindAllProductRes;
 import dev.nmarulo.despensa_app.app.pantry.products.dtos.FindAllShoppingListProductRes;
@@ -16,11 +17,12 @@ public final class ProductMapper extends CommonMapper {
     
     public static FindAllShoppingListProductRes.Product toFindAllShoppingListProductResProduct(final Product product) {
         final var response = new FindAllShoppingListProductRes.Product();
+        final var productImage = getFirstProductImage(product);
         
         response.setId(product.getId());
         response.setName(product.getName());
         response.setPrice(product.getPrice());
-        response.setImgUrl(product.getImgUrl());
+        response.setImgUrl(productImage.getUrl());
         
         return response;
     }
@@ -48,11 +50,12 @@ public final class ProductMapper extends CommonMapper {
     
     public static FindAllProductRes.Product toFindAllProductResProduct(final Product product) {
         final var response = new FindAllProductRes.Product();
+        final var productImage = getFirstProductImage(product);
         
         response.setId(product.getId());
         response.setName(product.getName());
         response.setPrice(product.getPrice());
-        response.setImgUrl(product.getImgUrl());
+        response.setImgUrl(productImage.getUrl());
         response.setCalories(product.getCalories());
         response.setDescription(product.getDescription());
         
@@ -65,6 +68,13 @@ public final class ProductMapper extends CommonMapper {
     
     public static FindAllProductRes toFindAllProductRes(final Page<Product> page) {
         return pageTo(page, FindAllProductRes::new, ProductMapper::toFindAllProductResProduct);
+    }
+    
+    private static ProductImage getFirstProductImage(Product product) {
+        return product.getProductImages()
+                      .stream()
+                      .toList()
+                      .getFirst();
     }
     
 }

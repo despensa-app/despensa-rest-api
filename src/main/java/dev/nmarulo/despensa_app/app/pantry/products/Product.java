@@ -38,14 +38,6 @@ public class Product {
     @Column(name = "price", nullable = false, precision = 2)
     private BigDecimal price;
     
-    /**
-     * @deprecated Use {@link ProductImage} instead
-     */
-    @Basic
-    @Column(name = "img_url", nullable = false)
-    @Deprecated
-    private String imgUrl;
-    
     @Basic
     @Column(name = "calories", nullable = false, precision = 2)
     private BigDecimal calories;
@@ -112,11 +104,6 @@ public class Product {
         if (!Objects.equals(this$price, other$price)) {
             return false;
         }
-        final Object this$imgUrl = this.getImgUrl();
-        final Object other$imgUrl = other.getImgUrl();
-        if (!Objects.equals(this$imgUrl, other$imgUrl)) {
-            return false;
-        }
         final Object this$calories = this.getCalories();
         final Object other$calories = other.getCalories();
         if (!Objects.equals(this$calories, other$calories)) {
@@ -148,8 +135,6 @@ public class Product {
         result = result * PRIME + ($name == null ? 43 : $name.hashCode());
         final Object $price = this.getPrice();
         result = result * PRIME + ($price == null ? 43 : $price.hashCode());
-        final Object $imgUrl = this.getImgUrl();
-        result = result * PRIME + ($imgUrl == null ? 43 : $imgUrl.hashCode());
         final Object $calories = this.getCalories();
         result = result * PRIME + ($calories == null ? 43 : $calories.hashCode());
         final Object $description = this.getDescription();
