@@ -44,6 +44,7 @@ jobs:
           DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
 
   deploy:
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -135,6 +136,7 @@ jobs:
           fi
 
       - name: Pushes this Image to the CloudCaptain Vault
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           RESULT=$(${PWD}/boxfuse/boxfuse push $IMAGE_NAME_FUSE_DATE | awk '/ERROR/{print $1}' | sed 's/://')
           
