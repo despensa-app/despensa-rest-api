@@ -70,7 +70,7 @@ public final class ProductMapper extends CommonMapper {
         return pageTo(page, FindAllProductRes::new, ProductMapper::toFindAllProductResProduct);
     }
     
-    private static ProductImage getFirstProductImage(Product product) {
+    private static ProductImage getFirstProductImage(final Product product) {
         return product.getProductImages()
                       .stream()
                       .toList()

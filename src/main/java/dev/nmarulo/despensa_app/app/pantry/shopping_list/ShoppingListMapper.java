@@ -94,7 +94,7 @@ public final class ShoppingListMapper extends CommonMapper {
         return response;
     }
     
-    private static ProductImage getFirtProductImage(Product product) {
+    private static ProductImage getFirtProductImage(final Product product) {
         return product.getProductImages()
                       .stream()
                       .toList()
