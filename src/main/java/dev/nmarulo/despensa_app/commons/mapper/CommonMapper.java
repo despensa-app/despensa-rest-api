@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class CommonMapper {
+public abstract class CommonMapper {
     
     protected static <E, R extends PagingAndSortingRes<O>, O> R pageTo(final Page<E> page,
                                                                        final Supplier<R> supplier,

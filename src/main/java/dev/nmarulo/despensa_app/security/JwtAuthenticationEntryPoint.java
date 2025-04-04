@@ -32,7 +32,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         this.delegate.commence(request, response, authException);
         
         if (authException instanceof InvalidBearerTokenException bearerTokenException) {
-            var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED,
+            final var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED,
                                                                  bearerTokenException.getMessage());
             
             problemDetail.setTitle("Invalid Token");

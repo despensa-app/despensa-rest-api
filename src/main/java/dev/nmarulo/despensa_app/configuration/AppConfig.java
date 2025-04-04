@@ -24,7 +24,7 @@ public class AppConfig implements WebMvcConfigurer {
     
     @Bean
     public LocaleResolver localeResolver() {
-        var acceptHeaderLocaleResolver = new AcceptHeaderLocaleResolver();
+        final var acceptHeaderLocaleResolver = new AcceptHeaderLocaleResolver();
         
         acceptHeaderLocaleResolver.setSupportedLocales(this.appProperties.getSupportedLocales());
         acceptHeaderLocaleResolver.setDefaultLocale(this.appProperties.getDefaultLocale());

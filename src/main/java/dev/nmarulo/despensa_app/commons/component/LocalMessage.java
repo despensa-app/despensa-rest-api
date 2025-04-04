@@ -11,7 +11,7 @@ public class LocalMessage {
     
     private final MessageSource messageSource;
     
-    public String getMessage(String code, Object... args) {
+    public String getMessage(final String code, final Object... args) {
         return this.messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
     

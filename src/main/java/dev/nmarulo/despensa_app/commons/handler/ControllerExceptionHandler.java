@@ -35,7 +35,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
     
     private ErrorRes newErrorRes(Exception ex, HttpStatusCode statusCode) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(statusCode, ex.getMessage());
+        final var problemDetail = ProblemDetail.forStatusAndDetail(statusCode, ex.getMessage());
         
         return new ErrorRes(problemDetail);
     }
