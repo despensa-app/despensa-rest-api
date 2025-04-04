@@ -18,10 +18,14 @@ import java.util.Date;
 @Configuration
 public class GsonConfig {
     
-    private static final String[] DATE_FORMATS = new String[]{"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ssXXX", "yyyy-MM-dd"};
+    private static final String[] DATE_FORMATS = new String[] {
+        "yyyy-MM-dd HH:mm:ss",
+        "yyyy-MM-dd'T'HH:mm:ssXXX",
+        "yyyy-MM-dd"
+    };
     
     @Bean
-    public Gson gson(GsonBuilder gsonBuilder) {
+    public Gson gson(final GsonBuilder gsonBuilder) {
         gsonBuilder.setExclusionStrategies(new GsonExclusionStrategy());
         gsonBuilder.registerTypeAdapter(Timestamp.class, new TimestampTypeAdapter());
         gsonBuilder.registerTypeAdapter(Date.class, new DateTypeAdapter());
@@ -48,9 +52,11 @@ public class GsonConfig {
     private static class TimestampTypeAdapter implements JsonDeserializer<Timestamp> {
         
         @Override
-        public Timestamp deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            long primitive = json.getAsJsonPrimitive()
-                                 .getAsLong();
+        public Timestamp deserialize(JsonElement json,
+                                     Type typeOfT,
+                                     JsonDeserializationContext context) throws JsonParseException {
+            final var primitive = json.getAsJsonPrimitive()
+                                      .getAsLong();
             
             return new Timestamp(primitive);
         }
@@ -60,16 +66,18 @@ public class GsonConfig {
     private static class DateTypeAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
         
         @Override
-        public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonPrimitive asJsonPrimitive = json.getAsJsonPrimitive();
+        public Date deserialize(JsonElement json,
+                                Type typeOfT,
+                                JsonDeserializationContext context) throws JsonParseException {
+            final var asJsonPrimitive = json.getAsJsonPrimitive();
             
             if (asJsonPrimitive.isNumber()) {
                 return new Date(asJsonPrimitive.getAsLong());
             }
             
-            String asString = asJsonPrimitive.getAsString();
+            final var asString = asJsonPrimitive.getAsString();
             
-            for (String pattern : DATE_FORMATS) {
+            for (final String pattern : DATE_FORMATS) {
                 try {
                     return new SimpleDateFormat(pattern).parse(asString);
                 } catch (ParseException ignored) {
@@ -94,7 +102,9 @@ public class GsonConfig {
         }
         
         @Override
-        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public LocalDate deserialize(JsonElement json,
+                                     Type typeOfT,
+                                     JsonDeserializationContext context) throws JsonParseException {
             return LocalDate.parse(json.getAsString());
         }
         
@@ -103,12 +113,16 @@ public class GsonConfig {
     private static class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
         
         @Override
-        public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        public LocalDateTime deserialize(JsonElement jsonElement,
+                                         Type type,
+                                         JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
             return LocalDateTime.parse(jsonElement.getAsString());
         }
         
         @Override
-        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+        public JsonElement serialize(LocalDateTime localDateTime,
+                                     Type type,
+                                     JsonSerializationContext jsonSerializationContext) {
             return new JsonPrimitive(localDateTime.toString());
         }
         

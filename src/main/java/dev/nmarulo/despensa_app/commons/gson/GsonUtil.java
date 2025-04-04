@@ -14,10 +14,10 @@ public class GsonUtil {
     
     private final Gson gson;
     
-    public <R> R convertTo(Object object, Class<?> clazz) {
-        String json = gson.toJson(object);
-        boolean isList = ResolvableType.forClass(List.class)
-                                       .isAssignableFrom(ResolvableType.forInstance(object));
+    public <R> R convertTo(final Object object, final Class<?> clazz) {
+        final var json = gson.toJson(object);
+        final var isList = ResolvableType.forClass(List.class)
+                                         .isAssignableFrom(ResolvableType.forInstance(object));
         
         if (isList) {
             return fromJsonTo(json, TypeToken.getParameterized(List.class, clazz));
@@ -26,15 +26,15 @@ public class GsonUtil {
         return fromJsonTo(json, TypeToken.get(clazz));
     }
     
-    public <R> R fromJsonTo(String json, Class<?> clazz) {
+    public <R> R fromJsonTo(final String json, final Class<?> clazz) {
         return fromJsonTo(json, TypeToken.get(clazz));
     }
     
-    private <R> R fromJsonTo(String json, TypeToken<?> typeToken) {
+    private <R> R fromJsonTo(final String json, final TypeToken<?> typeToken) {
         return gson.fromJson(json, typeToken.getType());
     }
     
-    public void toJson(Object object, Appendable writer) {
+    public void toJson(final Object object, final Appendable writer) {
         this.gson.toJson(object, writer);
     }
     
