@@ -7,11 +7,11 @@ public final class IntegerUtil {
     private IntegerUtil() {
     }
     
-    public static Integer nullToZero(Integer integer) {
+    public static Integer nullToZero(final Integer integer) {
         return integer == null ? 0 : integer;
     }
     
-    public static AtomicReference<Integer> newAtomicReference(Integer integer) {
+    public static AtomicReference<Integer> newAtomicReference(final Integer integer) {
         return new AtomicReference<>(nullToZero(integer));
     }
     

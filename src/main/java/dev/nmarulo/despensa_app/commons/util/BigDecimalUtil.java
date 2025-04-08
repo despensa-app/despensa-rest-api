@@ -8,11 +8,11 @@ public final class BigDecimalUtil {
     private BigDecimalUtil() {
     }
     
-    public static BigDecimal multiply(BigDecimal bigDecimal, Integer integer) {
+    public static BigDecimal multiply(final BigDecimal bigDecimal, final Integer integer) {
         return bigDecimal.multiply(valueOf(integer));
     }
     
-    public static BigDecimal valueOf(Integer integer) {
+    public static BigDecimal valueOf(final Integer integer) {
         if (integer == null) {
             return BigDecimal.ZERO;
         }
@@ -20,11 +20,11 @@ public final class BigDecimalUtil {
         return new BigDecimal(integer);
     }
     
-    public static BigDecimal nullToZero(BigDecimal bigDecimal) {
+    public static BigDecimal nullToZero(final BigDecimal bigDecimal) {
         return bigDecimal == null ? BigDecimal.ZERO : bigDecimal;
     }
     
-    public static AtomicReference<BigDecimal> newAtomicReference(BigDecimal bigDecimal) {
+    public static AtomicReference<BigDecimal> newAtomicReference(final BigDecimal bigDecimal) {
         return new AtomicReference<>(nullToZero(bigDecimal));
     }
     
