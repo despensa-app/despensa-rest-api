@@ -3,8 +3,6 @@ package dev.nmarulo.despensa_app.security;
 import com.nimbusds.jose.KeyLengthException;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
 import dev.nmarulo.despensa_app.app.users.UserRepository;
 import dev.nmarulo.despensa_app.commons.component.LocalMessage;
 import dev.nmarulo.despensa_app.commons.converter.CustomJwtAuthenticationConverter;
@@ -68,8 +66,8 @@ public class WebSecurityConfig {
     }
     
     private CorsConfigurationSource corsConfigurationSource() {
-        var source = new UrlBasedCorsConfigurationSource();
-        var configuration = new CorsConfiguration();
+        final var source = new UrlBasedCorsConfigurationSource();
+        final var configuration = new CorsConfiguration();
         
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
@@ -86,19 +84,19 @@ public class WebSecurityConfig {
     
     @Bean
     public JwtEncoder jwtEncoder() throws KeyLengthException {
-        MACSigner macSigner = new MACSigner(appProperties.getSecretKey());
-        JWKSource<SecurityContext> jwkSource = new ImmutableSecret<>(macSigner.getSecretKey());
+        final var macSigner = new MACSigner(appProperties.getSecretKey());
+        final var jwkSource = new ImmutableSecret<>(macSigner.getSecretKey());
         
         return new NimbusJwtEncoder(jwkSource);
     }
     
     @Bean
     public JwtDecoder jwtDecoder() throws KeyLengthException {
-        MACSigner macSigner = new MACSigner(appProperties.getSecretKey());
+        final var macSigner = new MACSigner(appProperties.getSecretKey());
         final var withClockSkew = new DelegatingOAuth2TokenValidator<>(new JwtTimestampValidator(Duration.ZERO));
-        NimbusJwtDecoder build = NimbusJwtDecoder.withSecretKey(macSigner.getSecretKey())
-                                                 .macAlgorithm(MacAlgorithm.HS256)
-                                                 .build();
+        final var build = NimbusJwtDecoder.withSecretKey(macSigner.getSecretKey())
+                                          .macAlgorithm(MacAlgorithm.HS256)
+                                          .build();
         
         build.setJwtValidator(withClockSkew);
         
