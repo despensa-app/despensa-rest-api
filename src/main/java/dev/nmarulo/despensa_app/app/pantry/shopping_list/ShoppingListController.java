@@ -1,6 +1,7 @@
 package dev.nmarulo.despensa_app.app.pantry.shopping_list;
 
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.dtos.*;
+import dev.nmarulo.despensa_app.app.pantry.shopping_list.services.UpdateShoppingListService;
 import dev.nmarulo.despensa_app.commons.component.DataRequestScope;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class ShoppingListController {
     
     private final ShoppingListService shoppingListService;
+    
+    private final UpdateShoppingListService updateShoppingListService;
     
     private final DataRequestScope dataRequestScope;
     
@@ -60,9 +63,9 @@ public class ShoppingListController {
     @PutMapping("/{id}")
     public ResponseEntity<UpdateShoppingListRes> update(@PathVariable Long id,
                                                         @RequestBody UpdateShoppingListReq request) {
-        return ResponseEntity.ok(this.shoppingListService.update(id,
-                                                                 request,
-                                                                 this.dataRequestScope.getAuthenticationPrincipal()));
+        return ResponseEntity.ok(this.updateShoppingListService.update(id,
+                                                                       request,
+                                                                       this.dataRequestScope.getAuthenticationPrincipal()));
     }
     
     @DeleteMapping("/{id}")

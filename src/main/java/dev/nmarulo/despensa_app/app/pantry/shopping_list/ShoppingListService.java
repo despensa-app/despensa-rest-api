@@ -116,18 +116,6 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toSaveShoppingListRes(save);
     }
     
-    public UpdateShoppingListRes update(Long id, UpdateShoppingListReq request, User user) {
-        final var shoppingList = getShoppingList(id, user);
-        
-        updateProducts(id, request.getProducts(), user);
-        
-        shoppingList.setName(request.getName());
-        
-        var update = this.shoppingListRepository.save(shoppingList);
-        
-        return ShoppingListMapper.toUpdateShoppingListRes(update);
-    }
-    
     public void delete(Long id, User user) {
         final var shoppingList = getShoppingList(id, user);
         
@@ -152,38 +140,6 @@ public class ShoppingListService extends BasicServiceImp {
         final var productListPage = this.productHasShoppingListRepository.findAll(specification, pageable);
         
         return ShoppingListMapper.toFindByIdProductListRes(productListPage);
-    }
-    
-    private void updateProducts(Long shoppingListId,
-                                List<UpdateShoppingListReq.ProductShoppingList> productsReq,
-                                User user) {
-        if (productsReq == null || productsReq.isEmpty()) {
-            return;
-        }
-        
-        var productsId = productsReq.stream()
-                                    .map(UpdateShoppingListReq.ProductShoppingList::getProductId)
-                                    .toList();
-        var unitTypesId = productsReq.stream()
-                                     .map(UpdateShoppingListReq.ProductShoppingList::getUnitTypeId)
-                                     .toList();
-        var result = this.productHasShoppingListRepository.findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdInAndUnitType_IdIn(
-            shoppingListId,
-            user,
-            productsId,
-            unitTypesId);
-        
-        result.forEach(value -> {
-            var productDTO = value.getProduct();
-            
-            productsReq.stream()
-                       .filter(productReq -> productReq.getProductId()
-                                                       .equals(productDTO.getId()))
-                       .findFirst()
-                       .ifPresent(productReq -> value.setSelected(productReq.isSelected()));
-            
-            this.productHasShoppingListRepository.save(value);
-        });
     }
     
     private ShoppingList getShoppingList(final Long id, final User user) {
