@@ -21,10 +21,8 @@ public interface ProductHasShoppingListRepository extends JpaRepository<ProductH
                                                                                              User user,
                                                                                              List<Long> productsId);
     
-    List<ProductHasShoppingList> findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdInAndUnitType_IdIn(Long shoppingListId,
-                                                                                                             User user,
-                                                                                                             List<Long> productsId,
-                                                                                                             List<Long> unitTypesId);
+    List<ProductHasShoppingList> findAllByShoppingList_UserAndProductHasShoppingListPKIn(User user,
+                                                                                         List<ProductHasShoppingListPK> productHasShoppingListPK);
     
     @Modifying
     @Query(

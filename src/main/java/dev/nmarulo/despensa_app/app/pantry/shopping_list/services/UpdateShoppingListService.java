@@ -33,7 +33,7 @@ public class UpdateShoppingListService extends BasicServiceImp {
     public UpdateShoppingListRes update(Long id, UpdateShoppingListReq request, User user) {
         final var shoppingList = getShoppingList(id, user);
         
-        updateProducts(id, request.getProducts(), user);
+        updateProducts(shoppingList, request.getProducts(), user);
         
         shoppingList.setName(request.getName());
         
@@ -42,7 +42,7 @@ public class UpdateShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toUpdateShoppingListRes(update);
     }
     
-    private void updateProducts(Long shoppingListId,
+    private void updateProducts(final ShoppingList shoppingList,
                                 List<UpdateShoppingListReq.ProductShoppingList> productsReq,
                                 User user) {
         final var productsReqOptional = Optional.ofNullable(productsReq);
@@ -51,17 +51,10 @@ public class UpdateShoppingListService extends BasicServiceImp {
             return;
         }
         
-        var productsId = productsReq.stream()
-                                    .map(UpdateShoppingListReq.ProductShoppingList::getProductId)
-                                    .toList();
-        var unitTypesId = productsReq.stream()
-                                     .map(UpdateShoppingListReq.ProductShoppingList::getUnitTypeId)
-                                     .toList();
-        var result = this.productHasShoppingListRepository.findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdInAndUnitType_IdIn(
-            shoppingListId,
+        final var list = ShoppingListMapper.toProductHasShoppingListPK(productsReq, shoppingList.getId());
+        final var result = this.productHasShoppingListRepository.findAllByShoppingList_UserAndProductHasShoppingListPKIn(
             user,
-            productsId,
-            unitTypesId);
+            list);
         
         checkResultAndThrowException(result, productsReq);
         

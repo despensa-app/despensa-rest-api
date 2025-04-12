@@ -2,10 +2,13 @@ package dev.nmarulo.despensa_app.app.pantry.shopping_list;
 
 import dev.nmarulo.despensa_app.app.pantry.product_images.ProductImage;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingList;
+import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingListPK;
 import dev.nmarulo.despensa_app.app.pantry.products.Product;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.dtos.*;
 import dev.nmarulo.despensa_app.commons.mapper.CommonMapper;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public final class ShoppingListMapper extends CommonMapper {
     
@@ -99,6 +102,15 @@ public final class ShoppingListMapper extends CommonMapper {
                       .stream()
                       .toList()
                       .getFirst();
+    }
+    
+    public static List<ProductHasShoppingListPK> toProductHasShoppingListPK(final List<UpdateShoppingListReq.ProductShoppingList> list,
+                                                                            final Long shoppingListId) {
+        return list.stream()
+                   .map(value -> new ProductHasShoppingListPK(value.getProductId(),
+                                                              shoppingListId,
+                                                              value.getUnitTypeId()))
+                   .toList();
     }
     
 }
