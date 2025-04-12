@@ -1,12 +1,15 @@
 package dev.nmarulo.despensa_app.app.pantry.shopping_list.services;
 
+import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingList;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingListRepository;
+import dev.nmarulo.despensa_app.app.pantry.products.ProductRepository;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.ShoppingList;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.ShoppingListMapper;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.ShoppingListRepository;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.dtos.UpdateShoppingListReq;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.dtos.UpdateShoppingListRes;
 import dev.nmarulo.despensa_app.app.users.User;
+import dev.nmarulo.despensa_app.commons.exception.BadRequestException;
 import dev.nmarulo.despensa_app.commons.exception.NotFoundException;
 import dev.nmarulo.despensa_app.commons.service.BasicServiceImp;
 import lombok.Getter;
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +27,8 @@ public class UpdateShoppingListService extends BasicServiceImp {
     private final ShoppingListRepository shoppingListRepository;
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
+    
+    private final ProductRepository productRepository;
     
     public UpdateShoppingListRes update(Long id, UpdateShoppingListReq request, User user) {
         final var shoppingList = getShoppingList(id, user);
@@ -39,7 +45,9 @@ public class UpdateShoppingListService extends BasicServiceImp {
     private void updateProducts(Long shoppingListId,
                                 List<UpdateShoppingListReq.ProductShoppingList> productsReq,
                                 User user) {
-        if (productsReq == null || productsReq.isEmpty()) {
+        final var productsReqOptional = Optional.ofNullable(productsReq);
+        
+        if (productsReqOptional.isEmpty()) {
             return;
         }
         
@@ -54,6 +62,8 @@ public class UpdateShoppingListService extends BasicServiceImp {
             user,
             productsId,
             unitTypesId);
+        
+        checkResultAndThrowException(result, productsReq);
         
         result.forEach(value -> {
             var productDTO = value.getProduct();
@@ -76,6 +86,28 @@ public class UpdateShoppingListService extends BasicServiceImp {
         }
         
         return shoppingListOptional.get();
+    }
+    
+    private void checkResultAndThrowException(final List<ProductHasShoppingList> result,
+                                              final List<UpdateShoppingListReq.ProductShoppingList> productsReq) {
+        if (result.size() == productsReq.size()) {
+            return;
+        }
+        
+        if (productsReq.size() > 1) {
+            throw new BadRequestException(getLocalMessage().getMessage("error.some-products-not-exist"));
+        }
+        
+        final var first = productsReq.getFirst();
+        final var productOptional = this.productRepository.findById(first.getProductId());
+        
+        if (productOptional.isEmpty()) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        final var product = productOptional.get();
+        
+        throw new BadRequestException(getLocalMessage().getMessage("error.product-not-updated", product.getName()));
     }
     
 }
