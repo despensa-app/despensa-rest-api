@@ -52,7 +52,7 @@ public class AuthenticationService {
         final var optionalUser = this.userRepository.findByUsername(request.getUsername());
         
         if (optionalUser.isPresent()) {
-            throw new BadRequestException(this.localMessage.getMessage("error.user-already-exists"));
+            throw new BadRequestException(this.localMessage.getMessage("error.registering-user"));
         }
         
         final var encodePassword = this.passwordEncoder.encode(request.getPassword());
