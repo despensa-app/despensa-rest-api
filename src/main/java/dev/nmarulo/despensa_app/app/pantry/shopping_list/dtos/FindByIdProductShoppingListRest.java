@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class FindByIdProductShoppingListRest {
@@ -20,6 +21,8 @@ public class FindByIdProductShoppingListRest {
     private String imgUrl;
     
     private UnitTypeRes unitType;
+    
+    private List<String> images;
     
     @Data
     @AllArgsConstructor

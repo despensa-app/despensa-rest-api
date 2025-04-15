@@ -32,6 +32,7 @@ public final class ShoppingListMapper extends CommonMapper {
         final var unitType = productHasShoppingList.getUnitType();
         final var unitTypeRes = new FindByIdProductShoppingListRest.UnitTypeRes(unitType.getId(), unitType.getName());
         final var productImage = getFirtProductImage(product);
+        final var images = getImages(product);
         
         response.setName(product.getName());
         response.setPrice(product.getPrice());
@@ -39,6 +40,7 @@ public final class ShoppingListMapper extends CommonMapper {
         response.setTotalPrice(productHasShoppingList.getTotalPrice());
         response.setImgUrl(productImage.getUrl());
         response.setUnitType(unitTypeRes);
+        response.setImages(images);
         
         return response;
     }
@@ -79,6 +81,7 @@ public final class ShoppingListMapper extends CommonMapper {
         final var unitType = productHasShoppingList.getUnitType();
         final var product = productHasShoppingList.getProduct();
         final var productImage = getFirtProductImage(product);
+        final var images = getImages(product);
         
         unitTypeRes.setId(unitType.getId());
         unitTypeRes.setName(unitType.getName());
@@ -87,6 +90,7 @@ public final class ShoppingListMapper extends CommonMapper {
         productRes.setName(product.getName());
         productRes.setPrice(product.getPrice());
         productRes.setImgUrl(productImage.getUrl());
+        productRes.setImages(images);
         
         response.setUnitsPerProduct(productHasShoppingList.getUnitsPerProduct());
         response.setSelected(productHasShoppingList.isSelected());
@@ -95,6 +99,13 @@ public final class ShoppingListMapper extends CommonMapper {
         response.setTotalPrice(productHasShoppingList.getTotalPrice());
         
         return response;
+    }
+    
+    private static List<String> getImages(final Product product) {
+        return product.getProductImages()
+                      .stream()
+                      .map(ProductImage::getUrl)
+                      .toList();
     }
     
     private static ProductImage getFirtProductImage(final Product product) {

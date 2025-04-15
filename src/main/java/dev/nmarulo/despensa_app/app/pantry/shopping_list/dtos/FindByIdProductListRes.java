@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -34,6 +35,8 @@ public class FindByIdProductListRes extends PagingAndSortingRes<FindByIdProductL
             private BigDecimal price;
             
             private String imgUrl;
+            
+            private List<String> images;
             
         }
         
