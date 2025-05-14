@@ -1,0 +1,22 @@
+{
+  "common": {
+    "actions": "Actions",
+    "date": "Date",
+    "date-created": "Date created",
+    "date-updated": "Date updated",
+    "delete": "Delete",
+    "edit": "Edit",
+    "favorite": "Favorite",
+    "filter": "filter",
+    "home": "Home",
+    "log-in": "Log-in",
+    "show-more": "Show more",
+    "sort": "Sort",
+    "title": "Title",
+    "view": "View"
+  },
+  "home": {
+    "new-list": "New list",
+    "shopping-lists": "Shopping lists"
+  }
+}

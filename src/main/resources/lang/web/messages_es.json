@@ -1,0 +1,22 @@
+{
+  "common": {
+    "actions": "Acciones",
+    "date": "Fecha",
+    "date-created": "Fecha de creación",
+    "date-updated": "Fecha de actualización",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "favorite": "Favoritos",
+    "filter": "Filtrar",
+    "home": "Inicio",
+    "log-in": "Iniciar sessión",
+    "show-more": "Mostrar más",
+    "sort": "Ordenar",
+    "title": "Título",
+    "view": "Ver"
+  },
+  "home": {
+    "new-list": "Nueva lista",
+    "shopping-lists": "Listas de la compra"
+  }
+}
