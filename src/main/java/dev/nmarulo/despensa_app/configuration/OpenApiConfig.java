@@ -8,6 +8,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springdoc.core.models.GroupedOpenApi;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @Configuration
 @RequiredArgsConstructor
@@ -39,11 +41,16 @@ public class OpenApiConfig {
                                    .license(license);
         final var securityScheme = new SecurityScheme().type(SecurityScheme.Type.HTTP)
                                                        .scheme("bearer")
-                                                       .bearerFormat("JWT");
+                                                       .bearerFormat("JWT")
+                                                       .description(
+                                                           "Utilice el token JWT obtenido en el endpoint de login para autenticarse");
         final var components = new Components().addSecuritySchemes(bearerKeySecurityScheme, securityScheme);
+        final var localServer = new Server().url("http://localhost:8080")
+                                            .description("Servidor de desarrollo local");
         
         return new OpenAPI().info(info)
-                            .components(components);
+                            .components(components)
+                            .servers(Collections.singletonList(localServer));
     }
     
     @Bean
