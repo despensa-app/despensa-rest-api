@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/resources/languages")
+@RequestMapping("/resources")
 @RequiredArgsConstructor
 @Getter
 @Tag(name = "Resources - Languages",
      description = "Endpoint to obtain the texts according to the selected language, for the web application")
-public class LanguagesWebController {
+public class ResourcesController {
     
-    private final LanguagesWebService languagesWebService;
+    private final ResourcesService resourcesService;
     
-    @GetMapping
+    @GetMapping("/languages")
     public ResponseEntity<Object> getLanguages() {
-        return ResponseEntity.ok(this.languagesWebService.getByLocale(LocaleContextHolder.getLocale()));
+        return ResponseEntity.ok(this.resourcesService.getLanguagesByLocale(LocaleContextHolder.getLocale()));
     }
     
 }

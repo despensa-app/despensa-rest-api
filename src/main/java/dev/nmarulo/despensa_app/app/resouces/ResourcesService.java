@@ -10,11 +10,11 @@ import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
-public class LanguagesWebService {
+public class ResourcesService {
     
     private final ObjectMapper objectMapper;
     
-    public Object getByLocale(Locale locale) {
+    public Object getLanguagesByLocale(Locale locale) {
         try {
             final var localeFileName = String.format("lang/web/messages_%s.json", locale.getLanguage());
             var localeResource = new ClassPathResource(localeFileName);
