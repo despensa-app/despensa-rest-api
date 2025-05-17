@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 import java.net.URI;
 
 @Getter(value = AccessLevel.PROTECTED)
-public abstract class CrudController<I, O, ID> {
+public abstract class CrudController<I, O, ID> implements CrudApi<I, O, ID> {
     
     @Autowired
     private AppProperties appProperties;
