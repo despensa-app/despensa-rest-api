@@ -1,5 +1,6 @@
 package dev.nmarulo.despensa_app.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.KeyLengthException;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
@@ -11,11 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,14 +37,11 @@ public class WebSecurityConfig {
     
     private final AppProperties appProperties;
     
-    private final UserRepository userRepository;
-    
-    private final LocalMessage localeMessage;
-    
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(final HttpSecurity http,
+                                           final UserRepository userRepository,
+                                           final LocalMessage localeMessage,
+                                           final ObjectMapper objectMapper) throws Exception {
         http.securityMatcher(appProperties.getPathPrefix() + "/**")
             .authorizeHttpRequests(authorize -> {
                 if (ArrayUtils.isNotEmpty(appProperties.getPermitAllPaths())) {
@@ -59,7 +55,16 @@ public class WebSecurityConfig {
             .httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .oauth2ResourceServer(configOAuth2())
+            .oauth2ResourceServer(oauth -> {
+                final var entryPoint = new JwtAuthenticationEntryPoint(objectMapper);
+                
+                oauth.authenticationEntryPoint(entryPoint);
+                oauth.jwt(jwtConfigurer -> {
+                    final var converter = new CustomJwtAuthenticationConverter(userRepository, localeMessage);
+                    
+                    jwtConfigurer.jwtAuthenticationConverter(converter);
+                });
+            })
             .cors(value -> value.configurationSource(corsConfigurationSource()));
         
         return http.build();
@@ -101,13 +106,6 @@ public class WebSecurityConfig {
         build.setJwtValidator(withClockSkew);
         
         return build;
-    }
-    
-    private Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>> configOAuth2() {
-        final var converter = new CustomJwtAuthenticationConverter(this.userRepository, this.localeMessage);
-        
-        return oauth -> oauth.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                             .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(converter));
     }
     
 }

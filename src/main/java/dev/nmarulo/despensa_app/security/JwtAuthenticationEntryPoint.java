@@ -12,11 +12,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
 @RequiredArgsConstructor
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     
@@ -28,12 +26,11 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        
         this.delegate.commence(request, response, authException);
         
         if (authException instanceof InvalidBearerTokenException bearerTokenException) {
             final var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED,
-                                                                 bearerTokenException.getMessage());
+                                                                       bearerTokenException.getMessage());
             
             problemDetail.setTitle("Invalid Token");
             
