@@ -32,12 +32,14 @@ public class ShoppingListService extends BasicServiceImp {
     
     private final UserRepository userRepository;
     
+    @Transactional(readOnly = true)
     public FindAllShoppingListRes findAll(final Pageable pageable, User user) {
         var pageFindAll = this.shoppingListRepository.findAllByUser(user, pageable);
         
         return ShoppingListMapper.toFindAllShoppingListRes(pageFindAll);
     }
     
+    @Transactional(readOnly = true)
     public FindByIdShoppingListRes findById(final Long id,
                                             final User user,
                                             final FindByIdProductListReq request,
@@ -69,6 +71,7 @@ public class ShoppingListService extends BasicServiceImp {
         return response;
     }
     
+    @Transactional(readOnly = true)
     public FindByIdProductShoppingListRest findByIdProduct(Long id, Long productId, User user) {
         final var productShoppingListOptional = this.productHasShoppingListRepository.findByShoppingList_IdAndShoppingList_UserAndProduct_Id(
             id,
@@ -82,6 +85,7 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toFindByIdProductShoppingListRest(productShoppingListOptional.get());
     }
     
+    @Transactional
     public void deleteProducts(Long id, DeleteProductsShoppingListReq request, User user) {
         final var shoppingList = getShoppingList(id, user);
         final var productsShoppingList = this.productHasShoppingListRepository.findAllByShoppingList_IdAndShoppingList_UserAndProduct_IdIn(
@@ -102,6 +106,7 @@ public class ShoppingListService extends BasicServiceImp {
         this.productHasShoppingListRepository.deleteAll(productsShoppingList);
     }
     
+    @Transactional
     public SaveShoppingListRes save(SaveShoppingListReq request, User user) {
         var shoppingList = new ShoppingList();
         
@@ -116,6 +121,7 @@ public class ShoppingListService extends BasicServiceImp {
         return ShoppingListMapper.toSaveShoppingListRes(save);
     }
     
+    @Transactional
     public void delete(Long id, User user) {
         final var shoppingList = getShoppingList(id, user);
         
@@ -123,6 +129,7 @@ public class ShoppingListService extends BasicServiceImp {
         this.shoppingListRepository.delete(shoppingList);
     }
     
+    @Transactional(readOnly = true)
     public FindByIdProductListRes findByIdProductList(final Long id,
                                                       final User user,
                                                       final FindByIdProductListReq request,
@@ -130,6 +137,21 @@ public class ShoppingListService extends BasicServiceImp {
         final var shoppingList = getShoppingList(id, user);
         
         return findAllProductList(shoppingList, user, request, pageable);
+    }
+    
+    @Transactional
+    public void productsSelected(Long id, ProductsSelectedReq request, User user) {
+        if (request.getAction() == null) {
+            return;
+        }
+        
+        if (!this.shoppingListRepository.existsByIdAndUser(id, user)) {
+            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
+        }
+        
+        final var select = ProductsSelectedReq.ActionType.SELECT == request.getAction();
+        
+        this.productHasShoppingListRepository.updateSelectedByShoppingList_IdShoppingList_User(select, id, user);
     }
     
     private FindByIdProductListRes findAllProductList(final ShoppingList shoppingList,
@@ -158,21 +180,6 @@ public class ShoppingListService extends BasicServiceImp {
         return List.of(new SelectOption<>(SelectedProducts.NO, "Pendientes", SelectedProducts.NO == selected),
                        new SelectOption<>(SelectedProducts.YES, "Finalizados", SelectedProducts.YES == selected),
                        new SelectOption<>(SelectedProducts.ALL, "Todos", SelectedProducts.ALL == selected));
-    }
-    
-    @Transactional
-    public void productsSelected(Long id, ProductsSelectedReq request, User user) {
-        if (request.getAction() == null) {
-            return;
-        }
-        
-        if (!this.shoppingListRepository.existsByIdAndUser(id, user)) {
-            throw new NotFoundException(getLocalMessage().getMessage("error.record-not-exist"));
-        }
-        
-        final var select = ProductsSelectedReq.ActionType.SELECT == request.getAction();
-        
-        this.productHasShoppingListRepository.updateSelectedByShoppingList_IdShoppingList_User(select, id, user);
     }
     
 }

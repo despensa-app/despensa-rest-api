@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,7 @@ public class UnitTypeService extends BasicServiceImp {
     
     private final UnitTypeRepository unitTypeRepository;
     
+    @Transactional(readOnly = true)
     public FindAllUnitTypeRes findAll(Pageable pageable) {
         var pageFindAll = this.unitTypeRepository.findAll(pageable);
         

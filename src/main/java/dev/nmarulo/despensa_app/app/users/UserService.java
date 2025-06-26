@@ -6,6 +6,7 @@ import dev.nmarulo.despensa_app.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class UserService extends BasicServiceImp {
     
     private final UserRepository userRepository;
     
+    @Transactional(readOnly = true)
     public FindByIdUserRes findById(Long id, User userToken) {
         var userId = id;
         

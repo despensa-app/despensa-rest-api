@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.function.Supplier;
@@ -37,6 +38,7 @@ public class AuthenticationService {
     
     private final LocalMessage localMessage;
     
+    @Transactional(readOnly = true)
     public AuthenticationRes login(final AuthenticationReq request) {
         final Supplier<UnautorizedException> orElseThrow = () -> new UnautorizedException(this.localMessage.getMessage(
             "error.user-password-incorrect"));
@@ -49,6 +51,7 @@ public class AuthenticationService {
         return AuthenticationMapper.toAuthenticationRes(user, tokenValue);
     }
     
+    @Transactional
     public RegisterAuthenticationRes register(final RegisterAuthenticationReq request) {
         final var optionalUser = this.userRepository.findByUsername(request.getUsername());
         

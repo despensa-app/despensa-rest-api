@@ -15,6 +15,7 @@ import dev.nmarulo.despensa_app.commons.service.BasicServiceImp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class UpdateShoppingListService extends BasicServiceImp {
     
     private final ProductRepository productRepository;
     
+    @Transactional
     public UpdateShoppingListRes update(Long id, UpdateShoppingListReq request, User user) {
         final var shoppingList = getShoppingList(id, user);
         

@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class ProductService extends BasicServiceImp {
     
     private final ProductHasShoppingListRepository productHasShoppingListRepository;
     
+    @Transactional(readOnly = true)
     public FindAllShoppingListProductRes findAllProductsByShoppingListId(Integer shoppingListId,
                                                                          boolean isExclude,
                                                                          Pageable pageable,
@@ -49,6 +51,7 @@ public class ProductService extends BasicServiceImp {
         return ProductMapper.toFindAllShoppingListProductRes(pageFindAll);
     }
     
+    @Transactional
     public SaveShoppingListProductRes saveProductInShoppingList(SaveShoppingListProductReq request, User user) {
         var productOptional = this.productRepository.findById(request.getProductId());
         var shoppingListOptional = this.shoppingListRepository.findByIdAndUser(request.getShoppingListId(), user);
@@ -80,6 +83,7 @@ public class ProductService extends BasicServiceImp {
                                                           productHasShoppingListSave);
     }
     
+    @Transactional(readOnly = true)
     public FindAllProductRes findAll(final Pageable pageable) {
         var pageFindAll = this.productRepository.findAll(pageable);
         
