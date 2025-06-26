@@ -13,9 +13,11 @@ public final class FakeTestUtil {
     static {
         faker = new Faker();
     }
-
-    public static BigDecimal randomBigDecimal(){
-        double randomValue = faker.number().randomDouble(2, 1, 1000);
+    
+    public static BigDecimal randomBigDecimal() {
+        double randomValue = faker.number()
+                                  .randomDouble(2, 1, 1000);
+        
         return BigDecimal.valueOf(randomValue);
     }
     
@@ -68,4 +70,5 @@ public final class FakeTestUtil {
         return LocalDateTime.ofInstant(faker.timeAndDate()
                                             .past(), ZoneId.systemDefault());
     }
+    
 }
