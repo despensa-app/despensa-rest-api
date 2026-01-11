@@ -1,6 +1,7 @@
 package dev.nmarulo.despensa_app.commons.algolia;
 
 import com.algolia.api.SearchClient;
+import com.algolia.exceptions.AlgoliaRuntimeException;
 import com.algolia.model.search.Hit;
 import com.algolia.model.search.SearchParamsObject;
 import dev.nmarulo.despensa_app.configuration.AlgoliaAppProperties;
@@ -15,7 +16,7 @@ public class AlgoliaSearchClient {
     
     private final AlgoliaAppProperties algoliaAppProperties;
     
-    public ProductSearchAlgoliaRes searchByProductIndex(ProductSearchAlgoliaReq request) throws IOException {
+    public ProductSearchAlgoliaRes searchByProductIndex(ProductSearchAlgoliaReq request) throws IOException, AlgoliaRuntimeException {
         final var appID = this.algoliaAppProperties.getId();
         final var apiKey = this.algoliaAppProperties.getApiKey();
         final var indexName = this.algoliaAppProperties.getProductIndexName();
