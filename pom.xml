@@ -24,6 +24,7 @@
         <springdoc-openapi-starter-webmvc-ui.version>2.8.8</springdoc-openapi-starter-webmvc-ui.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
         <datafaker.version>2.4.3</datafaker.version>
+        <algoliasearch.version>4.32.1</algoliasearch.version>
     </properties>
 
     <dependencies>
@@ -81,7 +82,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.algolia</groupId>
+            <artifactId>algoliasearch</artifactId>
+            <version>${algoliasearch.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
