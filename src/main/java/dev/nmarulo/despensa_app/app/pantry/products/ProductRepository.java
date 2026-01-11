@@ -16,4 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT p FROM Product p WHERE p.id IN (SELECT phs.product.id FROM ProductHasShoppingList phs WHERE phs.shoppingList.id = :id AND phs.shoppingList.user = :user)")
     Page<Product> findAllByIdInShoppingListIdAndUser(Integer id, User user, Pageable pageable);
     
+    @Query(value = "SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    Page<Product> findAllByNameLikeIgnoreCase(String name, Pageable pageable);
+    
 }

@@ -101,7 +101,7 @@ public class ProductService extends BasicServiceImp {
             return findAllProductsByAlgolia(search, pageable);
         }
         
-        var pageFindAll = this.productRepository.findAll(pageable);
+        var pageFindAll = this.productRepository.findAllByNameLikeIgnoreCase(search, pageable);
         
         return ProductMapper.toFindAllProductRes(pageFindAll);
     }
