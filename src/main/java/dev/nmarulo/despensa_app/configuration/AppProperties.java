@@ -53,4 +53,12 @@ public class AppProperties {
     @Value("${app.locale.supported:}")
     private List<Locale> supportedLocales;
     
+    @Value("${app.search-engine}")
+    private SearchEngine searchEngine;
+    
+    public enum SearchEngine {
+        BASIC,
+        ALGOLIA
+    }
+    
 }
