@@ -24,6 +24,17 @@ public class FindAllProductRes extends PagingAndSortingRes<FindAllProductRes.Pro
         
         private String description;
         
+        private Highlight highlight;
+        
+        @Data
+        public static class Highlight {
+            
+            private String name;
+            
+            private String description;
+            
+        }
+        
     }
     
 }

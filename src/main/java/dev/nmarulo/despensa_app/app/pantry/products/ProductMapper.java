@@ -7,8 +7,12 @@ import dev.nmarulo.despensa_app.app.pantry.products.dtos.FindAllShoppingListProd
 import dev.nmarulo.despensa_app.app.pantry.products.dtos.SaveShoppingListProductRes;
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.ShoppingList;
 import dev.nmarulo.despensa_app.app.pantry.unity_types.UnitType;
+import dev.nmarulo.despensa_app.commons.algolia.ProductSearchAlgoliaRes;
 import dev.nmarulo.despensa_app.commons.mapper.CommonMapper;
+import dev.nmarulo.despensa_app.commons.util.IntegerUtil;
 import org.springframework.data.domain.Page;
+
+import java.math.BigDecimal;
 
 public final class ProductMapper extends CommonMapper {
     
@@ -75,6 +79,43 @@ public final class ProductMapper extends CommonMapper {
                       .stream()
                       .toList()
                       .getFirst();
+    }
+    
+    public static FindAllProductRes toFindAllProductRes(ProductSearchAlgoliaRes algoliaRes) {
+        final var response = new FindAllProductRes();
+        final var hitAlgoliaRes = algoliaRes.response();
+        
+        response.setCurrentPage(IntegerUtil.nullToZero(hitAlgoliaRes.getPage()));
+        response.setPageSize(IntegerUtil.nullToZero(hitAlgoliaRes.getHitsPerPage()));
+        response.setTotalPages(IntegerUtil.nullToZero(hitAlgoliaRes.getNbPages()));
+        response.setTotal(IntegerUtil.nullToZero(hitAlgoliaRes.getNbHits()));
+        response.setContent(algoliaRes.products()
+                                      .stream()
+                                      .map(ProductMapper::toFindAllProductResProduct)
+                                      .toList());
+        
+        return response;
+    }
+    
+    private static FindAllProductRes.Product toFindAllProductResProduct(ProductSearchAlgoliaRes.Product productSearchAlgoliaRes) {
+        final var product = new FindAllProductRes.Product();
+        
+        product.setId(productSearchAlgoliaRes.id());
+        product.setName(productSearchAlgoliaRes.name());
+        product.setPrice(productSearchAlgoliaRes.price());
+        product.setImgUrl(productSearchAlgoliaRes.imgUrl());
+        product.setCalories(BigDecimal.ZERO);
+        product.setDescription(productSearchAlgoliaRes.description());
+        
+        final var highlightAlgolia = productSearchAlgoliaRes.highlight();
+        final var highlight = new FindAllProductRes.Product.Highlight();
+        
+        highlight.setName(highlightAlgolia.name());
+        highlight.setDescription(highlightAlgolia.description());
+        
+        product.setHighlight(highlight);
+        
+        return product;
     }
     
 }

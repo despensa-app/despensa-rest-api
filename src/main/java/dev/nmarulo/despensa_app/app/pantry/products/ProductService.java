@@ -1,5 +1,6 @@
 package dev.nmarulo.despensa_app.app.pantry.products;
 
+import com.algolia.exceptions.AlgoliaRuntimeException;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingList;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingListPK;
 import dev.nmarulo.despensa_app.app.pantry.product_shopping_list.ProductHasShoppingListRepository;
@@ -10,10 +11,14 @@ import dev.nmarulo.despensa_app.app.pantry.products.dtos.SaveShoppingListProduct
 import dev.nmarulo.despensa_app.app.pantry.shopping_list.ShoppingListRepository;
 import dev.nmarulo.despensa_app.app.pantry.unity_types.UnitTypeRepository;
 import dev.nmarulo.despensa_app.app.users.User;
+import dev.nmarulo.despensa_app.commons.algolia.AlgoliaSearchClient;
+import dev.nmarulo.despensa_app.commons.algolia.ProductSearchAlgoliaReq;
 import dev.nmarulo.despensa_app.commons.exception.BadRequestException;
+import dev.nmarulo.despensa_app.commons.exception.InternalServerErrorException;
 import dev.nmarulo.despensa_app.commons.exception.NotFoundException;
 import dev.nmarulo.despensa_app.commons.service.BasicServiceImp;
 import dev.nmarulo.despensa_app.commons.util.BigDecimalUtil;
+import dev.nmarulo.despensa_app.configuration.AppProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,10 +26,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+
 @Service
 @RequiredArgsConstructor
 @Getter
 public class ProductService extends BasicServiceImp {
+    
+    private final AlgoliaSearchClient algoliaSearchClient;
     
     private final ProductRepository productRepository;
     
@@ -84,7 +93,14 @@ public class ProductService extends BasicServiceImp {
     }
     
     @Transactional(readOnly = true)
-    public FindAllProductRes findAll(final Pageable pageable) {
+    public FindAllProductRes findAll(String search, final Pageable pageable) {
+        final var searchEngine = getDataRequestScope().getAppProperties()
+                                                      .getSearchEngine();
+        
+        if (AppProperties.SearchEngine.ALGOLIA == searchEngine) {
+            return findAllProductsByAlgolia(search, pageable);
+        }
+        
         var pageFindAll = this.productRepository.findAll(pageable);
         
         return ProductMapper.toFindAllProductRes(pageFindAll);
@@ -117,6 +133,17 @@ public class ProductService extends BasicServiceImp {
         
         if (isExistsProductShoppingList) {
             throw new BadRequestException(getLocalMessage().getMessage("error.record-already-exist"));
+        }
+    }
+    
+    private FindAllProductRes findAllProductsByAlgolia(String search, Pageable pageable) {
+        try {
+            final var productAlgoliaReq = new ProductSearchAlgoliaReq(search, pageable);
+            final var productSearchAlgoliaRes = this.algoliaSearchClient.searchByProductIndex(productAlgoliaReq);
+            
+            return ProductMapper.toFindAllProductRes(productSearchAlgoliaRes);
+        } catch (AlgoliaRuntimeException | IOException e) {
+            throw new InternalServerErrorException(getLocalMessage().getMessage("error.search-products-algolia"));
         }
     }
     
