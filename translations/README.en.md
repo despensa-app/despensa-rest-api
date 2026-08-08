@@ -73,8 +73,8 @@ Open a terminal in the root of the project and run the following commands:
 
 ### Deployment with docker
 
-With this option, we won't need to install MySQL. The application will start with the **dockerdev** profile.
-MySQL will use port `3307`.
+With this option, we won't need to install MySQL. The application will start with the **dockerdev** profile. MySQL will
+use port `3307`.
 
 **Start Docker Hub image**
 
@@ -102,8 +102,8 @@ docker compose up --build -d
 
 The following instructions are for the Ultimate version, although most of them work with the Community Edition as well.
 
-You can find a [demo of local deployment with the Community Edition][github-discussion-url] available in the
-discussions section of this repository.
+You can find a [demo of local deployment with the Community Edition][github-discussion-url] available in the discussions
+section of this repository.
 
 #### Clone project
 
@@ -169,8 +169,8 @@ Before you start coding, please read the [contribution guidelines](../CONTRIBUTI
 
 ## Acknowledgements
 
-Thanks to [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) for providing a license for IntelliJ IDEA
-to develop this project.
+Thanks to [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) for providing a license for IntelliJ IDEA to develop
+this project.
 
 | JetBrains                                                                                             | IntelliJ IDEA                                                                                                      |
 |-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|

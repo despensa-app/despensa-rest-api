@@ -75,8 +75,8 @@ Abrir una consola en la raíz del proyecto y ejecutar los siguientes comandos:
 
 ### Despliegue con docker
 
-Con esta opción no necesitaremos instalar mysql. La aplicación se iniciará con el perfil **dockerdev**.
-MySQL utilizará el puerto `3307`.
+Con esta opción no necesitaremos instalar mysql. La aplicación se iniciará con el perfil **dockerdev**. MySQL utilizará
+el puerto `3307`.
 
 **Iniciar imagen de docker hub**
 
