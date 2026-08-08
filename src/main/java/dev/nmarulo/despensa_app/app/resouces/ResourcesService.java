@@ -1,9 +1,9 @@
 package dev.nmarulo.despensa_app.app.resouces;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ResourcesService {
     
-    private final ObjectMapper objectMapper;
+    private final JsonMapper jsonMapper;
     
     @SuppressWarnings("unchecked")
     public Map<String, String> getLanguagesByLocale(Locale locale) {
@@ -26,7 +26,7 @@ public class ResourcesService {
                 localeResource = new ClassPathResource("lang/web/messages_es.json");
             }
             
-            return objectMapper.readValue(localeResource.getInputStream(), Map.class);
+            return jsonMapper.readValue(localeResource.getInputStream(), Map.class);
         } catch (IOException e) {
             return Collections.emptyMap();
         }

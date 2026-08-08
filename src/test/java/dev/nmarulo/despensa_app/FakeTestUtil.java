@@ -47,12 +47,12 @@ public final class FakeTestUtil {
     }
     
     public static String randomPassword() {
-        return faker.internet()
+        return faker.credentials()
                     .password(60, 60);
     }
     
     public static String randomUsername() {
-        return faker.internet()
+        return faker.credentials()
                     .username();
     }
     

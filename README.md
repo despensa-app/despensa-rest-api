@@ -56,9 +56,9 @@ Este proyecto proporciona los recursos a consumir por el [proyecto web][github-p
 
 #### Requisitos
 
-* [Java 21][java-temurin-url]
+* [Java 25][java-temurin-url]
 * [MySQL 8][mysql-url]
-* [Maven 3.9.7][maven-url] (Opcional)
+* [Maven 3.9.16][maven-url] (Opcional)
 
 #### Configurar base de datos
 
@@ -75,8 +75,8 @@ Abrir una consola en la raíz del proyecto y ejecutar los siguientes comandos:
 
 ### Despliegue con docker
 
-Con esta opción no necesitaremos instalar mysql. La aplicación se iniciará con el perfil **dockerdev**.
-MySQL utilizará el puerto `3307`.
+Con esta opción no necesitaremos instalar mysql. La aplicación se iniciará con el perfil **dockerdev**. MySQL utilizará
+el puerto `3307`.
 
 **Iniciar imagen de docker hub**
 
@@ -197,11 +197,11 @@ desarrollar este proyecto.
 
 [github-project-web-url]: https://github.com/despensa-app/despensa-web
 
-[java-temurin-url]: https://adoptium.net/es/temurin/releases/?version=21
+[java-temurin-url]: https://adoptium.net/es/temurin/releases/?version=25
 
 [mysql-url]: https://dev.mysql.com/downloads/mysql/
 
-[maven-url]: https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/
+[maven-url]: https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/
 
 [postman-url]: https://app.getpostman.com/run-collection/3462094-24c69e86-2ae0-42da-a1f0-55d411d60ad6?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D3462094-24c69e86-2ae0-42da-a1f0-55d411d60ad6%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bdespensa-app%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaSIsInNlc3Npb25JbmRleCI6MH1d
 
