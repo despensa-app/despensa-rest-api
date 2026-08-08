@@ -1,6 +1,5 @@
 package dev.nmarulo.despensa_app.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.KeyLengthException;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
@@ -25,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -41,7 +41,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(final HttpSecurity http,
                                            final UserRepository userRepository,
                                            final LocalMessage localeMessage,
-                                           final ObjectMapper objectMapper) throws Exception {
+                                           final JsonMapper jsonMapper) {
         http.securityMatcher(appProperties.getPathPrefix() + "/**")
             .authorizeHttpRequests(authorize -> {
                 if (ArrayUtils.isNotEmpty(appProperties.getPermitAllPaths())) {
@@ -56,7 +56,7 @@ public class WebSecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .oauth2ResourceServer(oauth -> {
-                final var entryPoint = new JwtAuthenticationEntryPoint(objectMapper);
+                final var entryPoint = new JwtAuthenticationEntryPoint(jsonMapper);
                 
                 oauth.authenticationEntryPoint(entryPoint);
                 oauth.jwt(jwtConfigurer -> {

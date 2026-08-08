@@ -1,8 +1,8 @@
 package dev.nmarulo.despensa_app.commons.handler;
 
 import dev.nmarulo.despensa_app.commons.dtos.ErrorRes;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.*;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
