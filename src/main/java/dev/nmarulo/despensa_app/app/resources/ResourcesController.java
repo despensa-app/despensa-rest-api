@@ -1,4 +1,4 @@
-package dev.nmarulo.despensa_app.app.resouces;
+package dev.nmarulo.despensa_app.app.resources;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;

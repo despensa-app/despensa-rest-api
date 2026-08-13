@@ -1,4 +1,4 @@
-package dev.nmarulo.despensa_app.app.resouces;
+package dev.nmarulo.despensa_app.app.resources;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
