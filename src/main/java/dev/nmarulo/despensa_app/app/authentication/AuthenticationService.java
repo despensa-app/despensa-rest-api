@@ -7,7 +7,7 @@ import dev.nmarulo.despensa_app.app.authentication.dtos.RegisterAuthenticationRe
 import dev.nmarulo.despensa_app.app.users.UserRepository;
 import dev.nmarulo.despensa_app.commons.component.LocalMessage;
 import dev.nmarulo.despensa_app.commons.exception.BadRequestException;
-import dev.nmarulo.despensa_app.commons.exception.UnautorizedException;
+import dev.nmarulo.despensa_app.commons.exception.UnauthorizedException;
 import dev.nmarulo.despensa_app.configuration.AppProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class AuthenticationService {
     
     @Transactional(readOnly = true)
     public AuthenticationRes login(final AuthenticationReq request) {
-        final Supplier<UnautorizedException> orElseThrow = () -> new UnautorizedException(this.localMessage.getMessage(
+        final Supplier<UnauthorizedException> orElseThrow = () -> new UnauthorizedException(this.localMessage.getMessage(
             "error.user-password-incorrect"));
         final var user = this.userRepository.findByUsername(request.getUsername())
                                             .filter(value -> this.passwordEncoder.matches(request.getPassword(),
