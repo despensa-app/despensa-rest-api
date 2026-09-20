@@ -74,7 +74,7 @@ public class WebSecurityConfig {
         final var source = new UrlBasedCorsConfigurationSource();
         final var configuration = new CorsConfiguration();
         
-        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedOrigins(appProperties.getCorsAllowedOrigins());
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         source.registerCorsConfiguration(appProperties.getPathPrefix() + "/**", configuration);
