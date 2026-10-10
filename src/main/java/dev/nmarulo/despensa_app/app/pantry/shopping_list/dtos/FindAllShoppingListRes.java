@@ -4,6 +4,7 @@ import dev.nmarulo.despensa_app.commons.dtos.PagingAndSortingRes;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
@@ -17,6 +18,8 @@ public class FindAllShoppingListRes extends PagingAndSortingRes<FindAllShoppingL
         private String name;
         
         private Integer totalProducts;
+        
+        private BigDecimal totalPrice;
         
         private LocalDateTime createdAt;
         
