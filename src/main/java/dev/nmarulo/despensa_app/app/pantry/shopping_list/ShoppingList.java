@@ -57,8 +57,7 @@ public class ShoppingList {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shopping_list_id", insertable = false, updatable = false)
+    @OneToMany(mappedBy = "shoppingList", fetch = FetchType.LAZY)
     @ToString.Exclude
     @GsonExclude
     private Set<ProductHasShoppingList> productHasShoppingList;

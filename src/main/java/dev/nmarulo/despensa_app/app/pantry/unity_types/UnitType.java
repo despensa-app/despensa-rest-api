@@ -38,8 +38,7 @@ public class UnitType {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "unit_type_id")
+    @OneToMany(mappedBy = "unitType", fetch = FetchType.LAZY)
     @ToString.Exclude
     @GsonExclude
     private Set<ProductHasShoppingList> productHasShoppingList;

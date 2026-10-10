@@ -21,6 +21,7 @@ public final class ShoppingListMapper extends CommonMapper {
         response.setId(entity.getId());
         response.setName(entity.getName());
         response.setTotalProducts(entity.getTotalProducts());
+        response.setTotalPrice(entity.getTotalPrice());
         response.setCreatedAt(entity.getCreatedAt());
         
         return response;

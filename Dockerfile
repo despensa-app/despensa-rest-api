@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM eclipse-temurin:21-jdk-jammy as base
+FROM eclipse-temurin:25-jdk-jammy as base
 WORKDIR /build
 COPY --chmod=0755 mvnw mvnw
 COPY .mvn/ .mvn/
@@ -11,7 +11,7 @@ RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     --mount=type=cache,target=/root/.m2 \
     ./mvnw test
 
-FROM eclipse-temurin:21-jdk-jammy as deps
+FROM eclipse-temurin:25-jdk-jammy as deps
 WORKDIR /build
 COPY --chmod=0755 mvnw mvnw
 COPY .mvn/ .mvn/
@@ -28,10 +28,10 @@ RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     mv target/$(./mvnw help:evaluate -Dexpression=project.artifactId -q -DforceStdout).war target/app.war
 
 # See Spring's docs for reference:
-# https://docs.spring.io/spring-boot/docs/current/reference/html/container-images.html
+# https://docs.spring.io/spring-boot/reference/packaging/container-images/efficient-images.html
 FROM package as extract
 WORKDIR /build
-RUN java -Djarmode=layertools -jar target/app.war extract --destination target/extracted
+RUN java -Djarmode=tools -jar target/app.war extract --launcher --layers --destination target/extracted
 
 FROM extract as development
 WORKDIR /build
@@ -43,7 +43,7 @@ EXPOSE 8080
 ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 CMD [ "java", "-Dspring.profiles.active=dockerdev", "org.springframework.boot.loader.launch.WarLauncher" ]
 
-FROM eclipse-temurin:21-jre-jammy AS final
+FROM eclipse-temurin:25-jre-jammy AS final
 # https://docs.docker.com/go/dockerfile-user-best-practices/
 ARG UID=10001
 RUN adduser \

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * @see org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+ * @see org.springframework.boot.gson.autoconfigure.GsonAutoConfiguration
  */
 @Configuration
 public class GsonConfig {

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 public class ShoppingListServiceTestUtil {
@@ -65,22 +66,30 @@ public class ShoppingListServiceTestUtil {
     
     private FindAllShoppingListRes initFindAllShoppingListRes(Page<ShoppingList> shoppingListPage) {
         final var findAllShoppingListRes = new FindAllShoppingListRes();
-        final var shoppingListRest = new FindAllShoppingListRes.ShoppingList();
-        final var shoppingList = shoppingListPage.getContent()
-                                                 .getFirst();
-        
-        shoppingListRest.setId(shoppingList.getId());
-        shoppingListRest.setName(shoppingList.getName());
-        shoppingListRest.setTotalProducts(shoppingList.getTotalProducts());
-        shoppingListRest.setCreatedAt(shoppingList.getCreatedAt());
         
         findAllShoppingListRes.setCurrentPage(shoppingListPage.getNumber());
         findAllShoppingListRes.setPageSize(shoppingListPage.getNumberOfElements());
         findAllShoppingListRes.setTotalPages(shoppingListPage.getTotalPages());
         findAllShoppingListRes.setTotal(shoppingListPage.getTotalElements());
+        
+        final var shoppingListRest = initShoppingListRest(shoppingListPage.getContent());
+        
         findAllShoppingListRes.setContent(Collections.singletonList(shoppingListRest));
         
         return findAllShoppingListRes;
+    }
+    
+    private FindAllShoppingListRes.ShoppingList initShoppingListRest(List<ShoppingList> shoppingLists) {
+        final var shoppingListRest = new FindAllShoppingListRes.ShoppingList();
+        final var shoppingList = shoppingLists.getFirst();
+        
+        shoppingListRest.setId(shoppingList.getId());
+        shoppingListRest.setName(shoppingList.getName());
+        shoppingListRest.setTotalProducts(shoppingList.getTotalProducts());
+        shoppingListRest.setTotalPrice(shoppingList.getTotalPrice());
+        shoppingListRest.setCreatedAt(shoppingList.getCreatedAt());
+        
+        return shoppingListRest;
     }
     
 }

@@ -54,9 +54,9 @@ This project provides with the needed resources for [web project][github-project
 
 #### Requirements
 
-* [Java 21][java-temurin-url]
+* [Java 25][java-temurin-url]
 * [MySQL 8][mysql-url]
-* [Maven 3.9.7][maven-url] (Optional)
+* [Maven 3.9.16][maven-url] (Optional)
 
 #### Configure database
 
@@ -73,8 +73,8 @@ Open a terminal in the root of the project and run the following commands:
 
 ### Deployment with docker
 
-With this option, we won't need to install MySQL. The application will start with the **dockerdev** profile.
-MySQL will use port `3307`.
+With this option, we won't need to install MySQL. The application will start with the **dockerdev** profile. MySQL will
+use port `3307`.
 
 **Start Docker Hub image**
 
@@ -102,8 +102,8 @@ docker compose up --build -d
 
 The following instructions are for the Ultimate version, although most of them work with the Community Edition as well.
 
-You can find a [demo of local deployment with the Community Edition][github-discussion-url] available in the
-discussions section of this repository.
+You can find a [demo of local deployment with the Community Edition][github-discussion-url] available in the discussions
+section of this repository.
 
 #### Clone project
 
@@ -169,8 +169,8 @@ Before you start coding, please read the [contribution guidelines](../CONTRIBUTI
 
 ## Acknowledgements
 
-Thanks to [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) for providing a license for IntelliJ IDEA
-to develop this project.
+Thanks to [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) for providing a license for IntelliJ IDEA to develop
+this project.
 
 | JetBrains                                                                                             | IntelliJ IDEA                                                                                                      |
 |-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
@@ -193,11 +193,11 @@ to develop this project.
 
 [github-project-web-url]: https://github.com/despensa-app/despensa-web
 
-[java-temurin-url]: https://adoptium.net/es/temurin/releases/?version=21
+[java-temurin-url]: https://adoptium.net/es/temurin/releases/?version=25
 
 [mysql-url]: https://dev.mysql.com/downloads/mysql/
 
-[maven-url]: https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/
+[maven-url]: https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/
 
 [postman-url]: https://app.getpostman.com/run-collection/3462094-24c69e86-2ae0-42da-a1f0-55d411d60ad6?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D3462094-24c69e86-2ae0-42da-a1f0-55d411d60ad6%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bdespensa-app%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaSIsInNlc3Npb25JbmRleCI6MH1d
 
